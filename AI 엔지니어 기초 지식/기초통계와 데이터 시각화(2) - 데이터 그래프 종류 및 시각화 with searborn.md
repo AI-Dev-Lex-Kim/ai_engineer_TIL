@@ -1,4 +1,4 @@
-- [데이터 그래프 종류 및 시각화 with searborn](#데이터-그래프-종류-및-시각화-with-searborn)
+- [기초통계와 데이터 시각화(2) - 데이터 그래프 종류 및 시각화 with searborn](#기초통계와-데이터-시각화2---데이터-그래프-종류-및-시각화-with-searborn)
   - [데이터 그래프](#데이터-그래프)
     - [**Boxplot (박스플롯)**](#boxplot-박스플롯)
     - [**Stripplot (스트립플롯)**](#stripplot-스트립플롯)
@@ -12,7 +12,7 @@
 
 <br>
 
-# 데이터 그래프 종류 및 시각화 with searborn
+# 기초통계와 데이터 시각화(2) - 데이터 그래프 종류 및 시각화 with searborn
 
 **Seaborn**은 **Python의 데이터 시각화 라이브러리**로, **Matplotlib** 기반에서 더 세련되고 통계적인 그래프를 쉽게 만들 수 있도록 도와준다.
 
