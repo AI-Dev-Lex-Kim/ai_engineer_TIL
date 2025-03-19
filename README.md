@@ -18,6 +18,6 @@
 
 [데이터 사이언스란?](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/AI%20%EA%B8%B0%EB%B3%B8%EA%B0%9C%EB%85%90/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4%EB%9E%80%3F.md)
 
-[기초통계와 데이터 시각화(1) - 데이터 종류, pandas 시각화, 분산과 표준편차]()
+[기초통계와 데이터 시각화(1) - 데이터 종류, pandas 시각화, 분산과 표준편차](<https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/AI%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%20%EA%B8%B0%EC%B4%88%20%EC%A7%80%EC%8B%9D/%EA%B8%B0%EC%B4%88%ED%86%B5%EA%B3%84%EC%99%80%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%8B%9C%EA%B0%81%ED%99%94(1)%20-%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A2%85%EB%A5%98%2C%20pandas%20%EC%8B%9C%EA%B0%81%ED%99%94%2C%20%EB%B6%84%EC%82%B0%EA%B3%BC%20%ED%91%9C%EC%A4%80%ED%8E%B8%EC%B0%A8.md>)
 
 ## Python
