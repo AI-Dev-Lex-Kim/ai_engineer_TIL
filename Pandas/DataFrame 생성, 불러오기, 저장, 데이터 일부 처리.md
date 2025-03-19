@@ -1,4 +1,4 @@
-- [DataFrame 만드는법](#dataframe-만드는법)
+- [DataFrame 생성, 불러오기, 저장, 데이터 일부 처리](#dataframe-생성-불러오기-저장-데이터-일부-처리)
   - [컬럼명 설정](#컬럼명-설정)
 - [데이터 가져오기 read\_csv()](#데이터-가져오기-read_csv)
   - [header(옵션)](#header옵션)
@@ -12,7 +12,7 @@
 
 <br>
 
-## DataFrame 만드는법
+## DataFrame 생성, 불러오기, 저장, 데이터 일부 처리
 
 ```python
 two_dimensional_list = [
