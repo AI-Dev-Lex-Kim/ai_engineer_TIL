@@ -13,6 +13,8 @@
 ## Pandas
 
 - [DataFrame 생성, 불러오기, 저장, 데이터 일부 처리](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/Pandas/DataFrame%20%EC%83%9D%EC%84%B1%2C%20%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0%2C%20%EC%A0%80%EC%9E%A5%2C%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%9D%BC%EB%B6%80%20%EC%B2%98%EB%A6%AC.md)
+- [Pandas 총정리](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/Pandas/Pandas%20%EC%B4%9D%EC%A0%95%EB%A6%AC.md)
+- [Pandas 총정리(간단)](<https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/Pandas/Pandas%20%EC%B4%9D%EC%A0%95%EB%A6%AC(%EA%B0%84%EB%8B%A8).md>)
 
 <br>
 

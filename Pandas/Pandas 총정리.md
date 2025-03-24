@@ -1,3 +1,72 @@
+- [데이터 입출력 및 생성](#데이터-입출력-및-생성)
+  - [pd.read\_csv()](#pdread_csv)
+  - [pd.DataFrame()](#pddataframe)
+  - [**df.head(행\_개수)**](#dfhead행_개수)
+  - [**df.tail(행\_개수)**](#dftail행_개수)
+  - [**df.dtypes**](#dfdtypes)
+- [인덱싱 및 슬라이싱](#인덱싱-및-슬라이싱)
+  - [df.iloc\[\]](#dfiloc)
+  - [df.loc\[\]](#dfloc)
+  - [df\[\] 인덱싱 및 불린 인덱싱](#df-인덱싱-및-불린-인덱싱)
+- [데이터 수정 및 추가](#데이터-수정-및-추가)
+  - [행 값 변경](#행-값-변경)
+  - [컬럼 값 변경](#컬럼-값-변경)
+  - [행/컬럼 추가](#행컬럼-추가)
+  - [df.quantile()](#dfquantile)
+  - [df.var()](#dfvar)
+  - [df.std()](#dfstd)
+  - [누적 연산: cumsum(), cumprod()](#누적-연산-cumsum-cumprod)
+  - [**df.corr()**](#dfcorr)
+- [데이터 시각화](#데이터-시각화)
+  - [df.plot()](#dfplot)
+  - [seaborn 시각화 함수 (sns.barplot, sns.lineplot 등)](#seaborn-시각화-함수-snsbarplot-snslineplot-등)
+- [데이터 타입 및 문자열 처리](#데이터-타입-및-문자열-처리)
+  - [df\[컬럼\].astype()](#df컬럼astype)
+  - [문자열 관련 함수 (str.lower, str.upper, str.capitalize, str.split, str.strip, str.replace)](#문자열-관련-함수-strlower-strupper-strcapitalize-strsplit-strstrip-strreplace)
+  - [round()](#round)
+- [결측치 및 중복 데이터 처리](#결측치-및-중복-데이터-처리)
+  - [df.isna(), df.isna().sum(), df.isna().any()](#dfisna-dfisnasum-dfisnaany)
+  - [df.dropna(), df\[컬럼\].fillna()](#dfdropna-df컬럼fillna)
+  - [df.duplicated()](#dfduplicated)
+  - [df.drop\_duplicates()](#dfdrop_duplicates)
+- [날짜/시간 처리](#날짜시간-처리)
+  - [pd.to\_datetime()](#pdto_datetime)
+  - [series.dt.\*](#seriesdt)
+  - [pd.to\_timedelta(series, unit=날짜)](#pdto_timedeltaseries-unit날짜)
+  - [df.loc\[날짜\]](#dfloc날짜)
+- [데이터 결합 및 그룹화](#데이터-결합-및-그룹화)
+  - [pd.concat(\[left\_df1, right\_df2\] ,ignore\_index=True, axis=1)](#pdconcatleft_df1-right_df2-ignore_indextrue-axis1)
+  - [pd.merge(left\_df, right\_df, on, how, suffix, left\_on, right\_on, left\_index, right\_index)](#pdmergeleft_df-right_df-on-how-suffix-left_on-right_on-left_index-right_index)
+  - [left\_df.join(right\_df, on, lsuffix, rsuffix, how,)](#left_dfjoinright_df-on-lsuffix-rsuffix-how)
+  - [df.groupby(그룹화할 열)](#dfgroupby그룹화할-열)
+  - [df.groupby(그룹화할 열).size()](#dfgroupby그룹화할-열size)
+  - [df.groupby(그룹화할 열).count()](#dfgroupby그룹화할-열count)
+  - [df.groupby(그룹화할 열).min(numeric\_only=True)](#dfgroupby그룹화할-열minnumeric_onlytrue)
+  - [df.groupby(그룹화할 열).max(),mean(),sum()](#dfgroupby그룹화할-열maxmeansum)
+  - [df.groupby(그룹화할 열)\[집계할 열\]](#dfgroupby그룹화할-열집계할-열)
+  - [df.groupby(\[그룹화할 열,그룹화할 열\])](#dfgroupby그룹화할-열그룹화할-열)
+  - [df.groupby(그룹화할 열)\[집계할 열\].agg(min | max | mean | …)](#dfgroupby그룹화할-열집계할-열aggmin--max--mean--)
+  - [df.groupby(그룹화할 열)\[집계할 열\].agg(\[{ ‘score’ : ‘mean’, ‘runtime’: \[’min’, ‘max’\]})](#dfgroupby그룹화할-열집계할-열agg-score--mean-runtime-min-max)
+  - [pd.pivot\_table(df, values, index, columns)](#pdpivot_tabledf-values-index-columns)
+- [시리즈 고유값 및 개수 확인](#시리즈-고유값-및-개수-확인)
+  - [series.unique()](#seriesunique)
+  - [series.value\_counts(dropna, normalize)](#seriesvalue_countsdropna-normalize)
+- [데이터 인덱싱 및 쿼리](#데이터-인덱싱-및-쿼리)
+  - [df\[\] 인덱싱](#df-인덱싱)
+  - [df.query(비교연산자)](#dfquery비교연산자)
+- [행 및 컬럼 삭제, 이름 변경](#행-및-컬럼-삭제-이름-변경)
+  - [df.drop(value)](#dfdropvalue)
+  - [df.rename()](#dfrename)
+- [범주형 데이터 처리 및 함수 적용](#범주형-데이터-처리-및-함수-적용)
+  - [pd.cut(series, bins, right, labels)](#pdcutseries-bins-right-labels)
+  - [series.apply()](#seriesapply)
+  - [series.select()](#seriesselect)
+- [기타 DataFrame 기본 속성 및 함수](#기타-dataframe-기본-속성-및-함수)
+  - [df.sort\_values(by='컬럼명', ascending=True)](#dfsort_valuesby컬럼명-ascendingtrue)
+  - [df.columns](#dfcolumns)
+  - [df.info()](#dfinfo)
+  - [df.shape](#dfshape)
+
 ## 데이터 입출력 및 생성
 
 ### pd.read_csv()
@@ -120,9 +189,9 @@ DataFrame의 하위 일부 행 반환
 - df.loc['new_row'] = [...]로 행,
 - df['새컬럼'] = [...]로 컬럼을 추가한다.
   예제
-      ```python
-      df.loc['new_row'] = [7, 8]
-      df['C'] = [9, 10, 11]
+  ```python
+  df.loc['new_row'] = [7, 8]
+  df['C'] = [9, 10, 11]
 
       ```
 
