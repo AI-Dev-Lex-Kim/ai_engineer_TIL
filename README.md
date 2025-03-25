@@ -2,13 +2,18 @@
 
 <br>
 
-- [ai\_engineer\_TIL](#ai_engineer_til)
+- [ai_engineer_TIL](#ai_engineer_til)
+  - [머신러닝](#머신러닝)
   - [Pandas](#pandas)
   - [Numpy](#numpy)
   - [AI 엔지니어 기초 지식](#ai-엔지니어-기초-지식)
   - [Python](#python)
 
 <br>
+
+## 머신러닝
+
+- [로지스틱 회귀 경사하강법](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1%20%ED%9A%8C%EA%B7%80%20%EA%B2%BD%EC%82%AC%ED%95%98%EA%B0%95%EB%B2%95.md)
 
 ## Pandas
 
