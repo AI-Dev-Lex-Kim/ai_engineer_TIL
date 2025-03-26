@@ -2,7 +2,7 @@
 
 <br>
 
-- [ai_engineer_TIL](#ai_engineer_til)
+- [ai\_engineer\_TIL](#ai_engineer_til)
   - [머신러닝](#머신러닝)
   - [Pandas](#pandas)
   - [Numpy](#numpy)
@@ -14,6 +14,7 @@
 ## 머신러닝
 
 - [로지스틱 회귀 경사하강법](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1%20%ED%9A%8C%EA%B7%80%20%EA%B2%BD%EC%82%AC%ED%95%98%EA%B0%95%EB%B2%95.md)
+- [가설함수](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/%EA%B0%80%EC%84%A4%ED%95%A8%EC%88%98.md)
 
 <br>
 
