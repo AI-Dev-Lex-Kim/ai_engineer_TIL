@@ -15,6 +15,7 @@
 
 - [로지스틱 회귀 경사하강법](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1%20%ED%9A%8C%EA%B7%80%20%EA%B2%BD%EC%82%AC%ED%95%98%EA%B0%95%EB%B2%95.md)
 - [가설함수](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/%EA%B0%80%EC%84%A4%ED%95%A8%EC%88%98.md)
+- [지도 비지도학습, 손실함수, 편향 분산, k폴드 교차검증](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/%EC%A7%80%EB%8F%84%20%EB%B9%84%EC%A7%80%EB%8F%84%ED%95%99%EC%8A%B5%2C%20%EC%86%90%EC%8B%A4%ED%95%A8%EC%88%98%2C%20%ED%8E%B8%ED%96%A5%20%EB%B6%84%EC%82%B0%2C%20k%ED%8F%B4%EB%93%9C%20%EA%B5%90%EC%B0%A8%EA%B2%80%EC%A6%9D.md)
 
 <br>
 
