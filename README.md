@@ -13,7 +13,7 @@
 
 ## Pytorch
 
-- [nn.BatchNorm2d]()
+- [nn.BatchNorm2d](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/Pytorch/nn_BatchNorm2d.md)
 
 <br>
 
