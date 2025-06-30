@@ -1,6 +1,19 @@
-# BERT 주요 특징
+- [BERT 주요 특징](#bert-주요-특징)
+  - [1. 완전한 양방향(bidirectional) 구조](#1-완전한-양방향bidirectional-구조)
+    - [정리](#정리)
+  - [2. 사전 학습 2가지 방식 적용](#2-사전-학습-2가지-방식-적용)
+    - [Masked Language Modeling (MLM)](#masked-language-modeling-mlm)
+    - [MLM이 전체 입력 토큰의 15%만 마스킹하는 이유](#mlm이-전체-입력-토큰의-15만-마스킹하는-이유)
+    - [구현 코드](#구현-코드)
+    - [Next Sentence Prediction (NSP)](#next-sentence-prediction-nsp)
+    - [학습 방식](#학습-방식)
+    - [NSP를 추가한 의도](#nsp를-추가한-의도)
+    - [NSP가 downstream task에 주는 이점](#nsp가-downstream-task에-주는-이점)
+    - [구현 코드](#구현-코드-1)
+  - [3. 미세 조정으로 다양한 작업 활용](#3-미세-조정으로-다양한-작업-활용)
+    - [결론](#결론)
 
-업로드전: 자연어
+# BERT 주요 특징
 
 BERT는 대규모 말뭉치에서 양방향 문맥 정보를 학습하는 사전학습 기반 언어 모델로,
 
