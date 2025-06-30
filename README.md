@@ -23,7 +23,7 @@
 
 ## Image Generation
 
-[cGAN](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/Image%20Generation/cGAN.md)
+- [cGAN](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/Image%20Generation/cGAN.md)
 
 <br>
 
