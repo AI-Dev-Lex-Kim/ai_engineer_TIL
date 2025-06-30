@@ -15,6 +15,7 @@
 
 ## NLP(Natural Language Processing)
 - [Bahdanau Attention Mechanism](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Bahdanau%20Attention%20Mechanism.md)
+- [Bahdanau Attention 코드 분석]()
 - [Self-Attention, Mult-Head-Attention](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Self-Attention%2C%20Mult-Head-Attention.md)
 - [BERT 주요 특징](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/BERT%20%EC%A3%BC%EC%9A%94%20%ED%8A%B9%EC%A7%95.md)
 - [BERT 전체 과정](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/BERT%20%EC%A0%84%EC%B2%B4%20%EA%B3%BC%EC%A0%95.md)
