@@ -15,12 +15,17 @@
 
 ## NLP(Natural Language Processing)
 
+[Self-Attention, Mult-Head-Attention]()
 [BERT 주요 특징](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/BERT%20%EC%A3%BC%EC%9A%94%20%ED%8A%B9%EC%A7%95.md)
 [BERT 전체 과정](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/BERT%20%EC%A0%84%EC%B2%B4%20%EA%B3%BC%EC%A0%95.md)
+
+<br>
 
 ## Image Generation
 
 [cGAN](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/Image%20Generation/cGAN.md)
+
+<br>
 
 ## Pytorch
 
@@ -35,7 +40,8 @@
 - [날짜와 시간 데이터 인덱싱 및 슬라이싱 방법](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/Pandas/%EB%82%A0%EC%A7%9C%EC%99%80%20%EC%8B%9C%EA%B0%84%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%9D%B8%EB%8D%B1%EC%8B%B1%20%EB%B0%8F%20%EC%8A%AC%EB%9D%BC%EC%9D%B4%EC%8B%B1%20%EB%B0%A9%EB%B2%95.md)
 - [Pandas 총정리](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/Pandas/Pandas%20%EC%B4%9D%EC%A0%95%EB%A6%AC.md)
 - [Pandas 총정리(간단)](<https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/Pandas/Pandas%20%EC%B4%9D%EC%A0%95%EB%A6%AC(%EA%B0%84%EB%8B%A8).md>)
-  <br>
+
+<br>
 
 ## Numpy
 
