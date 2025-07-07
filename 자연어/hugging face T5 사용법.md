@@ -1,3 +1,19 @@
+- [hugging face T5 사용법](#hugging-face-t5-사용법)
+  - [데이터셋 불러오기 및 전처리](#데이터셋-불러오기-및-전처리)
+  - [모델 가져오기](#모델-가져오기)
+  - [토크나이저(Tokenizer)](#토크나이저tokenizer)
+    - [map() 함수](#map-함수)
+    - [set\_format()](#set_format)
+  - [Model](#model)
+    - [포워딩 테스트](#포워딩-테스트)
+  - [Collator](#collator)
+    - [패딩 인덱스 -100 주기위한 조건(중요)](#패딩-인덱스--100-주기위한-조건중요)
+  - [Metrix](#metrix)
+  - [Trainer](#trainer)
+  - [Test](#test)
+
+---
+
 # hugging face T5 사용법
 
 ## 데이터셋 불러오기 및 전처리
