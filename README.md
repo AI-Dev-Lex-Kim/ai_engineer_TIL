@@ -55,7 +55,7 @@
 ## AI 엔지니어 기초
 
 - [Precision, Recall, F1-Score](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/AI%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%20%EA%B8%B0%EC%B4%88%20%EC%A7%80%EC%8B%9D/Precision%2C%20Recall%2C%20F1-Score%20.md)
-- [Backpropagation, 경사 하강법 업데이트 Deep Dive]()
+- [Backpropagation, 경사 하강법 업데이트 Deep Dive](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/AI%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%20%EA%B8%B0%EC%B4%88%20%EC%A7%80%EC%8B%9D/Backpropagation%2C%20%EA%B2%BD%EC%82%AC%20%ED%95%98%EA%B0%95%EB%B2%95%20%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%20Deep%20Dive.md)
 - [데이터 사이언스란?](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/AI%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%20%EA%B8%B0%EC%B4%88%20%EC%A7%80%EC%8B%9D/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4%EB%9E%80%3F.md)
 - [기초통계와 데이터 시각화(1) - 데이터 종류, pandas 시각화, 분산과 표준편차](<https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/AI%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%20%EA%B8%B0%EC%B4%88%20%EC%A7%80%EC%8B%9D/%EA%B8%B0%EC%B4%88%ED%86%B5%EA%B3%84%EC%99%80%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%8B%9C%EA%B0%81%ED%99%94(1)%20-%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A2%85%EB%A5%98%2C%20pandas%20%EC%8B%9C%EA%B0%81%ED%99%94%2C%20%EB%B6%84%EC%82%B0%EA%B3%BC%20%ED%91%9C%EC%A4%80%ED%8E%B8%EC%B0%A8.md>)
 - [기초통계와 데이터 시각화(2) - 데이터 그래프 종류 및 시각화 with searborn](<https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/AI%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%20%EA%B8%B0%EC%B4%88%20%EC%A7%80%EC%8B%9D/%EA%B8%B0%EC%B4%88%ED%86%B5%EA%B3%84%EC%99%80%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%8B%9C%EA%B0%81%ED%99%94(2)%20-%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B7%B8%EB%9E%98%ED%94%84%20%EC%A2%85%EB%A5%98%20%EB%B0%8F%20%EC%8B%9C%EA%B0%81%ED%99%94%20with%20searborn.md>)
