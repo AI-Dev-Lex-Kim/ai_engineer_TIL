@@ -21,6 +21,7 @@
 - [BERT 주요 특징](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/BERT%20%EC%A3%BC%EC%9A%94%20%ED%8A%B9%EC%A7%95.md)
 - [BERT 전체 과정](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/BERT%20%EC%A0%84%EC%B2%B4%20%EA%B3%BC%EC%A0%95.md)
 - [hugging face T5 사용법](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/hugging%20face%20T5%20%EC%82%AC%EC%9A%A9%EB%B2%95.md)
+- [LoRA(Low Rank Adaptation of LLM)]()
 
 <br>
 

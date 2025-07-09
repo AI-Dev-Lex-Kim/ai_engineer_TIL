@@ -12,6 +12,13 @@
   - [행 값 변경](#행-값-변경)
   - [컬럼 값 변경](#컬럼-값-변경)
   - [행/컬럼 추가](#행컬럼-추가)
+  - [마스킹을 통한 조건부 할당](#마스킹을-통한-조건부-할당)
+- [인덱스 설정 및 정렬](#인덱스-설정-및-정렬)
+  - [**df.set\_index('컬럼명')**](#dfset_index컬럼명)
+  - [**df.reset\_index()**](#dfreset_index)
+  - [df.sort\_index()](#dfsort_index)
+- [통계 및 요약 함수](#통계-및-요약-함수)
+  - [df.describe()](#dfdescribe)
   - [df.quantile()](#dfquantile)
   - [df.var()](#dfvar)
   - [df.std()](#dfstd)
@@ -189,11 +196,13 @@ DataFrame의 하위 일부 행 반환
 - df.loc['new_row'] = [...]로 행,
 - df['새컬럼'] = [...]로 컬럼을 추가한다.
   예제
-  ```python
+
+  ````python
   df.loc['new_row'] = [7, 8]
   df['C'] = [9, 10, 11]
 
       ```
+  ````
 
 ### 마스킹을 통한 조건부 할당
 
@@ -489,8 +498,8 @@ left_df을 right_df에 합쳐준다.(인덱스를 기준으로)
 - left_on=인덱스로 사용할 컬럼명, right_on=인덱스로 사용할 컬럼명
   - 만약 두 데이터의 값은 같지만 key값이 될 컬럼명이 다르다면, left_on, right_on에 각자 key로 설정할 컬럼명을 넣어주면된다.
 - left_index, right_index = True | False
-  - `left_index`라는 값을 `True`로 설정하면 왼쪽 데이터에 있는 인덱스를 키 값으로 사용하고, `right_index`라는 값을 `True`로 설정하면 오른쪽 데이터에 있는 인덱스를 키 값으로 사용합니다.
-  - 둘중 하나만 True로 사용해도 된다. 예를 들어 `left_index`만 `True`로 설정하면 왼쪽 데이터만 인덱스를 키 값으로 사용하고, 오른쪽 데이터는 특정 컬럼을 키 값으로 사용하게 되는데요. 이때, 반드시 `right_on` 옵션을 함께 사용해서 어떤 컬럼을 키 값으로 할 건지 정해 줘야 합니다. 반대로 `right_index`만 `True`로 설정할 땐, `left_on` 옵션을 함께 사용해야 하고요.
+  - `left_index`라는 값을 `True`로 설정하면 왼쪽 데이터에 있는 인덱스를 키 값으로 사용하고, `right_index`라는 값을 `True`로 설정하면 오른쪽 데이터에 있는 인덱스를 키 값으로 사용한다.
+  - 둘중 하나만 True로 사용해도 된다. 예를 들어 `left_index`만 `True`로 설정하면 왼쪽 데이터만 인덱스를 키 값으로 사용하고, 오른쪽 데이터는 특정 컬럼을 키 값으로 사용하게 되는데요. 이때, 반드시 `right_on` 옵션을 함께 사용해서 어떤 컬럼을 키 값으로 할 건지 정해 줘야 한다. 반대로 `right_index`만 `True`로 설정할 땐, `left_on` 옵션을 함께 사용해야 한다..
 
 ```python
 df_merge = pd.merge(df1, df2, on='id', how='inner')
