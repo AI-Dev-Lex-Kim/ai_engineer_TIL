@@ -28,7 +28,7 @@
 
 ### Hugging Face
 
-- [dataset load_dataset()]()
+- [dataset load_dataset()](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/dataset%20load_dataset().md>)
 - [hugging face T5 사용법](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/hugging%20face%20T5%20%EC%82%AC%EC%9A%A9%EB%B2%95.md)
 
 ## Image Generation
