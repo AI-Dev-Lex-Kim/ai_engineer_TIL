@@ -30,7 +30,7 @@
 
 - [Hugging Face load_dataset](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/dataset%20load_dataset().md>)
 - [Hugging Face 사용법 with T5](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/hugging%20face%20T5%20%EC%82%AC%EC%9A%A9%EB%B2%95.md)
-- [Hugging Face Dataset.map]()
+- [Hugging Face Dataset.map](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Hugging%20Face%20Dataset%20map.md)
 
 <br>
 

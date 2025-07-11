@@ -1,7 +1,7 @@
 - [Hugging Face Dataset.map](#hugging-face-datasetmap)
   - [Batch Mapping](#batch-mapping)
     - [map 함수 파라미터(batch)](#map-함수-파라미터batch)
-    - [**Feature**](#feature)
+    - [Feature](#feature)
     - [batch\_size](#batch_size)
     - [num\_proc](#num_proc)
 
@@ -83,7 +83,7 @@ batch = {
 
 <br>
 
-### **Feature**
+### Feature
 
 `Features`는 단일 샘플에서의 컬럼 타입을 정해주면 된다.
 
