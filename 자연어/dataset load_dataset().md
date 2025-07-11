@@ -1,5 +1,5 @@
-- [dataset load\_dataset()](#dataset-load_dataset)
-  - [hugging face dataset load\_dataset](#hugging-face-dataset-load_dataset)
+- [Hugging Face](#hugging-face)
+  - [Hugging Face load\_dataset()](#hugging-face-load_dataset)
     - [포맷 및 빌더 선택](#포맷-및-빌더-선택)
     - [스플릿 결정](#스플릿-결정)
     - [중첩구조](#중첩구조)
@@ -13,9 +13,9 @@
 
 ---
 
-# dataset load_dataset()
+# Hugging Face
 
-## hugging face dataset load_dataset
+## Hugging Face load_dataset() 
 
 hugging face의 load_dataset을 통해 데이터를 쉽게 불러올 수 있다.
 
