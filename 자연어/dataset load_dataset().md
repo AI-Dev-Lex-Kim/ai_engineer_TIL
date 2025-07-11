@@ -1,13 +1,15 @@
 - [dataset load\_dataset()](#dataset-load_dataset)
   - [hugging face dataset load\_dataset](#hugging-face-dataset-load_dataset)
-    - [**포맷 및 빌더 선택**](#포맷-및-빌더-선택)
-    - [**스플릿 결정**](#스플릿-결정)
-    - [**중첩구조**](#중첩구조)
-    - [**멀티프로세싱(Multi Processing)**](#멀티프로세싱multi-processing)
-    - [**Specify Features**](#specify-features)
+    - [포맷 및 빌더 선택](#포맷-및-빌더-선택)
+    - [스플릿 결정](#스플릿-결정)
+    - [중첩구조](#중첩구조)
+    - [멀티프로세싱(Multi Processing)](#멀티프로세싱multi-processing)
+    - [Specify Features](#specify-features)
     - [load nested json data](#load-nested-json-data)
     - [load\_dataset 동작원리](#load_dataset-동작원리)
     - [파라미터](#파라미터)
+    - [json format: encoding\_errors](#json-format-encoding_errors)
+    - [Dataset.filter()](#datasetfilter)
 
 ---
 
@@ -23,7 +25,7 @@ from datasets import load_dataset
 dataset = load_dataset("json", data=files="my_file.json")
 ```
 
-### **포맷 및 빌더 선택**
+### 포맷 및 빌더 선택
 
 `load_dataset`은 데이터셋 폴더 안의 파일들을 살펴보고 가장한 흔한 데이터 포맷을 찾아서 그 형식으로 데이터를 불러온다. 예를들어 json 파일이 많으면 json 빌더를 선택해서 가져온다.
 
@@ -31,7 +33,7 @@ dataset = load_dataset("json", data=files="my_file.json")
 
 <br>
 
-### **스플릿 결정**
+### 스플릿 결정
 
 파일이나 폴더 이름을 보고 train data인지 test data인지 자동으로 구분한다.
 
@@ -39,7 +41,7 @@ dataset = load_dataset("json", data=files="my_file.json")
 
 <br>
 
-### **중첩구조**
+### 중첩구조
 
 만약 nested filed로 되어있다면, `field` 파라미터를 사용해야한다.
 
@@ -58,7 +60,7 @@ dataset = load_dataset("json", data_files="my_file.json", field="data")
 
 <br>
 
-### **멀티프로세싱(Multi Processing)**
+### 멀티프로세싱(Multi Processing)
 
 데이터셋의 크기가 매우 크다면(수십 GB) 데이터셋을 불러오는데 오랜시간이 걸린다.
 
@@ -85,7 +87,7 @@ ml_librispeech_spanish = load_dataset("facebook/multilingual_librispeech", "span
 
 <br>
 
-### **Specify Features**
+### Specify Features
 
 dataset 라이브러리를 사용해서 로컬 파일을 Dataset으로 만들때, 각 컬럼(key)의 데이터타입을 자동으로 추론한다. 예를 들어서 어떤 컬럼에 숫자만 있으면 `int` 타입, 글자만 있으면 `string` 타입으로 인식한다.
 
@@ -454,6 +456,74 @@ ex) `num_proc=8`
 
 <br>
 
+### json format: encoding_errors
+
+json 파일에서 데이터를 로드할때 에러가 발생할 경우 처리해주는 파라미터 이다.
+
+<br>
+
+**strict(default)**
+
+인코딩 또는 디코딩 중 오류가 발생하면 예외를 발생 시킨다.
+
+<br>
+
+**ignore**
+
+오류가 발생한 문자를 모두 무시하고 제거한다.
+
+오류가 있는 부분은 단순히 건너뛰고 나머지 부분을 진행한다.
+
+<br>
+
+**replace**
+
+오류가 발생한 문자를 ‘?’ 또는 유니코드 대체문자로 대체한다.
+
+오류가 있는 문자를 제거하는 대신, 대체 문자를 넣어서 구조를 유지한다.
+
+<br>
+
+**backslashreplace**
+
+오류가 발생한 문자를 백슬래쉬 이스케이프 시퀀스로 대체한다.(\x80, \uXXX, \UXXXXXXX)
+
+디버깅 목적으로 원본 데이터의 인코딩 오류 부분을 확인하고 싶을 때 사용한다.
+
+<br>
+
+### Dataset.filter()
+
+데이터셋을 로드할때, 데이터셋의 문제가 있는 경우 에러를 넘기는 방법을 사용할 수 있었다.
+
+이후에 데이터의 이상치, 결측치 등을 전처리 해주어야한다.
+
+<br>
+
+`Dataset.filter()`는 데이터셋에서 특정 조건을 만족하는 샘플만 선택해서 새로운 데이터셋을 만드는 전처리 함수이다.
+
+<br>
+
+filter() 함수에 특정 조건을 검사하는 함수를 파라미터로 넣어준다. 이 함수가 True를 반환하는 샘플만 새로운 데이터셋에 포함 시킨다. False를 반환하는 샘플을 넣지 않는다.
+
+```python
+data = {
+    'id': [1, 2, 3, 4, 5],
+    'score': [85, 92, 78, 65, 95],
+    'name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve']
+}
+my_dataset = Dataset.from_dict(data)
+
+# 필터링 함수 정의: score가 80 이상인 샘플만 선택
+def filter_high_score(example):
+    return example['score'] >= 80
+
+filtered_dataset_score = my_dataset.filter(filter_high_score)
+```
+
+<br>
+
 참고
 
-- [Hugging Face load_dataset Docs](https://huggingface.co/docs/datasets/v4.0.0/en/package_reference/loading_methods#loading-methods)
+- [Hugging Face load_dataset Docs](https://huggingface.co/docs/datasets/v4.0.0/en/package_reference/loading_methods#datasets.packaged_modules.json.JsonConfig)
+- [Hugging Face Dataset.filter Docs](https://huggingface.co/docs/datasets/v4.0.0/en/package_reference/main_classes#datasets.Dataset.filter)
