@@ -42,7 +42,7 @@
 ## Pytorch
 
 - [nn.BatchNorm2d](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/Pytorch/nn_BatchNorm2d.md)
-- [Pytorch DataLoader DeepDive]()
+- [Pytorch DataLoader DeepDive](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/Pytorch/Pytorch%20DataLoader%20DeepDive.md)
 
 <br>
 
