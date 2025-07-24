@@ -24,6 +24,7 @@
 - [LoRA(Low Rank Adaptation of LLM)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LoRA(Low%20Rank%20Adaptation%20of%20LLM).md>)
 - [skt koBERT Full Fine-Tuning LoRA 감정분석 모델 구현](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/skt%20koBERT%20Full%20Fine-Tuning%20LoRA%20%EA%B0%90%EC%A0%95%EB%B6%84%EC%84%9D%20%EB%AA%A8%EB%8D%B8%20%EA%B5%AC%ED%98%84.md)
 - [RAG Deep Dive with code](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/RAG(Retrieval-Agumented%20Generation)%20Deep%20Dive%20with%20code.md>)
+- [MCP(Model Context Protocol)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/MCP(Model%20Context%20Protocol).md>)
 
 <br>
 
