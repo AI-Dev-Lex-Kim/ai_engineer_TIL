@@ -11,6 +11,7 @@
   - [Numpy](#numpy)
   - [AI Basic](#ai-basic)
   - [Python](#python)
+  - [etc](#etc)
 
 <br>
 
@@ -80,3 +81,9 @@
 ## Python
 
 - [datetime](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/python/datetime.md)
+
+<br>
+
+## etc
+
+- [if **name** == **main**]()
