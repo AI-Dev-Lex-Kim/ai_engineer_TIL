@@ -86,4 +86,4 @@
 
 ## etc
 
-- [if **name** == **main**]()
+- [if \_\_name\_\_ == "\_\_main\_\_"](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/etc/if%20__name__%20%3D%3D%20__main__.md)
