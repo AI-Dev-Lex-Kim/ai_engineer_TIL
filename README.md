@@ -33,7 +33,7 @@
 - [OpenAI Fine-Tuing 성능을 더 높이는 방법](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20Fine-Tuing%20%EC%84%B1%EB%8A%A5%EC%9D%84%20%EB%8D%94%20%EB%86%92%EC%9D%B4%EB%8A%94%20%EB%B0%A9%EB%B2%95.md)
 - [OpenAI LLM Fine-Tuning을 위한 데이터 준비 및 분석](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20LLM%20Fine-Tuning%EC%9D%84%20%EC%9C%84%ED%95%9C%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A4%80%EB%B9%84%20%EB%B0%8F%20%EB%B6%84%EC%84%9D.md)
 - [OpenAI Fine-Tuning API](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20Fine-Tuning%20API.md)
-- [OpenAI 프롬프트 엔지니어링(Prompt Template)]()
+- [OpenAI 프롬프트 엔지니어링(Prompt Template)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%20%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81(Prompt%20Template).md>)
 
 <br>
 
