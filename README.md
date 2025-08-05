@@ -29,6 +29,7 @@
 - [OpenAI Responses vs Chat Completions](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20Responses%20vs%20Chat%20Completions.md)
 - [OpenAI Responses API](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20Responses%20API.md)
 - [OpenAI Conversation state(대화 상태 관리)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20Conversation%20state(%EB%8C%80%ED%99%94%20%EC%83%81%ED%83%9C%20%EA%B4%80%EB%A6%AC).md>)
+- [OpenAI LLM Supervised Fine-Tuing](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20LLM%20Supervised%20Fine-Tuing%20Search.md)
 
 <br>
 
