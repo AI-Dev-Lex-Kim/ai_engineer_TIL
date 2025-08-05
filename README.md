@@ -27,7 +27,7 @@
 - [RAG Deep Dive with code](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/RAG(Retrieval-Agumented%20Generation)%20Deep%20Dive%20with%20code.md>)
 - [MCP(Model Context Protocol)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/MCP(Model%20Context%20Protocol).md>)
 - [OpenAI Responses vs Chat Completions](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20Responses%20vs%20Chat%20Completions.md)
-- [OpenAI Responses API]()
+- [OpenAI Responses API](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20Responses%20API.md)
 
 <br>
 
