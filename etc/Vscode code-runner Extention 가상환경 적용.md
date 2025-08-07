@@ -1,3 +1,5 @@
+# Vscode code-runner Extention 가상환경 적용
+
 일반적으로 코드러너를 실행시키면 가상환경이 적용되지 않아 라이브러리가 없다고 에러가 나오며 동작하지 않는다.
 
 Vscode에서 가상환경을 적용해서 code runner을 실행 시켜야한다.

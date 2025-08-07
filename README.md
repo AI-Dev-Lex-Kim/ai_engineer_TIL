@@ -98,6 +98,6 @@
 ## etc
 
 - [if \_\_name\_\_ == "\_\_main\_\_"](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/etc/if%20__name__%20%3D%3D%20__main__.md)
-- [Vscode code-runner Extention 가상환경 적용]()
+- [Vscode code-runner Extention 가상환경 적용](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/etc/Vscode%20code-runner%20Extention%20%EA%B0%80%EC%83%81%ED%99%98%EA%B2%BD%20%EC%A0%81%EC%9A%A9.md)
 
 <br>
