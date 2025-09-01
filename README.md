@@ -1,13 +1,14 @@
-# ai_engineer_TIL
+# AI Engineer TIL
 
 <br>
 
-- [ai\_engineer\_TIL](#ai_engineer_til)
+- [AI Engineer TIL](#ai-engineer-til)
   - [NLP(Natural Language Processing)](#nlpnatural-language-processing)
     - [Hugging Face](#hugging-face)
   - [Image Generation](#image-generation)
+  - [Math](#math)
   - [Pytorch](#pytorch)
-  - [Pandas](#pandas)
+  - [EDA](#eda)
   - [Numpy](#numpy)
   - [AI Basic](#ai-basic)
   - [Python](#python)
@@ -54,6 +55,12 @@
 
 <br>
 
+## Math
+
+- [다양한 수학 방정식들은 어떤 이유로 발명한 것일까?](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/math/%EB%8B%A4%EC%96%91%ED%95%9C%20%EC%88%98%ED%95%99%20%EB%B0%A9%EC%A0%95%EC%8B%9D%EB%93%A4%EC%9D%80%20%EC%96%B4%EB%96%A4%20%EC%9D%B4%EC%9C%A0%EB%A1%9C%20%EB%B0%9C%EB%AA%85%ED%95%9C%20%EA%B2%83%EC%9D%BC%EA%B9%8C%3F.md)
+
+<br>
+
 ## Pytorch
 
 - [nn.BatchNorm2d](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/Pytorch/nn_BatchNorm2d.md)
@@ -61,7 +68,7 @@
 
 <br>
 
-## Pandas
+## EDA
 
 - [DataFrame 생성, 불러오기, 저장, 데이터 일부 처리](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/Pandas/DataFrame%20%EC%83%9D%EC%84%B1%2C%20%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0%2C%20%EC%A0%80%EC%9E%A5%2C%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%9D%BC%EB%B6%80%20%EC%B2%98%EB%A6%AC.md)
 - [datetime 타입으로 변경하는 방법 with pandas](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/Pandas/datetime%20%ED%83%80%EC%9E%85%EC%9C%BC%EB%A1%9C%20%EB%B3%80%EA%B2%BD%ED%95%98%EB%8A%94%20%EB%B0%A9%EB%B2%95%20with%20pandas.md)
