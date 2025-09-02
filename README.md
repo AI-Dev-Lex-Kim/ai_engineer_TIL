@@ -18,6 +18,7 @@
 
 ## NLP(Natural Language Processing)
 
+- [LLM Transformer 동작원리](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LLM%20Transformer%20%EB%8F%99%EC%9E%91%EC%9B%90%EB%A6%AC.md)
 - [Bahdanau Attention Mechanism](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Bahdanau%20Attention%20Mechanism.md)
 - [Bahdanau Attention 코드 분석](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Bahdanau%20Attention%20%EC%BD%94%EB%93%9C%20%EB%B6%84%EC%84%9D.md)
 - [Self-Attention, Mult-Head-Attention](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Self-Attention%2C%20Mult-Head-Attention.md)
