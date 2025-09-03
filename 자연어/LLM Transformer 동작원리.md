@@ -297,3 +297,4 @@ len(last_vector)
 참고
 
 - [https://www.youtube.com/watch?v=g38aoGttLhI&ab_channel=3Blue1Brown한국어](https://www.youtube.com/watch?v=g38aoGttLhI&ab_channel=3Blue1Brown%ED%95%9C%EA%B5%AD%EC%96%B4)
+- [https://en.wikipedia.org/wiki/Transformer\_(deep_learning_architecture)#Positional_encoding](<https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)#Positional_encoding>)
