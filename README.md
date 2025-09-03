@@ -100,7 +100,7 @@
 ## Python
 
 - [datetime](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/python/datetime.md)
-- [os.path]()
+- [os.path](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/python/os.path.md)
 
 <br>
 
