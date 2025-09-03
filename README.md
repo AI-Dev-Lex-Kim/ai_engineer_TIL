@@ -101,6 +101,7 @@
 
 - [datetime](https://github.com/FE-Lex-Kim/ai_engineer_TIL/blob/main/python/datetime.md)
 - [os.path](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/python/os.path.md)
+- [sys.path](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/python/sys.path.md)
 
 <br>
 
