@@ -41,10 +41,49 @@ snapshot_download 함수를 사용하면 특정 버전을 전체 다운로드 �
 2. 이미 캐시에 있는 파일은 다운로드하지 않고 재사용
 3. 특정 파일만 다운로드 가능 (`allow_patterns` 사용)
 
-**반환값**: 다운로드된 스냅샷 폴더 경로
+반환값: 다운로드된 스냅샷 폴더 경로
+
+<br>
+
+## 문제발생
+
+이렇게 똑같이 진행을 했지만, 내가 원하는 경로에 제대로 저장되지 않았다.
+
+반드시 Transformer 라이브러리를 import 해오기전에 `HF_HOME`을 미리 환경설정 해야한다.
+
+라이브러리를 먼저 불러오면 캐시 경로를 <mark>**전역 상수**</mark>로 저장한다.
+
+상수로 저장했으니 더이상 변경되지 않는다.
+
+따라서 이후에 변경하는 코드가 있어도 적용되지 않은것이다.
+<br>
+잘못된 코드
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+import os
+
+cache_dir = "/content/drive/MyDrive/ai_enginner/job_search/AI/cache/"
+os.environ['HF_HOME'] = cache_dir
+```
+
+<br>
+올바른 코드
+
+```python
+import os
+
+cache_dir = "/content/drive/MyDrive/ai_enginner/job_search/AI/cache/"
+os.environ['HF_HOME'] = cache_dir
+
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+```
 
 <br>
 
 참고
 
 - https://huggingface.co/docs/huggingface_hub/ko/package_reference/environment_variables
+- https://stackoverflow.com/questions/63312859/how-to-change-huggingface-transformers-default-cache-directory
