@@ -22,6 +22,8 @@
 - [Bahdanau Attention Mechanism](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Bahdanau%20Attention%20Mechanism.md)
 - [Bahdanau Attention 코드 분석](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Bahdanau%20Attention%20%EC%BD%94%EB%93%9C%20%EB%B6%84%EC%84%9D.md)
 - [Self-Attention, Mult-Head-Attention](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Self-Attention%2C%20Mult-Head-Attention.md)
+- [CLM(Causal Language Modeling)이란? (인과적 언어 모델링): 데이터셋/학습/추론](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Causal%20language%20modeling%EC%9D%B4%EB%9E%80%3F%20(%EC%9D%B8%EA%B3%BC%EC%A0%81%20%EC%96%B8%EC%96%B4%20%EB%AA%A8%EB%8D%B8%EB%A7%81)%3A%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B_%ED%95%99%EC%8A%B5_%EC%B6%94%EB%A1%A0.md>)
+- [MLM(Masked Language Modeling)이란? (마스크 언어 모델링): 데이터셋/학습/추론](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Masked%20Language%20Modeling%EC%9D%B4%EB%9E%80%3F%20(%EB%A7%88%EC%8A%A4%ED%81%AC%20%EC%96%B8%EC%96%B4%20%EB%AA%A8%EB%8D%B8%EB%A7%81)%3A%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B_%ED%95%99%EC%8A%B5_%EC%B6%94%EB%A1%A0.md>)
 - [BERT 주요 특징](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/BERT%20%EC%A3%BC%EC%9A%94%20%ED%8A%B9%EC%A7%95.md)
 - [BERT 전체 과정](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/BERT%20%EC%A0%84%EC%B2%B4%20%EA%B3%BC%EC%A0%95.md)
 - [LoRA(Low Rank Adaptation of LLM)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LoRA(Low%20Rank%20Adaptation%20of%20LLM).md>)
