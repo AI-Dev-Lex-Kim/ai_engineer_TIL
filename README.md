@@ -3,6 +3,7 @@
 <br>
 
 - [AI Engineer TIL](#ai-engineer-til)
+  - [NLP 논문 리뷰](#nlp-논문-리뷰)
   - [NLP(Natural Language Processing)](#nlpnatural-language-processing)
     - [Hugging Face](#hugging-face)
   - [Image Generation](#image-generation)
@@ -15,6 +16,10 @@
   - [etc](#etc)
 
 <br>
+
+## NLP 논문 리뷰
+
+- [[NLP 논문 리뷰] Attention is all you need(Transformer)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0/%5BNLP%20%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0%5D%20Attention%20is%20all%20you%20need(Transformer).md>)
 
 ## NLP(Natural Language Processing)
 
