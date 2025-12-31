@@ -64,7 +64,7 @@ Causal Language Model은
 
 데이터셋을 Dataset 객체로 변환
 
-LLM 학습에서 중요한 점은 사용할 **모델이 실제 추론 때 받게 될 입력과 동일한 형식으로 학습 데이터**를 준비하는 것이다.
+LLM 학습에서 중요한 점은 사용할 <mark>**모델이 실제 추론 때 받게 될 입력과 동일한 형식으로 학습 데이터**</mark>를 준비하는 것이다.
 
 <br>
 
@@ -111,9 +111,9 @@ print(dataset)
 # })
 ```
 
-- Hugging Face `datasets.Dataset`에서 `from_dict`를 사용할 때는 **딕셔너리 형태**가 필요하다.
+- Hugging Face `datasets.Dataset`에서 `from_dict`를 사용할 때는 <mark>**딕셔너리 형태**</mark>가 필요하다.
 - 즉, `{"key1": [값1, 값2, ...], "key2": [값1, 값2, ...]}` 형태여야 한다.
-- `train_data`가 **리스트 안에 리스트 + 딕셔너리 구조**로 되어 있으면, 바로 `from_dict(train_data)`는 오류가 난다.
+- `train_data`가 <mark>**리스트 안에 리스트 + 딕셔너리 구조**</mark>로 되어 있으면, 바로 `from_dict(train_data)`는 오류가 난다.
 - 이렇게 하면 `dataset[0]["messages"]`로 각 대화에 접근할 수 있다.
 - `apply_chat_template` 같은 토크나이저 변환 함수에 바로 넣을 수 있다.
 
@@ -170,7 +170,7 @@ print(tokenized_dataset)
 
 `batched=True`
 
-- `preprocess_function`이 단일 예제(x) 하나씩 받는 게 아니라 **배치 단위의 예제 리스트**를 받도록 바뀐다.
+- `preprocess_function`이 단일 예제(x) 하나씩 받는 게 아니라 <mark>**배치 단위의 예제 리스트**</mark>를 받도록 바뀐다.
 - 그래서 `" ".join(x) for x in examples["answers.text"]` 같은 코드가 가능해진다.
 - 만약 False면 `examples`가 단일 예제가 되므로 리스트 컴프리헨션이 오류 날 수 있다.
 
@@ -186,7 +186,7 @@ print(tokenized_dataset)
 `remove_columns=dataset.column_names`
 
 - 원래 데이터셋 안의 모든 컬럼을 제거한다.
-- 따라서 결과에는 **`preprocess_function`에서 리턴한 토큰화 결과만 남는다**.
+- 따라서 결과에는 <mark>**`preprocess_function`에서 리턴한 토큰화 결과만 남는다**</mark>.
 - 즉 `"answers.text"`를 합쳐서 토큰화한 값만 남게 된다.
 
 <br>
@@ -222,7 +222,7 @@ print(tokenized_dataset)
 
   - 여기서 컬럼은 `'id'`, `'question'`, `'answers.text'`
   - `preprocess_function`이 반환하는 값(`input_ids`, `attention_mask`)만 남게 됨
-  - “컬럼을 제거한다”는 말은 **원래 객체에 있던 id, question, answers.text 등의 필드를 삭제**
+  - “컬럼을 제거한다”는 말은 <mark>**원래 객체에 있던 id, question, answers.text 등의 필드를 삭제**</mark>
 
 <br>
 
@@ -241,13 +241,13 @@ data_collator = DataCollatorForLanguageModeling(
 )
 ```
 
-**1. pad_token을 eos_token으로 설정하는 이유**
+<mark>**1. pad_token을 eos_token으로 설정하는 이유**</mark>
 
 토크나이저(tokenizer)는 텍스트를 토큰 단위로 바꿔주는 역할이다.
 
-GPT 같은 **causal LM 모델**은 원래 문장의 끝을 알리는 특별한 토큰(eos_token)만 가지고 있음
+GPT 같은 <mark>**causal LM 모델**</mark>은 원래 문장의 끝을 알리는 특별한 토큰(eos_token)만 가지고 있음
 
-그런데 학습할 때 여러 문장을 **같은 길이**로 맞춰야 한다.
+그런데 학습할 때 여러 문장을 <mark>**같은 길이**</mark>로 맞춰야 한다.
 
 <br>
 
@@ -255,9 +255,9 @@ GPT 같은 **causal LM 모델**은 원래 문장의 끝을 알리는 특별한 �
 
 `pad_token`은 패딩할 때 쓰는 특별한 토큰이다.
 
-causal LM(GPT 계열)에는 원래 pad_token(**패딩용 토큰)이 정의되어 있지 않은 경우가 많음**
+causal LM(GPT 계열)에는 원래 pad_token(<mark>**패딩용 토큰)이 정의되어 있지 않은 경우가 많음**</mark>
 
-**모델이 이미 아는 eos_token(**End Of Sequence)**을 패딩용으로 재활용**한다.
+<mark>**모델이 이미 아는 eos_token(**</mark>End Of Sequence)<mark>**을 패딩용으로 재활용**</mark>한다.
 
 즉, “문장의 끝”을 의미하는 토큰을 “빈 칸”처럼 사용한다고 이해하면 된다.
 
@@ -266,13 +266,13 @@ tokenizer.eos_token  # '<|endoftext|>'
 tokenizer.pad_token  # None -> pad_token = '<|endoftext|>'
 ```
 
-이제 배치에서 짧은 문장을 패딩할 때도 **'<|endoftext|>'** 토큰을 사용
+이제 배치에서 짧은 문장을 패딩할 때도 <mark>**'<|endoftext|>'**</mark> 토큰을 사용
 
 <br>
 
-**2. DataCollatorForLanguageModeling의 역할**
+<mark>**2. DataCollatorForLanguageModeling의 역할**</mark>
 
-`DataCollatorForLanguageModeling`은 **배치(batch)를 만들면서 언어 모델 학습에 필요한 처리를 자동으로 해주는 클래스**
+`DataCollatorForLanguageModeling`은 <mark>**배치(batch)를 만들면서 언어 모델 학습에 필요한 처리를 자동으로 해주는 클래스**</mark>
 
 1. 문장 길이 맞추기
 
@@ -295,39 +295,39 @@ tokenizer.pad_token  # None -> pad_token = '<|endoftext|>'
      - `labels` = `input_ids` 그대로 해서 라벨 생성
      - 마지막 패딩 부분은 예측할 필요가 없으므로 학습에서 무시(-100)한다.
    - `mls=True`일때
-     - 일부 토큰만 mask 처리 → 예측 대상은 **mask 토큰뿐**
+     - 일부 토큰만 mask 처리 → 예측 대상은 <mark>**mask 토큰뿐**</mark>
      - 나머지(non-masked) 토큰 위치는 -100으로 처리
      ```python
      input_ids = [101, 11, 22, 33]
      mask       = [False, True, False, False]  # 11만 mask
      labels     = [-100, 11, -100, -100]
      ```
-     모델은 **mask된 11만 예측**하고, 나머지 토큰은 학습에서 무시
+     모델은 <mark>**mask된 11만 예측**</mark>하고, 나머지 토큰은 학습에서 무시
 4. DataCollator에서 tokenizer를 넣는 이유
 
-   DataCollator는 **padding token ID를 알아야** 다음을 수행할 수 있다
+   DataCollator는 <mark>**padding token ID를 알아야**</mark> 다음을 수행할 수 있다
 
    1. 배치 패딩
-      - padding 토큰으로 **짧은 시퀀스를 채우기**
+      - padding 토큰으로 <mark>**짧은 시퀀스를 채우기**</mark>
    2. attention mask 생성
       - padding 위치를 0, 실제 토큰 위치를 1로 표시
    3. (MLM이면) 마스킹
-      - masked LM 학습 시 **mask 토큰을 선택**
+      - masked LM 학습 시 <mark>**mask 토큰을 선택**</mark>
 
-   - 즉, tokenizer 없이는 DataCollator가 **어떤 숫자로 패딩할지, 어떤 토큰을 마스킹할지** 알 수 없다.
+   - 즉, tokenizer 없이는 DataCollator가 <mark>**어떤 숫자로 패딩할지, 어떤 토큰을 마스킹할지**</mark> 알 수 없다.
 
 <br>
 
 정리
 
-1. GPT 계열 causal LM 모델은 **MLM이 필요 없고, 순차적 생성이 목적**이므로 `mlm=False` 설정
-2. 배치에서 문장 길이가 달라도 **패딩 필요** → pad_token 지정
-3. 토큰화와 라벨 생성을 **자동화** → `DataCollatorForLanguageModeling` 사용
-4. 학습 시 **loss 계산에서 패딩 무시** → 정확한 다음 단어 예측 학습 가능
+1. GPT 계열 causal LM 모델은 <mark>**MLM이 필요 없고, 순차적 생성이 목적**</mark>이므로 `mlm=False` 설정
+2. 배치에서 문장 길이가 달라도 <mark>**패딩 필요**</mark> → pad_token 지정
+3. 토큰화와 라벨 생성을 <mark>**자동화**</mark> → `DataCollatorForLanguageModeling` 사용
+4. 학습 시 <mark>**loss 계산에서 패딩 무시**</mark> → 정확한 다음 단어 예측 학습 가능
 
 <br>
 
-정리하면, 이 코드는 **GPT 계열 모델을 학습할 때 데이터 배치를 준비하는 표준적인 방법**
+정리하면, 이 코드는 <mark>**GPT 계열 모델을 학습할 때 데이터 배치를 준비하는 표준적인 방법**</mark>
 
 - `pad_token = eos_token` → 패딩 문제 해결
 - `mlm=False` → causal LM용 라벨 생성
@@ -336,11 +336,11 @@ tokenizer.pad_token  # None -> pad_token = '<|endoftext|>'
 
 ### Transformer 모델 내부 label 처리
 
-내부 구현을 보면 **shift는** `forward()` **모델 내부에서 자동으로 수행한다.**
+내부 구현을 보면 <mark>**shift는**</mark> `forward()` <mark>**모델 내부에서 자동으로 수행한다.**</mark>
 
-그래서 **collator에서 label을 따로 오른쪽으로 밀 필요가 없다**.
+그래서 <mark>**collator에서 label을 따로 오른쪽으로 밀 필요가 없다**</mark>.
 
-- causal LM에서는 labels가 **입력 시퀀스를 오른쪽에서 왼쪽으로 한 칸씩 밀어서 다음 단어 예측**용으로 만들어진다.
+- causal LM에서는 labels가 <mark>**입력 시퀀스를 오른쪽에서 왼쪽으로 한 칸씩 밀어서 다음 단어 예측**</mark>용으로 만들어진다.
   - 왜냐하면 모델이 현재 보고 있는 위치의 토큰을 가지고 바로 그 토큰을 맞추는 게 아니라 그 다음 위치에 나올 토큰을 맞춰야 하기 때문이다.
   - 예를 들어 입력이 ["나는", "밥을", "먹는다"]라는 토큰 시퀀스라고 하자.(원래는 토큰화로 숫자여야함)
   - 그렇다면 labels는 ["밥을", "먹는다", -100]처럼 만들어지는데 여기서 한 칸 오른쪽에서 왼쪽으로 밀려 있다는 것을 볼 수 있다.
@@ -551,4 +551,4 @@ tokenizer.batch_decode(outputs, skip_special_tokens=True)
 
 참고
 
-[**Hugging Face Causal language modeling Docs**](https://huggingface.co/docs/transformers/v4.56.2/en/tasks/language_modeling)
+[<mark>**Hugging Face Causal language modeling Docs**</mark>](https://huggingface.co/docs/transformers/v4.56.2/en/tasks/language_modeling)
