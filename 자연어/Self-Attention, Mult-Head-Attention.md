@@ -1,4 +1,4 @@
-- [Self-Attention, Mult-Head-Attention](#self-attention-mult-head-attention)
+- [\[코드 분석\]Self-Attention](#코드-분석self-attention)
   - [전체 흐름](#전체-흐름)
   - [입력 임베딩](#입력-임베딩)
   - [Q, K, V 생성](#q-k-v-생성)
@@ -10,7 +10,7 @@
     - [가중합(어텐션 가중치, V)](#가중합어텐션-가중치-v)
 - [Mult-Head-Attention](#mult-head-attention)
 
-# Self-Attention, Mult-Head-Attention
+# [코드 분석]Self-Attention
 
 모든 입력 토큰들이 전체 입력 시퀀스(입력이 두 문장이 될 수 있음)의 토큰들을 모두 참조해서 문맥 기반 표현을 얻는다.
 
