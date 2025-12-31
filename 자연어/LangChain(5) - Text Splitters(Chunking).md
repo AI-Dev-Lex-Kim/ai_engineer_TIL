@@ -23,6 +23,12 @@
 
 ## 1. 텍스트 구조 기반 분할(Text structure-based)
 
+설치
+
+```bash
+pip install -qU langchain-text-splitters
+```
+
 LangChain의 패키지중 “`RecursiveCharacterTextSplitter`” 스플리터가 이 방식으로 동작한다.
 
 기본적으로 청킹은 “`RecursiveCharacterTextSplitter`” 부터 사용하는 것이 좋다.
@@ -89,6 +95,42 @@ LangChain의 패키지중 “`RecursiveCharacterTextSplitter`” 스플리터가
 <br>
 
 이렇게 겹치면, 청크 경계에서 갈려도 <mark>**앞, 뒤 청크 둘중 하나에 문맥이 남을확률**</mark>이 높아진다.
+
+<br>
+
+코드로 어떻게 사용하는지 알아보자.
+
+```python
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+# 예시 문서 로드
+with open("state_of_the_union.txt") as f:
+    state_of_the_union = f.read()
+
+text_splitter = RecursiveCharacterTextSplitter(
+    # 동작을 보여주기 위해 chunk_size를 아주 작게 설정
+    chunk_size=100,
+    chunk_overlap=20,
+    length_function=len,
+    is_separator_regex=False,
+)
+texts = text_splitter.create_documents([state_of_the_union])
+print(texts[0])
+print(texts[1])
+
+```
+
+```python
+page_content='Madam Speaker, Madam Vice President, our First Lady and Second Gentleman. Members of Congress and'
+page_content='of Congress and the Cabinet. Justices of the Supreme Court. My fellow Americans.'
+```
+
+`RecursiveCharacterTextSplitter` 파라미터
+
+- `chunk_size`: 청크의 최대 크기. 크기는 `length_function`으로 결정된다.
+- `chunk_overlap`: 청크 간 목표 중복 길이. 청크가 나뉘면서 문맥이 갈라져 정보가 유실되는 문제를 완화한다.
+- `length_function`: 청크 크기를 계산하는 함수.
+- `is_separator_regex`: 분할 목록(기본값 `["\n\n", "\n", " ", ""]`)을 정규식으로 해석할지 여부.
 
 <br>
 
