@@ -1,6 +1,6 @@
 # MCP(Model Context Protocol)
 
-**MCP(Model Context Protocol) Agent란?**
+<mark>**MCP(Model Context Protocol) Agent란?**</mark>
 
 MCP는 2024년 11월 [‘앤트로픽’이 발표](https://www.anthropic.com/news/model-context-protocol)한 오픈 소스 프로토콜이다.
 
@@ -30,29 +30,29 @@ MCP는 오픈 소스로 공개되어 새로운 AI용 앱을 만들 수 있다.
 
 <br>
 
-**MCP 원리**
+<mark>**MCP 원리**</mark>
 
 ![image.png](../images/MCP/image2.png)
 
-- **MCP Hosts**: 클로드 데스크 탑, IDE, AI tool 같은 데이터를 접근하려는 프로그램이다.
-- **MCP Clients**: MCP 서버와 1:1로 연결을 유지하며 서버에 요청한다.
-- **MCP Servers**: 클라이언트 요청을 받아서 외부 앱들이 정보를 제공하거나 동작을 하는 서버.
-- **Local Data Sources**: MCP 서버에서 컴퓨터의 파일, 데이터베이스에 안전하게 접근 가능한 데이터들이다.
-- **Remote Services**: 외부 API 서비스들이다.
+- <mark>**MCP Hosts**</mark>: 클로드 데스크 탑, IDE, AI tool 같은 데이터를 접근하려는 프로그램이다.
+- <mark>**MCP Clients**</mark>: MCP 서버와 1:1로 연결을 유지하며 서버에 요청한다.
+- <mark>**MCP Servers**</mark>: 클라이언트 요청을 받아서 외부 앱들이 정보를 제공하거나 동작을 하는 서버.
+- <mark>**Local Data Sources**</mark>: MCP 서버에서 컴퓨터의 파일, 데이터베이스에 안전하게 접근 가능한 데이터들이다.
+- <mark>**Remote Services**</mark>: 외부 API 서비스들이다.
 
 <br>
 
 예시
 
-**다른 규격**: 노션 새 페이지 만들기를 위해서 API 규칙 맞춰야한다. 슬랙(Slack) 메시지 전송은 슬랙의 API 규칙을 따라야 한다.
+<mark>**다른 규격**</mark>: 노션 새 페이지 만들기를 위해서 API 규칙 맞춰야한다. 슬랙(Slack) 메시지 전송은 슬랙의 API 규칙을 따라야 한다.
 
-**같은 규격:** AI는 '도구 실행'이라는 표준 MCP 명령만 알면, MCP 서버가 노션, 슬랙의 세부 규칙을 알아서 처리해준다.
+<mark>**같은 규격:**</mark> AI는 '도구 실행'이라는 표준 MCP 명령만 알면, MCP 서버가 노션, 슬랙의 세부 규칙을 알아서 처리해준다.
 
 <br>
 
 ### MCP 적용 전 슬랙, 노션 API 호출 규격
 
-**MCP 적용전: 노션 API 호출**
+<mark>**MCP 적용전: 노션 API 호출**</mark>
 
 ```json
 {
@@ -89,7 +89,7 @@ MCP는 오픈 소스로 공개되어 새로운 AI용 앱을 만들 수 있다.
 
 <br>
 
-**MCP 적용 전: 슬랙(Slack) API 호출 (메시지 전송)**
+<mark>**MCP 적용 전: 슬랙(Slack) API 호출 (메시지 전송)**</mark>
 
 ```json
 {
@@ -98,17 +98,17 @@ MCP는 오픈 소스로 공개되어 새로운 AI용 앱을 만들 수 있다.
 }
 ```
 
-**엔드포인트(Endpoint)**: `https://slack.com/api/chat.postMessage`
+<mark>**엔드포인트(Endpoint)**</mark>: `https://slack.com/api/chat.postMessage`
 
-**인증(Authentication)**: `Bearer` 타입의 토큰을 헤더에 포함시켜야 한다.
+<mark>**인증(Authentication)**</mark>: `Bearer` 타입의 토큰을 헤더에 포함시켜야 한다.
 
-**요청 본문 (Request Body in JSON)**: 슬랙(Slack)이 요구하는, 노션과는 완전히 다른 제이슨(JSON) 구조를 가진다.
+<mark>**요청 본문 (Request Body in JSON)**</mark>: 슬랙(Slack)이 요구하는, 노션과는 완전히 다른 제이슨(JSON) 구조를 가진다.
 
 <br>
 
 ### MCP 적용 후 노션, 슬랙 API 호출 규격
 
-**MCP 적용 후: 슬랙(Slack) API 호출**
+<mark>**MCP 적용 후: 슬랙(Slack) API 호출**</mark>
 
 ```json
 {
@@ -122,7 +122,7 @@ MCP는 오픈 소스로 공개되어 새로운 AI용 앱을 만들 수 있다.
 
 <br>
 
-**MCP 적용 후: 노션 API 호출**
+<mark>**MCP 적용 후: 노션 API 호출**</mark>
 
 ```json
 {
@@ -161,9 +161,9 @@ MCP는 오픈 소스로 공개되어 새로운 AI용 앱을 만들 수 있다.
 
 <br>
 
-가장 먼저 **환경 설정**을 해준다.
+가장 먼저 <mark>**환경 설정**</mark>을 해준다.
 
-uv 같은 가상 환경를 사용해서 **mcp**, anthropic 등 파이썬 패키지를 설치한다.
+uv 같은 가상 환경를 사용해서 <mark>**mcp**</mark>, anthropic 등 파이썬 패키지를 설치한다.
 
 ```bash
 uv init mcp-client # 프로젝트 디렉토리 생성
@@ -276,7 +276,7 @@ async def process_query_with_tools(session, model, tokenizer, device, query: str
 
 <br>
 
-1. **모델에게 질문**
+1. <mark>**모델에게 질문**</mark>
 
 ```python
 outputs = model.generate(**inputs, max_new_tokens=1000)
@@ -286,7 +286,7 @@ outputs = model.generate(**inputs, max_new_tokens=1000)
 
 <br>
 
-1. **도구 사용 여부 판단**
+1. <mark>**도구 사용 여부 판단**</mark>
 
 ```python
 if "<|tool_code|>" in response_text:
@@ -297,7 +297,7 @@ if "<|tool_code|>" in response_text:
 
 <br>
 
-1. **도구 실행**
+1. <mark>**도구 실행**</mark>
 
 ```python
 tool_call_str = response_text.split("<|tool_code|>")[1].split("<|/tool_code|>")[0]
@@ -312,7 +312,7 @@ result = await session.call_tool(tool_name, tool_args)
 
 <br>
 
-1. **결과 피드백**
+1. <mark>**결과 피드백**</mark>
 
 ```python
 if ...

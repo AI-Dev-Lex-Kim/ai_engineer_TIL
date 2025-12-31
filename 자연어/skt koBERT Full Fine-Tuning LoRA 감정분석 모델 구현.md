@@ -44,7 +44,7 @@ dataset = load_dataset('json',
 
 <br>
 
-## **Preprocessing**
+## <mark>**Preprocessing**</mark>
 
 ```python
 remove_dataset = dataset.remove_columns(['Index', 'Source', 'Domain', 'MainCategory', 'ProductName', 'ReviewScore', 'Syllable', 'Word', 'RDate', 'Aspects'])
@@ -141,7 +141,7 @@ type_dataset = filtered_dataset['train'].map(tokenize_fn,
                                              remove_columns=['RawText', 'GeneralPolarity'])
 ```
 
-**타입 명시**
+<mark>**타입 명시**</mark>
 
 Features를 통해 아웃풋의 타입을 명시해준다.
 
@@ -156,7 +156,7 @@ Features를 통해 아웃풋의 타입을 명시해준다.
 
 <br>
 
-**토크나이저**
+<mark>**토크나이저**</mark>
 
 토크나이저는 Hugging Face `AutoTokenizer`을 통해 받는다.
 
@@ -168,7 +168,7 @@ Features를 통해 아웃풋의 타입을 명시해준다.
 
 현재 가장 권장되는 방식으로, 모든 하위 의존성을 관리하는 hugging face의 transformers 라이브러리을 사용하는 것이다.
 
-**초창기 transformers (4년 전) 에서는 custom code를 이용한 Auto mapping이 불가하여 skt/kobert-base-v1에서 파이썬 라이브러리 형태로만 제공을 했다.**
+<mark>**초창기 transformers (4년 전) 에서는 custom code를 이용한 Auto mapping이 불가하여 skt/kobert-base-v1에서 파이썬 라이브러리 형태로만 제공을 했다.**</mark>
 
 이제는 \*\*\*\*`monologg/kobert`를 통해 바로 호출 가능하게 수정 되었다.
 
@@ -176,19 +176,19 @@ Features를 통해 아웃풋의 타입을 명시해준다.
 
 <br>
 
-**텍스트 정제**
+<mark>**텍스트 정제**</mark>
 
 clean function를 만들어서 HTML 태그, 특수문자, 중복 공백 제거를 해주었다.
 
 <br>
 
-**배치매핑**
+<mark>**배치매핑**</mark>
 
 `datasets` 라이브러리에서 배치 매핑은 `batched=True` 파라미터를 설정한다.
 
 `batch_size=100(defaults: 1000)`와 같이 배치 사이즈도 정한다.
 
-데이터셋의 각 샘플을 개별적으로 처리하는 대신, **여러 샘플을 묶은 배치 단위로 함수를 적용한다.**
+데이터셋의 각 샘플을 개별적으로 처리하는 대신, <mark>**여러 샘플을 묶은 배치 단위로 함수를 적용한다.**</mark>
 
 <br>
 
@@ -198,7 +198,7 @@ clean function를 만들어서 HTML 태그, 특수문자, 중복 공백 제거�
 
 또한 데이터 메모리와 CPU 사이를 오가는 횟수를 줄인다.
 
-단일 샘플로 처리하는 것보다 **배치단위로 데이터를 한번에 처리할때 훨씬 빠르다.**
+단일 샘플로 처리하는 것보다 <mark>**배치단위로 데이터를 한번에 처리할때 훨씬 빠르다.**</mark>
 
 ```python
 tokenizer = AutoTokenizer.from_pretrained("skt/kobert-base-v1")
@@ -300,7 +300,7 @@ from transformer import DataCollatorWithPadding
 )
 ```
 
-**tokenizer**
+<mark>**tokenizer**</mark>
 
 토크나이저를 넣어주면 된다.
 
@@ -311,7 +311,7 @@ from transformer import DataCollatorWithPadding
 
 <br>
 
-**padding(default: True)**
+<mark>**padding(default: True)**</mark>
 
 시퀀스를 어떻게 패딩할지 정한다.
 
@@ -321,7 +321,7 @@ from transformer import DataCollatorWithPadding
 
 <br>
 
-**max_length**
+<mark>**max_length**</mark>
 
 타입: `int`
 
@@ -331,7 +331,7 @@ from transformer import DataCollatorWithPadding
 
 <br>
 
-**pad_to_multiple_of**
+<mark>**pad_to_multiple_of**</mark>
 
 시퀀스의 길이를 주어진 값의 배수가 되도록 패딩한다.
 

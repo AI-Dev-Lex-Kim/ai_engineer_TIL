@@ -45,40 +45,40 @@ client.fine_tuning.jobs.create(
 
 <br>
 
-### **Request body**
+### <mark>**Request body**</mark>
 
-- **`model`** string, **필수**
+- <mark>**`model`**</mark> string, <mark>**필수**</mark>
   파인튜닝할 모델의 이름이다. 지원되는 모델 중 하나를 선택할 수 있다.
-- **`training_file`** string, **필수**
+- <mark>**`training_file`**</mark> string, <mark>**필수**</mark>
   학습 데이터가 포함된, 업로드된 파일의 ID이다.
   파일 업로드 방법은 [파일 업로드](https://platform.openai.com/docs/api-reference/files/create) 문서를 참고해야 한다.
   데이터셋은 반드시 JSONL 파일 형식이어야 한다. 또한, 파일을 업로드할 때 `purpose`를 `fine-tune`으로 지정해야 한다.
   파일의 내용은 모델이 `chat` 또는 `completions` 형식을 사용하는지, 혹은 파인튜닝 방법이 `preference` 형식을 사용하는지에 따라 달라져야 한다.
-- **`metadata`** map, **선택**
+- <mark>**`metadata`**</mark> map, <mark>**선택**</mark>
   객체에 첨부할 수 있는 최대 16개의 키-값 쌍의 집합이다. 객체에 대한 추가 정보를 구조화된 형식으로 저장하고, API나 대시보드를 통해 객체를 조회할 때 유용하다.
   키는 최대 64자의 문자열이고, 값은 최대 512자의 문자열이다.
-- **`method`** object, **선택**
-  파인튜닝에 사용되는 방법이다. - **`type`** string **Required**
-  메서드의 유형이다. `supervised`, `dpo` 또는 `reinforcement` 중 하나이다. - **`supervised`** object Optional
-  supervised fine-tuning method 를 위한 환경 설정 - **`hyperparameters`** object Optional
-  파인튜닝 작업에 사용되는 하이퍼파라미터 - **`batch_size`**(“auto" or integer / Optional) **:** 각 배치에 포함된 예제의 수이다. - **`learning_rate_multiplier`**("auto" or number)**:** 학습률 - **`n_epochs`**: ("auto" or integer / Optional / Defaults to auto): 에폭 수
-- **`seed`** integer 또는 null / **선택**
-  **시드는 작업 결과의 재현성을 제어**한다.
+- <mark>**`method`**</mark> object, <mark>**선택**</mark>
+  파인튜닝에 사용되는 방법이다. - <mark>**`type`**</mark> string <mark>**Required**</mark>
+  메서드의 유형이다. `supervised`, `dpo` 또는 `reinforcement` 중 하나이다. - <mark>**`supervised`**</mark> object Optional
+  supervised fine-tuning method 를 위한 환경 설정 - <mark>**`hyperparameters`**</mark> object Optional
+  파인튜닝 작업에 사용되는 하이퍼파라미터 - <mark>**`batch_size`**</mark>(“auto" or integer / Optional) <mark>**:**</mark> 각 배치에 포함된 예제의 수이다. - <mark>**`learning_rate_multiplier`**</mark>("auto" or number)<mark>**:**</mark> 학습률 - <mark>**`n_epochs`**</mark>: ("auto" or integer / Optional / Defaults to auto): 에폭 수
+- <mark>**`seed`**</mark> integer 또는 null / <mark>**선택**</mark>
+  <mark>**시드는 작업 결과의 재현성을 제어**</mark>한다.
   동일한 시드와 작업 매개변수를 전달하면 대부분 동일한 결과가 생성되지만, 드문 경우 결과가 다를 수 있다.
   시드를 지정하지 않으면 자동으로 생성된다.
-- **`suffix`** string 또는 null / **선택**
-  기본값은 `null`이다. **파인튜닝된 모델 이름에 추가될 최대 64자의 문자열**이다.
+- <mark>**`suffix`**</mark> string 또는 null / <mark>**선택**</mark>
+  기본값은 `null`이다. <mark>**파인튜닝된 모델 이름에 추가될 최대 64자의 문자열**</mark>이다.
   예를 들어, `suffix`로 "custom-model-name"을 지정하면 `ft:gpt-4o-mini:openai:custom-model-name:7p4lURel`과 같은 모델 이름이 생성된다.
-- **`validation_file`** string 또는 null, **선택**
-  **검증 데이터가 포함된, 업로드된 파일의 ID**이다.
-  이 파일을 제공하면, 해당 데이터는 **파인튜닝 중에 주기적으로 검증 지표를 생성**하는 데 사용된다.
+- <mark>**`validation_file`**</mark> string 또는 null, <mark>**선택**</mark>
+  <mark>**검증 데이터가 포함된, 업로드된 파일의 ID**</mark>이다.
+  이 파일을 제공하면, 해당 데이터는 <mark>**파인튜닝 중에 주기적으로 검증 지표를 생성**</mark>하는 데 사용된다.
   이 지표들은 파인튜닝 결과 파일에서 확인할 수 있다.
   학습 파일과 검증 파일에 동일한 데이터가 중복으로 포함되어서는 안 된다.
   데이터셋은 반드시 JSONL 파일 형식이어야 하며, 파일을 업로드할 때 `purpose`를 `fine-tune`으로 지정해야 한다.
 
 <br>
 
-### **반환값 (Returns)**
+### <mark>**반환값 (Returns)**</mark>
 
 `fine-tuning.job` 객체를 반환한다.
 
@@ -158,9 +158,9 @@ client.fine_tuning.jobs.list_events(
 )
 ```
 
-**fine_tuning_job_id(string / Required): 이벤트를 가져올 파인튜닝 작업 ID**
+<mark>**fine_tuning_job_id(string / Required): 이벤트를 가져올 파인튜닝 작업 ID**</mark>
 
-**limit**: 검색할 이벤트의 수
+<mark>**limit**</mark>: 검색할 이벤트의 수
 
 <br>
 

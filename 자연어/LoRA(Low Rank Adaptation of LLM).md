@@ -232,7 +232,7 @@ d는 기존 모델에서 사용하던 원래 차원, 즉 embedding size or hidde
 
 r은 “low-rank”차원으로 LoRa에서 새로 추가한 임베딩 크기이다.
 
-얼마나 **“압축된 정보로 W를 표현할지”** 조절하는 크기이다.
+얼마나 <mark>**“압축된 정보로 W를 표현할지”**</mark> 조절하는 크기이다.
 
 <br>
 
@@ -353,4 +353,4 @@ LoRA가 가볍지만 효과가 좋은 이유가 이런 구조 이기 때문이�
 참고
 
 - [LoRA Hugging Face Docs](https://huggingface.co/docs/peft/task_guides/lora_based_methods)
-- [**LoRA: Low-Rank Adaptation of Large Language Models 논문**](https://arxiv.org/pdf/2106.09685)
+- [<mark>**LoRA: Low-Rank Adaptation of Large Language Models 논문**</mark>](https://arxiv.org/pdf/2106.09685)

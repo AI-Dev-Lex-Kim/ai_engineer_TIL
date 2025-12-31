@@ -1,9 +1,9 @@
 - [데이터 입출력 및 생성](#데이터-입출력-및-생성)
   - [pd.read\_csv()](#pdread_csv)
   - [pd.DataFrame()](#pddataframe)
-  - [**df.head(행\_개수)**](#dfhead행_개수)
-  - [**df.tail(행\_개수)**](#dftail행_개수)
-  - [**df.dtypes**](#dfdtypes)
+  - [<mark>**df.head(행\_개수)**</mark>](#dfhead행_개수)
+  - [<mark>**df.tail(행\_개수)**</mark>](#dftail행_개수)
+  - [<mark>**df.dtypes**</mark>](#dfdtypes)
 - [인덱싱 및 슬라이싱](#인덱싱-및-슬라이싱)
   - [df.iloc\[\]](#dfiloc)
   - [df.loc\[\]](#dfloc)
@@ -14,8 +14,8 @@
   - [행/컬럼 추가](#행컬럼-추가)
   - [마스킹을 통한 조건부 할당](#마스킹을-통한-조건부-할당)
 - [인덱스 설정 및 정렬](#인덱스-설정-및-정렬)
-  - [**df.set\_index('컬럼명')**](#dfset_index컬럼명)
-  - [**df.reset\_index()**](#dfreset_index)
+  - [<mark>**df.set\_index('컬럼명')**</mark>](#dfset_index컬럼명)
+  - [<mark>**df.reset\_index()**</mark>](#dfreset_index)
   - [df.sort\_index()](#dfsort_index)
 - [통계 및 요약 함수](#통계-및-요약-함수)
   - [df.describe()](#dfdescribe)
@@ -23,7 +23,7 @@
   - [df.var()](#dfvar)
   - [df.std()](#dfstd)
   - [누적 연산: cumsum(), cumprod()](#누적-연산-cumsum-cumprod)
-  - [**df.corr()**](#dfcorr)
+  - [<mark>**df.corr()**</mark>](#dfcorr)
 - [데이터 시각화](#데이터-시각화)
   - [df.plot()](#dfplot)
   - [seaborn 시각화 함수 (sns.barplot, sns.lineplot 등)](#seaborn-시각화-함수-snsbarplot-snslineplot-등)
@@ -101,19 +101,19 @@ print(df)
 
 ```
 
-### **df.head(행\_개수)**
+### <mark>**df.head(행\_개수)**</mark>
 
 DataFrame의 상위 일부 행 반환
 
 - 기본값: `행_개수=5`
 
-### **df.tail(행\_개수)**
+### <mark>**df.tail(행\_개수)**</mark>
 
 DataFrame의 하위 일부 행 반환
 
 - 기본값: `행_개수=5`
 
-### **df.dtypes**
+### <mark>**df.dtypes**</mark>
 
 각 컬럼의 데이터타입 정보를 반환
 
@@ -217,11 +217,11 @@ DataFrame의 하위 일부 행 반환
 
 ## 인덱스 설정 및 정렬
 
-### **df.set_index('컬럼명')**
+### <mark>**df.set_index('컬럼명')**</mark>
 
 지정한 컬럼을 인덱스로 설정
 
-### **df.reset_index()**
+### <mark>**df.reset_index()**</mark>
 
 기존 인덱스를 열로 이동시키고, 기본 정수 인덱스로 리셋한 DataFrame 반환
 
@@ -277,11 +277,11 @@ summary = df.describe()
 
     ```
 
-### **df.corr()**
+### <mark>**df.corr()**</mark>
 
 각 컬럼 간의 상관관계 계산 (numeric한 데이터만 고려)
 
-- **옵션:**
+- <mark>**옵션:**</mark>
   - `numeric_only=True` 또는 `numeric_only=False` → 숫자형 데이터만 상관계산에 포함할지 여부 설정
 
 ## 데이터 시각화
@@ -547,11 +547,11 @@ group_stats = df.groupby('지역')['매출'].agg(['min', 'max', 'mean'])
 
 ### df.groupby(그룹화할 열).count()
 
-지정한 컬럼을 기준으로 데이터를 그룹화한 뒤, 각 그룹에서 **결측값이 아닌 데이터 개수**를 세어 반환한다.
+지정한 컬럼을 기준으로 데이터를 그룹화한 뒤, 각 그룹에서 <mark>**결측값이 아닌 데이터 개수**</mark>를 세어 반환한다.
 
 ### df.groupby(그룹화할 열).min(numeric_only=True)
 
-각 그룹에서 **숫자형 또는 정렬 가능한 값(예: 날짜, 문자열 등)의 최소값**을 반환한다.
+각 그룹에서 <mark>**숫자형 또는 정렬 가능한 값(예: 날짜, 문자열 등)의 최소값**</mark>을 반환한다.
 
 - `numeric_only=True`
   - 숫자형만 나온다.
@@ -598,10 +598,10 @@ df.groupby(['지역', '상품']).loc[(['서울','대전','대구'], '전자'),:]
 
 지정한 행과 열 기준에 따라 데이터를 재배열해, 쉽게 분석할 수 있는 요약표를 생성한다.
 
-- **df**: 원본 데이터가 저장된 데이터프레임이다
-- **values**: value에 있는 데이터를 요약한다.
-- **index**: 행 방향으로 그룹화할 기준 열을 지정한다.
-- **columns**: 열 방향으로 그룹화할 기준 열을 지정한다.
+- <mark>**df**</mark>: 원본 데이터가 저장된 데이터프레임이다
+- <mark>**values**</mark>: value에 있는 데이터를 요약한다.
+- <mark>**index**</mark>: 행 방향으로 그룹화할 기준 열을 지정한다.
+- <mark>**columns**</mark>: 열 방향으로 그룹화할 기준 열을 지정한다.
 
 ```python
 pivot = pd.pivot_table(df, values='매출', index='지역', columns='상품', aggfunc='mean')
@@ -775,7 +775,7 @@ df['age_group'] = pd.cut(df['age'], bins=[10,20,30,40,50], right=False, labels=[
 
 지정한 컬럼을 기준으로 정렬
 
-- **옵션:**
+- <mark>**옵션:**</mark>
   - `by='컬럼명'` → 정렬 기준이 되는 컬럼 지정
   - `ascending=True` → 오름차순 정렬 (기본값)
   - `ascending=False` → 내림차순 정렬

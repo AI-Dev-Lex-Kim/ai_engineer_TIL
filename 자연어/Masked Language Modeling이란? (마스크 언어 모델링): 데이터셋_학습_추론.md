@@ -6,7 +6,7 @@
 
 # Masked Language Modeling이란? (마스크 언어 모델링): 데이터셋/학습/추론
 
-**Masked language modeling**은 문장에서 일부 단어를 숨기고 맞추는 학습 방식이다.
+<mark>**Masked language modeling**</mark>은 문장에서 일부 단어를 숨기고 맞추는 학습 방식이다.
 
 모델은 숨겨진 단어의 왼쪽과 오른쪽 문맥을 모두 참고할 수 있다.
 
@@ -46,7 +46,7 @@ BERT가 이런 마스크 언어 모델의 대표적인 예로, 문장 전체 이
 
 ## 데이터 준비 과정
 
-> **Masked Language Modeling**의 멋진 점은 데이터셋에 레이블(label)이 필요하지 않다는 점이다.
+> <mark>**Masked Language Modeling**</mark>의 멋진 점은 데이터셋에 레이블(label)이 필요하지 않다는 점이다.
 > 다음 단어가 레이블(label)이기 때문이다.
 
 <br>
@@ -106,7 +106,7 @@ print(tokenized_dataset)
 
 `batched=True`
 
-- `preprocess_function`이 단일 예제(x) 하나씩 받는 게 아니라 **배치 단위의 예제 리스트**를 받도록 바뀐다.
+- `preprocess_function`이 단일 예제(x) 하나씩 받는 게 아니라 <mark>**배치 단위의 예제 리스트**</mark>를 받도록 바뀐다.
 - 그래서 `" ".join(x) for x in examples["answers.text"]` 같은 코드가 가능해진다.
 - 만약 False면 `examples`가 단일 예제가 되므로 리스트 컴프리헨션이 오류 날 수 있다.
 
@@ -122,7 +122,7 @@ print(tokenized_dataset)
 `remove_columns=dataset.column_names`
 
 - 원래 데이터셋 안의 모든 컬럼을 제거한다.
-- 따라서 결과에는 **`preprocess_function`에서 리턴한 토큰화 결과만 남는다**.
+- 따라서 결과에는 <mark>**`preprocess_function`에서 리턴한 토큰화 결과만 남는다**</mark>.
 - 즉 `"answers.text"`를 합쳐서 토큰화한 값만 남게 된다.
 
 <br>
@@ -159,7 +159,7 @@ print(tokenized_dataset)
 
   - 여기서 컬럼은 `'id'`, `'question'`, `'answers.text'`
   - `preprocess_function`이 반환하는 값(`input_ids`, `attention_mask`)만 남게 됨
-  - “컬럼을 제거한다”는 말은 **원래 객체에 있던 id, question, answers.text 등의 필드를 삭제**
+  - “컬럼을 제거한다”는 말은 <mark>**원래 객체에 있던 id, question, answers.text 등의 필드를 삭제**</mark>
   - `train_test_split(test_size=0.2)`을 사용해서 학습, 테스트 세트 분할 가능
 
   ```python
@@ -177,13 +177,13 @@ tokenizer.pad_token = tokenizer.eos_token
 data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mls=True, mlm_probability=0.15)
 ```
 
-**1. pad_token을 eos_token으로 설정하는 이유**
+<mark>**1. pad_token을 eos_token으로 설정하는 이유**</mark>
 
 토크나이저(tokenizer)는 텍스트를 토큰 단위로 바꿔주는 역할이다.
 
-GPT 같은 **causal LM 모델**은 원래 문장의 끝을 알리는 특별한 토큰(eos_token)만 가지고 있음
+GPT 같은 <mark>**causal LM 모델**</mark>은 원래 문장의 끝을 알리는 특별한 토큰(eos_token)만 가지고 있음
 
-그런데 학습할 때 여러 문장을 **같은 길이**로 맞춰야 한다.
+그런데 학습할 때 여러 문장을 <mark>**같은 길이**</mark>로 맞춰야 한다.
 
 <br>
 
@@ -191,9 +191,9 @@ GPT 같은 **causal LM 모델**은 원래 문장의 끝을 알리는 특별한 �
 
 `pad_token`은 패딩할 때 쓰는 특별한 토큰이다.
 
-causal LM(GPT 계열)에는 원래 pad_token(**패딩용 토큰)이 정의되어 있지 않은 경우가 많음**
+causal LM(GPT 계열)에는 원래 pad_token(<mark>**패딩용 토큰)이 정의되어 있지 않은 경우가 많음**</mark>
 
-**모델이 이미 아는 eos_token(**End Of Sequence)**을 패딩용으로 재활용**한다.
+<mark>**모델이 이미 아는 eos_token(**</mark>End Of Sequence)<mark>**을 패딩용으로 재활용**</mark>한다.
 
 즉, “문장의 끝”을 의미하는 토큰을 “빈 칸”처럼 사용한다고 이해하면 된다.
 
@@ -202,13 +202,13 @@ tokenizer.eos_token  # '<|endoftext|>'
 tokenizer.pad_token  # None -> pad_token = '<|endoftext|>'
 ```
 
-이제 배치에서 짧은 문장을 패딩할 때도 **'<|endoftext|>'** 토큰을 사용
+이제 배치에서 짧은 문장을 패딩할 때도 <mark>**'<|endoftext|>'**</mark> 토큰을 사용
 
 <br>
 
-**2. DataCollatorForLanguageModeling의 역할**
+<mark>**2. DataCollatorForLanguageModeling의 역할**</mark>
 
-`DataCollatorForLanguageModeling`은 **배치(batch)를 만들면서 언어 모델 학습에 필요한 처리를 자동으로 해주는 클래스**
+`DataCollatorForLanguageModeling`은 <mark>**배치(batch)를 만들면서 언어 모델 학습에 필요한 처리를 자동으로 해주는 클래스**</mark>
 
 1. 토크나이저
 
@@ -242,7 +242,7 @@ tokenizer.pad_token  # None -> pad_token = '<|endoftext|>'
 
 3. `mls=True`일때
 
-   - 일부 토큰만 mask 처리 → 예측 대상은 **mask 토큰뿐**
+   - 일부 토큰만 mask 처리 → 예측 대상은 <mark>**mask 토큰뿐**</mark>
    - 나머지(non-masked) 토큰 위치는 -100으로 처리
 
    ```python
@@ -251,7 +251,7 @@ tokenizer.pad_token  # None -> pad_token = '<|endoftext|>'
    labels     = [-100, 11, -100, -100]
    ```
 
-   모델은 **mask된 11만 예측**하고, 나머지 토큰은 학습에서 무시
+   모델은 <mark>**mask된 11만 예측**</mark>하고, 나머지 토큰은 학습에서 무시
 
 4. `mlm_probability=0.15`
    - 마스킹될 토큰의 비율을 지정
@@ -495,13 +495,13 @@ for batch in dataloader:
 
 ```
 
-Summarization task에서는 **두 가지**를 만들어야 한다
+Summarization task에서는 <mark>**두 가지**</mark>를 만들어야 한다
 
-1. **input_ids** → 모델 입력(input), 여기서는 기사(article)
-2. **labels** → 모델이 예측해야 하는 정답(output), 여기서는 요약(summary)
+1. <mark>**input_ids**</mark> → 모델 입력(input), 여기서는 기사(article)
+2. <mark>**labels**</mark> → 모델이 예측해야 하는 정답(output), 여기서는 요약(summary)
 
 <br>
 
 참고
 
-- [**Hugging Face Masked language modeling Docs**](https://huggingface.co/docs/transformers/v4.56.2/en/tasks/masked_language_modeling#masked-language-modeling)
+- [<mark>**Hugging Face Masked language modeling Docs**</mark>](https://huggingface.co/docs/transformers/v4.56.2/en/tasks/masked_language_modeling#masked-language-modeling)

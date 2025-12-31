@@ -123,7 +123,7 @@ dataset_custom = load_dataset(
     'json',
     data_dir='path/to/local/my_dataset.json', # 데이터 폴더안의 파일 가져옴
     # data_files='path/to/local/my_dataset.json' 파일 하나 가능
-    features=emotion_features  # ***** 우리가 만든 features 객체를 지정 *****
+    features=emotion_features  # <mark>****</mark>* 우리가 만든 features 객체를 지정 <mark>****</mark>*
 )
 
 출력
@@ -139,7 +139,7 @@ dataset_custom = load_dataset(
 
 `ClassLabel`은 정수와 문자열 라벨의 매핑을 해주어주는 특별한 Feature 타입이다.
 
-이제 **Transformer Dataset** 라이브러리에서 `0`은 ‘sadness’, `1`이 ‘joy’가 된다.
+이제 <mark>**Transformer Dataset**</mark> 라이브러리에서 `0`은 ‘sadness’, `1`이 ‘joy’가 된다.
 
 <br>
 
@@ -167,7 +167,7 @@ dataset_custom = load_dataset(
 
 <br>
 
-**중첩된 Feature 객체 정의**
+<mark>**중첩된 Feature 객체 정의**</mark>
 
 ```python
 From datasets import load_dataset, Features, Value, ClassLabel
@@ -201,7 +201,7 @@ dataset = load_dataset(
 
 <br>
 
-**`.map()`**으로 애널리시스 객체안의 제너럴폴라리티 값을 꺼내어 최상위 계층으로 옮긴다.
+<mark>**`.map()`**</mark>으로 애널리시스 객체안의 제너럴폴라리티 값을 꺼내어 최상위 계층으로 옮긴다.
 
 ```python
 def flatten_structure(example):
@@ -268,7 +268,7 @@ return → Dataset or DatasetDict
 
 <br>
 
-**path**
+<mark>**path**</mark>
 
 데이터셋의 경로 또는 포맷을 지정한다.
 
@@ -278,17 +278,17 @@ return → Dataset or DatasetDict
 
 <br>
 
-**data_dir**
+<mark>**data_dir**</mark>
 
-데이터 파일들이 모여있는 **디렉토리 경로**를 지정한다.
+데이터 파일들이 모여있는 <mark>**디렉토리 경로**</mark>를 지정한다.
 
 `data_files`를 지정하지 않고 `data_dir`만 지정하면, 해당 디렉토리 안에 있는 모든 파일을 데이터셋으로 불러온다. `data_files`를 일일이 지정하기 번거로울 때 유용하다.
 
 <br>
 
-**data_files**
+<mark>**data_files**</mark>
 
-불러올 **데이터 파일의 정확한 경로**를 지정한다.
+불러올 <mark>**데이터 파일의 정확한 경로**</mark>를 지정한다.
 
 `{'train': 'train.csv', 'test': 'test.csv'}`처럼 딕셔너리 형태로 전달하여 데이터셋을 `train`, `test` 스플릿으로 나누는것이 가장 흔하다.
 
@@ -331,7 +331,7 @@ return → Dataset or DatasetDict
 
 <br>
 
-**split**
+<mark>**split**</mark>
 
 데이터를 train/test/valid 등 스플릿을 선택한다.
 
@@ -340,17 +340,17 @@ return → Dataset or DatasetDict
 
 <br>
 
-**cache_dir**
+<mark>**cache_dir**</mark>
 
-처리된 데이터(애로우 테이블)를 **저장하거나 읽어올 캐시 디렉토리**를 지정한다.
+처리된 데이터(애로우 테이블)를 <mark>**저장하거나 읽어올 캐시 디렉토리**</mark>를 지정한다.
 
 기본값은 `~/.cache/huggingface/datasets`이며, 한 번 불러온 데이터셋은 이곳에 저장되어 다음 로드 시 매우 빠르게 불러온다.
 
 <br>
 
-**features**
+<mark>**features**</mark>
 
-데이터셋의 **스키마(구조와 타입)를 지정한다.**
+데이터셋의 <mark>**스키마(구조와 타입)를 지정한다.**</mark>
 
 이전에 설명했듯이, `ClassLabel`을 사용해 레이블에 의미를 부여하거나, 데이터 타입을 강제하고 싶을 때 사용한다.
 
@@ -368,32 +368,32 @@ dataset_custom = load_dataset(
     data_dir='path/to/local/my_dataset.json', # 데이터 폴더안의 파일 가져옴
     # data_files='path/to/local/my_dataset.json' 파일 하나 가능
     column_names=['text', 'label'],
-    features=emotion_features  # ***** 우리가 만든 features 객체를 지정 *****
+    features=emotion_features  # <mark>****</mark>* 우리가 만든 features 객체를 지정 <mark>****</mark>*
 )
 ```
 
 <br>
 
-**download_mode**
+<mark>**download_mode**</mark>
 
-데이터를 허브같은 곳에서 다운로드하고 생성하는 **방식을 결정한다.**
+데이터를 허브같은 곳에서 다운로드하고 생성하는 <mark>**방식을 결정한다.**</mark>
 
 - `REUSE_DATASET_IF_EXISTS` (기본값): 캐시가 있으면 재사용한다.
 - `FORCE_REDOWNLOAD`: 캐시가 있어도 무시하고 강제로 다시 다운로드 및 처리한다.
 
 <br>
 
-**verification_mode**
+<mark>**verification_mode**</mark>
 
-다운로드한 데이터의 **무결성을 검증하는 수준**을 정한다.
+다운로드한 데이터의 <mark>**무결성을 검증하는 수준**</mark>을 정한다.
 
 체크섬, 파일 크기 등을 검사하여 데이터가 손상되지 않았는지 확인한다. 보통 기본값으로 충분하다.
 
 <br>
 
-**keep_in_memory**
+<mark>**keep_in_memory**</mark>
 
-데이터셋 전체를 복사하여 **RAM(메모리)에 저장시키고 유지할지** 결정한다.
+데이터셋 전체를 복사하여 <mark>**RAM(메모리)에 저장시키고 유지할지**</mark> 결정한다.
 
 데이터셋이 작을 경우, 메모리에 올려두고 사용하면 디스크 I/O가 없어 처리 속도가 더 빨라진다.
 
@@ -401,25 +401,25 @@ dataset_custom = load_dataset(
 
 <br>
 
-**revision**
+<mark>**revision**</mark>
 
-허브에 있는 데이터셋의 **특정 버전을 지정한다.**
+허브에 있는 데이터셋의 <mark>**특정 버전을 지정한다.**</mark>
 
-Git의 커밋 해시(commit SHA)나 태그(tag)를 사용하여, 특정 시점의 데이터셋을 불러올 수 있어 연구나 실험의 **재현성**을 보장하는 데 중요하다.
+Git의 커밋 해시(commit SHA)나 태그(tag)를 사용하여, 특정 시점의 데이터셋을 불러올 수 있어 연구나 실험의 <mark>**재현성**</mark>을 보장하는 데 중요하다.
 
 <br>
 
-**token**
+<mark>**token**</mark>
 
-허브에 있는 **비공개(private) 데이터셋**에 접근하기 위한 **인증 토큰**을 전달한다.
+허브에 있는 <mark>**비공개(private) 데이터셋**</mark>에 접근하기 위한 <mark>**인증 토큰**</mark>을 전달한다.
 
 `True`로 설정하면 로컬에 저장된 토큰(`~/.huggingface`)을 자동으로 사용한다.
 
 <br>
 
-**streaming**
+<mark>**streaming**</mark>
 
-`True`로 설정하면, 데이터를 미리 다운로드하지 않고 **실시간으로 스트리밍한다.**
+`True`로 설정하면, 데이터를 미리 다운로드하지 않고 <mark>**실시간으로 스트리밍한다.**</mark>
 
 필요할때마다 데이터를 실시간으로 가져와서 처리한다.
 
@@ -429,9 +429,9 @@ Git의 커밋 해시(commit SHA)나 태그(tag)를 사용하여, 특정 시점�
 
 <br>
 
-**num_proc**
+<mark>**num_proc**</mark>
 
-데이터를 처리할 때 사용할 **병렬 프로세스의 개수**를 지정한다.
+데이터를 처리할 때 사용할 <mark>**병렬 프로세스의 개수**</mark>를 지정한다.
 
 CPU 코어를 여러 개 활용하여 데이터 전처리 속도를 크게 향상시킬 수 있다.
 
@@ -439,13 +439,13 @@ ex) `num_proc=8`
 
 <br>
 
-**`*config_kwargs` (additional keyword arguments)**
+<mark>**`*config_kwargs` (additional keyword arguments)**</mark>
 
-위에 명시되지 않은, **특정 데이터셋 빌더(Builder)에만 필요한 추가적인 키워드 인자**들을 전달할 때 사용됩니다.
+위에 명시되지 않은, <mark>**특정 데이터셋 빌더(Builder)에만 필요한 추가적인 키워드 인자**</mark>들을 전달할 때 사용됩니다.
 
 <br>
 
-**반환 값 (Returns)**
+<mark>**반환 값 (Returns)**</mark>
 
 이러한 파라미터 조합에 따라 `load_dataset`은 다음과 같은 객체를 반환한다.
 
@@ -462,13 +462,13 @@ json 파일에서 데이터를 로드할때 에러가 발생할 경우 처리해
 
 <br>
 
-**strict(default)**
+<mark>**strict(default)**</mark>
 
 인코딩 또는 디코딩 중 오류가 발생하면 예외를 발생 시킨다.
 
 <br>
 
-**ignore**
+<mark>**ignore**</mark>
 
 오류가 발생한 문자를 모두 무시하고 제거한다.
 
@@ -476,7 +476,7 @@ json 파일에서 데이터를 로드할때 에러가 발생할 경우 처리해
 
 <br>
 
-**replace**
+<mark>**replace**</mark>
 
 오류가 발생한 문자를 ‘?’ 또는 유니코드 대체문자로 대체한다.
 
@@ -484,7 +484,7 @@ json 파일에서 데이터를 로드할때 에러가 발생할 경우 처리해
 
 <br>
 
-**backslashreplace**
+<mark>**backslashreplace**</mark>
 
 오류가 발생한 문자를 백슬래쉬 이스케이프 시퀀스로 대체한다.(\x80, \uXXX, \UXXXXXXX)
 

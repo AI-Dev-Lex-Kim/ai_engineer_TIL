@@ -206,7 +206,7 @@ dataset.set_format(type="torch", columns=["input_ids", "token_type_ids", "attent
 
 <br>
 
-**토큰화 확인**
+<mark>**토큰화 확인**</mark>
 
 ```python
 ids = train_token_inputs['input_ids'][0].tolist()
@@ -219,10 +219,10 @@ pd.DataFrame(
 )
 ```
 
-|            | **0** | **1** | **2** | **3**     | **4** | **5** | **6**     | **7** | **8** | **9** | **...** | **502** | **503** | **504** | **505** | **506** |
+|            | <mark>**0**</mark> | <mark>**1**</mark> | <mark>**2**</mark> | <mark>**3**</mark>     | <mark>**4**</mark> | <mark>**5**</mark> | <mark>**6**</mark>     | <mark>**7**</mark> | <mark>**8**</mark> | <mark>**9**</mark> | <mark>**...**</mark> | <mark>**502**</mark> | <mark>**503**</mark> | <mark>**504**</mark> | <mark>**505**</mark> | <mark>**506**</mark> |
 | ---------- | ----- | ----- | ----- | --------- | ----- | ----- | --------- | ----- | ----- | ----- | ------- | ------- | ------- | ------- | ------- | ------- |
-| **ids**    | 19531 | 157   | 97    | 1868      | 77    | 556   | 26928     | 7     | 21    | 23253 | ...     | 0       | 0       | 0       | 0       | 0       |
-| **tokens** | ▁박재 | 원    | ▁기자 | ▁대한민국 | ▁5    | G     | ▁홍보대사 | ▁     | 를    | ▁자처 | ...     | <pad>   | <pad>   | <pad>   | <pad>   | <pad>   |
+| <mark>**ids**</mark>    | 19531 | 157   | 97    | 1868      | 77    | 556   | 26928     | 7     | 21    | 23253 | ...     | 0       | 0       | 0       | 0       | 0       |
+| <mark>**tokens**</mark> | ▁박재 | 원    | ▁기자 | ▁대한민국 | ▁5    | G     | ▁홍보대사 | ▁     | 를    | ▁자처 | ...     | <pad>   | <pad>   | <pad>   | <pad>   | <pad>   |
 
 <br>
 
@@ -271,7 +271,7 @@ decoder_targets = tokenizer(ko, return_tensors="pt")['input_ids'].to(deivce)
 
 <br>
 
-**teacher forcing**
+<mark>**teacher forcing**</mark>
 
 디코더에서 이전 단어들을 참조하여 다음 단어를 예측한다.
 
@@ -279,9 +279,9 @@ decoder_targets = tokenizer(ko, return_tensors="pt")['input_ids'].to(deivce)
 
 그 다음 단어도 이전 단어들을 보고 학습을 하게 될때, 틀린 단어들이 가득한 단어들로 지속적으로 학습하게 된다.
 
-이 상태에서 계속해서 예측된 단어를 기반으로 학습하게 되면, **잘못된 예측이 누적되면서 학습이 왜곡**될 수 있다.
+이 상태에서 계속해서 예측된 단어를 기반으로 학습하게 되면, <mark>**잘못된 예측이 누적되면서 학습이 왜곡**</mark>될 수 있다.
 
-이를 방지하기 위해 **teacher forcing**을 사용한다.
+이를 방지하기 위해 <mark>**teacher forcing**</mark>을 사용한다.
 
 예측된 단어(토큰) 대신, 실제 정답 단어(target)을 다음 입력으로 사용하여 학습한다.
 
@@ -289,7 +289,7 @@ decoder_targets = tokenizer(ko, return_tensors="pt")['input_ids'].to(deivce)
 
 그럼 다음 타임스텝에서 이전 단어들을 참조해서 다음 단어를 예측할때 올바른 단어를 바탕으로 예측해 학습할 수 있다.
 
-모델이 실제로 예측한 단어(토큰)은 다음 입력으로는 사용되지 않고, **loss 계산에만 활용**된다.
+모델이 실제로 예측한 단어(토큰)은 다음 입력으로는 사용되지 않고, <mark>**loss 계산에만 활용**</mark>된다.
 
 <br>
 
@@ -316,8 +316,8 @@ pd.DataFrame(
 
 |                     | 0     | 1     | 2       | 3         | 4         | 5    |
 | ------------------- | ----- | ----- | ------- | --------- | --------- | ---- |
-| **decoder_inputs**  | <pad> | ▁나는 | ▁해외   | ▁여행을   | ▁좋아한다 | .    |
-| **decoder_targets** | ▁나는 | ▁해외 | ▁여행을 | ▁좋아한다 | .         | </s> |
+| <mark>**decoder_inputs**</mark>  | <pad> | ▁나는 | ▁해외   | ▁여행을   | ▁좋아한다 | .    |
+| <mark>**decoder_targets**</mark> | ▁나는 | ▁해외 | ▁여행을 | ▁좋아한다 | .         | </s> |
 
 <br>
 
@@ -811,7 +811,7 @@ with torch.no_grad():
 확률:             [0.4 , 0.3 , 0.1 , 0.1  , 0.1]
 ```
 
-- `num_beams=1`이면: `"you"` 선택 → **그대로 계속**
+- `num_beams=1`이면: `"you"` 선택 → <mark>**그대로 계속**</mark>
 - `num_beams=5`이면:
 
 → 확률 높은 5개를 동시에 살린다.

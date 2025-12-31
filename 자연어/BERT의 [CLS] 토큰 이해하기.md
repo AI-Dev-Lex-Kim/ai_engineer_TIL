@@ -36,11 +36,11 @@ Bert는 특이하게도 BERT를 만든 사람들이 [CLS] 토큰이 단지 문�
 
 BERT라는 기본 모델(AutoModel)은 마지막 레이어에서 2가지를 반환한다.
 
-‘**last_hidden_state**’와 ‘**pooler_output**’이다.
+‘<mark>**last_hidden_state**</mark>’와 ‘<mark>**pooler_output**</mark>’이다.
 
 <br>
 
-**lasst_hidden_state**는 최종 은닉 상태이다.
+<mark>**lasst_hidden_state**</mark>는 최종 은닉 상태이다.
 
 BERT는 12개의 hidden layer를 가지고 있다.
 
@@ -48,7 +48,7 @@ BERT는 12개의 hidden layer를 가지고 있다.
 
 <br>
 
-**pooler_output**
+<mark>**pooler_output**</mark>
 
 BERT 모델에 입력 문장을 넣었을때, [CLS] 토큰을 가장 앞에 넣어주었다.
 

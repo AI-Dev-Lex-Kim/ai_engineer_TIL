@@ -26,7 +26,7 @@ body만 있는 기본 모델이므로 특정 task를 수행하고 싶을때, 사
 
 ### 커스텀 분류기 레이어 추가
 
-**BERT의 핵심 구조**만 담고 있는 `AutoModel`을 불러온다.
+<mark>**BERT의 핵심 구조**</mark>만 담고 있는 `AutoModel`을 불러온다.
 
 이렇게 하면 모델의 강력한 언어 이해 능력은 유지하면서, 분류기와 같은 최종 레이어를 직접 추가할 수 있다.
 
@@ -73,7 +73,7 @@ custom_model = CustomModelWithHead(model_name, num_classes)
 
 ```
 
-클래스를 만들어 사전 학습된 `base_model`과 새롭게 추가된 **선형(Linear) 분류기 레이어**를 결합했다.
+클래스를 만들어 사전 학습된 `base_model`과 새롭게 추가된 <mark>**선형(Linear) 분류기 레이어**</mark>를 결합했다.
 
 `custom_model`을 사용하여 여러분의 데이터에 맞게 학습을 진행할 수 있다.
 

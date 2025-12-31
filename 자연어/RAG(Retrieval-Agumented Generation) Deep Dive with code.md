@@ -7,11 +7,11 @@
     - [PDF 문서](#pdf-문서)
   - [Text Chunking](#text-chunking)
     - [길이 단위 청킹(RecursiveCharacterTextSplitter)](#길이-단위-청킹recursivecharactertextsplitter)
-    - [의미 고려 청킹(**SemanticChunker)**](#의미-고려-청킹semanticchunker)
+    - [의미 고려 청킹(<mark>**SemanticChunker)**</mark>](#의미-고려-청킹semanticchunker)
   - [Embedding Model](#embedding-model)
-    - [**OpenAIEmbeddings**](#openaiembeddings)
+    - [<mark>**OpenAIEmbeddings**</mark>](#openaiembeddings)
     - [HuggingFaceEmbeddings](#huggingfaceembeddings)
-    - [**GoogleGenerativeAIEmbeddings**](#googlegenerativeaiembeddings)
+    - [<mark>**GoogleGenerativeAIEmbeddings**</mark>](#googlegenerativeaiembeddings)
   - [Vector Store](#vector-store)
     - [Chroma](#chroma)
     - [FAISS(Facebook AI Similarity Search)](#faissfacebook-ai-similarity-search)
@@ -199,7 +199,7 @@ file_path로 파일 경로를 입력해 csv를 로드 한다.
 
 ### PDF 문서
 
-**PDF 문서 페이지별 로드(PyPDFLoader)**
+<mark>**PDF 문서 페이지별 로드(PyPDFLoader)**</mark>
 
 `pypdf` 라이브러리를 설치해야한다.
 
@@ -227,9 +227,9 @@ metadata 속성에는 파일의 출처와 해당 페이지 번호가 있다.
 
 <br>
 
-**형식이 없는 PDF 문서 로드(UnstructuredPDFLoader)**
+<mark>**형식이 없는 PDF 문서 로드(UnstructuredPDFLoader)**</mark>
 
-**PDF 파일에서 텍스트를 추출할때** `unstructured` 라이브러리를 사용한다.
+<mark>**PDF 파일에서 텍스트를 추출할때**</mark> `unstructured` 라이브러리를 사용한다.
 
 `unstructured` 라이브러리는 PDF 파일 내의 다양한 청크를 서로다른 elements로 생성한다.
 
@@ -257,7 +257,7 @@ pages = loader.load()
 
 <br>
 
-**PDF 문서의 메타 데이터를 상세하게 추출(PyMuPDFLoader)**
+<mark>**PDF 문서의 메타 데이터를 상세하게 추출(PyMuPDFLoader)**</mark>
 
 PDF 파일의 페이지를 로드하고 각 페이지를 개별 document 객체로 추출한다.
 
@@ -305,7 +305,7 @@ pages = loader.load()
 
 <br>
 
-**온라인 PDF 문서로드(OnlinePDFLoader)**
+<mark>**온라인 PDF 문서로드(OnlinePDFLoader)**</mark>
 
 웹 사이트에 있는 PDF 문서를 로드해서 페이지 내용을 추출 할 수있다.
 
@@ -319,7 +319,7 @@ pages = loader.load()
 
 <br>
 
-**특정 폴더의 모든 PDF 문서 로드(PyPDFDirectoryLoader)**
+<mark>**특정 폴더의 모든 PDF 문서 로드(PyPDFDirectoryLoader)**</mark>
 
 디렉토리 경로를 입력해서 디렉토리안의 모든 PDF 문서를 로드 한다.
 
@@ -392,7 +392,7 @@ splited_texts[1].page_content
 
 <br>
 
-**chunk_overlap**
+<mark>**chunk_overlap**</mark>
 
 `chunk_overlap=50` 을하면 각 청크의 앞뒤 간 길이의 50정도의 내용이 겹친다.
 
@@ -421,7 +421,7 @@ RecursiveCharacterTextSplitter.from_tiktoken_encoder(
 
 <br>
 
-### 의미 고려 청킹(**SemanticChunker)**
+### 의미 고려 청킹(<mark>**SemanticChunker)**</mark>
 
 긴 길이를 짧게 만드는 청킹 기술이다.
 
@@ -470,7 +470,7 @@ SemanticChunker가 문서를 분할하는 방법은 크게 세 가지가 있다.
 
 <br>
 
-### **OpenAIEmbeddings**
+### <mark>**OpenAIEmbeddings**</mark>
 
 OpenAI API를 사용해서 각 문서를 임베딩 벡터로 변환한다.
 
@@ -639,7 +639,7 @@ Query 벡터와 Document 벡터의 코사인 유사도를 구해 유사한 답�
 
 <br>
 
-### **GoogleGenerativeAIEmbeddings**
+### <mark>**GoogleGenerativeAIEmbeddings**</mark>
 
 `langchain_google_genai` 라이브러리를 사용해서 문장을 임베딩 할 수 있다.
 
@@ -734,7 +734,7 @@ NLP, 이미지 처리 등 다양한 고차원 벡터 데이터를 관리하기 �
 
 스플리터는 텍스트를 청크 단위로 나눠준다.
 
-**스플리터 생성**
+<mark>**스플리터 생성**</mark>
 
 ```python
 from langchain_community.document_loaders import TextLoader
@@ -784,7 +784,7 @@ texts[0]
 
 <br>
 
-**임베딩 모델 및 Chroma 벡터 스토어 생성**
+<mark>**임베딩 모델 및 Chroma 벡터 스토어 생성**</mark>
 
 ```python
 embeddings_model = OpenAIEmbeddings()
@@ -949,7 +949,7 @@ mmr_docs = vectorstore.max_marginal_relevance_search(query, k=4, fetch_k=10)
 
 <br>
 
-**FAISS DB를 로컬에 저장**
+<mark>**FAISS DB를 로컬에 저장**</mark>
 
 벡터 스토어 DB를 저장하고 불러오는 과정에서 생성된 벡터 인덱스를 재사용한다.
 
@@ -975,7 +975,7 @@ db3 = FAISS.load_local('./db/faiss', embeddings_model)
 
 ### Vector Store Retriver
 
-**문서 로드 및 청킹**
+<mark>**문서 로드 및 청킹**</mark>
 
 ```python
 from langchain_community.document_loaders import PyMuPDFLoader
@@ -996,7 +996,7 @@ len(documents)
 
 <br>
 
-**문서 임베딩 및 벡터 스토어 저장**
+<mark>**문서 임베딩 및 벡터 스토어 저장**</mark>
 
 ```python
 # 벡터스토어에 문서 임베딩을 저장
@@ -1018,7 +1018,7 @@ vectorstore = FAISS.from_documents(documents,
 
 <br>
 
-**문서 검색**
+<mark>**문서 검색**</mark>
 
 ```python
 # 검색 쿼리
@@ -1044,7 +1044,7 @@ Retiever 객체에 있는 설정 조건에 맞춰 query와 가장 유사한 문�
 
 <br>
 
-**MMR 검색 기법**
+<mark>**MMR 검색 기법**</mark>
 
 ```python
 # MMR - 다양성 고려 (lambda_mult = 0.5)
@@ -1141,7 +1141,7 @@ logging.basicConfig()
 logging.getLogger('langchain.retrievers.multi_query').setLevel(logging.INFO)
 ```
 
-코드가 실행될 때 LLM이 원본 질문을 바탕으로 **어떤 새로운 질문들을 생성**했는지 로그로 직접 볼 수 있다.
+코드가 실행될 때 LLM이 원본 질문을 바탕으로 <mark>**어떤 새로운 질문들을 생성**</mark>했는지 로그로 직접 볼 수 있다.
 
 <br>
 
@@ -1198,7 +1198,7 @@ INFO:langchain.retrievers.multi_query:Generated queries:
 
 <br>
 
-**LLMChainExtractor**
+<mark>**LLMChainExtractor**</mark>
 
 LLMChainExtractor이라는 컴프레서는 리트리버가 찾아온 각 문서의 내용을 다시 LLM에 보여준다.
 
@@ -1256,28 +1256,28 @@ for doc in retrieved_docs_after:
 
 `ContextualCompressionRetriever` 은 기본 리트리버가 가져온 3개 문서를 LLMChainExtractor에게 하나씩 전달한다.
 
-`LLMChainExtractor`는 내부적으로 LLM을 호출하여 각 문서의 내용을 보고 **"이 내용이 'RAG의 단점'이라는 질문과 관련이 있는가?"**를 판단한다.
+`LLMChainExtractor`는 내부적으로 LLM을 호출하여 각 문서의 내용을 보고 <mark>**"이 내용이 'RAG의 단점'이라는 질문과 관련이 있는가?"**</mark>를 판단한다.
 
-- RAG의 '장점'과 '정의'에 대한 문서는 질문과 직접적인 관련이 없다고 판단하여 **버린다.**
-- '단점'에 대한 문서는 질문과 직접 관련이 있으므로 **그대로 통과시킨다.**
+- RAG의 '장점'과 '정의'에 대한 문서는 질문과 직접적인 관련이 없다고 판단하여 <mark>**버린다.**</mark>
+- '단점'에 대한 문서는 질문과 직접 관련이 있으므로 <mark>**그대로 통과시킨다.**</mark>
 
-최종적으로 압축 후 결과에는 질문과 100% 관련된 **단 하나의 문서만** 남게 된다.
+최종적으로 압축 후 결과에는 질문과 100% 관련된 <mark>**단 하나의 문서만**</mark> 남게 된다.
 
 이렇게 정제된 정보는 LLM이 더 정확하고 집중된 답변을 생성하는 데 큰 도움이 된다.
 
 <br>
 
-**EmbeddingsFilter**
+<mark>**EmbeddingsFilter**</mark>
 
 임베딩스필터는 임베딩 기반의 유사도를 기준으로 관련 없는 정보를 걸러내는 역활을 한다.
 
-리트리버가 찾아온 문서의 **각 문장들을 다시 한번 임베딩한다.**
+리트리버가 찾아온 문서의 <mark>**각 문장들을 다시 한번 임베딩한다.**</mark>
 
 사용자의 원본 질문 벡터와 유사도를 개별적으로 계산한다.
 
-그 유사도 점수가 미리 정해놓은 특정 기준치인 **임계값(Threshold)을 넘는 문장들만 통과** 시킨다.
+그 유사도 점수가 미리 정해놓은 특정 기준치인 <mark>**임계값(Threshold)을 넘는 문장들만 통과**</mark> 시킨다.
 
-기준에 **미달하는 문장들은 버리는 방식**으로 정보를 압축한다.
+기준에 <mark>**미달하는 문장들은 버리는 방식**</mark>으로 정보를 압축한다.
 
 ```python
 from langchain_openai import OpenAIEmbeddings
@@ -1332,18 +1332,18 @@ for doc in retrieved_docs_after:
 
 `ContextualCompressionRetriever`는 이 3개의 문서를 `EmbeddingsFilter`에게 전달한다.
 
-`EmbeddingsFilter`는 **LLM을 호출하지 않는다.**
+`EmbeddingsFilter`는 <mark>**LLM을 호출하지 않는다.**</mark>
 
-대신, 가져온 **각 문서의 내용을 다시 임베딩**하여 원본 질문("RAG의 단점은 뭐야?")의 임베딩 벡터와 **유사도를 직접 계산한다.**
+대신, 가져온 <mark>**각 문서의 내용을 다시 임베딩**</mark>하여 원본 질문("RAG의 단점은 뭐야?")의 임베딩 벡터와 <mark>**유사도를 직접 계산한다.**</mark>
 
 - 계산된 유사도 점수가 `similarity_threshold`로 설정한 `0.8`보다 낮은 문서는 버린다.
-- '단점'에 대한 문서는 질문과 유사도가 매우 높아 `0.8`을 넘으므로 **통과시킨다.**
+- '단점'에 대한 문서는 질문과 유사도가 매우 높아 `0.8`을 넘으므로 <mark>**통과시킨다.**</mark>
 
 <br>
 
-**최종적으로** `LLMChainExtractor`와 마찬가지로 질문과 가장 관련 있는 문서만 남는다.
+<mark>**최종적으로**</mark> `LLMChainExtractor`와 마찬가지로 질문과 가장 관련 있는 문서만 남는다.
 
-`EmbeddingsFilter`는 LLM 호출이 없어 **더 빠르고 비용이 저렴**하지만, LLM만큼 문맥을 깊게 이해하지는 못할 수 있다.
+`EmbeddingsFilter`는 LLM 호출이 없어 <mark>**더 빠르고 비용이 저렴**</mark>하지만, LLM만큼 문맥을 깊게 이해하지는 못할 수 있다.
 
 반면 `LLMChainExtractor`는 더 정교하지만 비용과 시간이 더 소요되므로, 상황에 맞게 선택하여 사용하는 것이 좋다.
 
@@ -1736,7 +1736,7 @@ rag_chain = (
 )
 ```
 
-1. **입력 처리**
+1. <mark>**입력 처리**</mark>
 
 `{"context": ..., "question": ...}` 딕셔너리 형태의 코드는 RunnableParallel이라고 불린다.
 
@@ -1768,7 +1768,7 @@ invoke에 들어온 사용자 질문이 동시에 retriever에 전달된다.
 
 <br>
 
-1. **프롬프트 생성 `| prompt`**
+1. <mark>**프롬프트 생성 `| prompt`**</mark>
 
 앞 단게에서 만들어진 딕셔너리를 입력으로 받는다.
 
@@ -1792,7 +1792,7 @@ OpenAI의 `gpt-4o-mini`와 같은 거대 언어 모델(LLM)이 이 프롬프트�
 
 `StrOutputParser`는 출력 파서(Output Parser)의 한 종류이다.
 
-`llm`이 생성한 복잡한 메시지 객체에서 사용자가 실제로 필요한 **순수 텍스트 내용(`content`)만 추출하는 역할**을 합니다.
+`llm`이 생성한 복잡한 메시지 객체에서 사용자가 실제로 필요한 <mark>**순수 텍스트 내용(`content`)만 추출하는 역할**</mark>을 합니다.
 
 사람이 읽을 수 있는 깔끔한 문자열(string) 형태의 최종 답변이 반환된다.
 
