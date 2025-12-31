@@ -5,7 +5,7 @@
 > 이번 논문은 지난 attention is all you need 보다 수월하게 읽을 수 있었다.
 > SE 구조가 복잡한 구조도 아니고 작은 MLP이다 보니 이해하는데 어렵지 않았다.
 
-## <span style='background-color: #fff5b1'>**Abstract**</span>
+## <mark>**Abstract**</mark>
 
 컨볼루션 신경망(CNN)은 이미지를 처리할때, 각 레이어마다 작은 영역( local receptive fields)만을 보면서 공간적 특징과 채널별 정보를 섞어서 더 좋은 특징을 만든다.
 
@@ -13,11 +13,11 @@
 
 여기서 공간 정보란, 피처맵에서 각 영역들의 픽셀 위치나 영역의 정보를 말한다.
 
-그동안 <span style='background-color: #fff5b1'>**대부분의 연구는 이 중에서 공간 정보를 더 잘 인코딩하는 방법에 집중**</span>해왔다. 예를 들어 “어떤 픽셀 주변에 어떤 패턴이 있는지”를 더 잘 포착하는 것이 목표였다.
+그동안 <mark>**대부분의 연구는 이 중에서 공간 정보를 더 잘 인코딩하는 방법에 집중**</mark>해왔다. 예를 들어 “어떤 픽셀 주변에 어떤 패턴이 있는지”를 더 잘 포착하는 것이 목표였다.
 
 <br>
 
-그런데 <span style='background-color: #fff5b1'>**이 논문에서는 “채널 간의 관계”에 집중**</span>한다.
+그런데 <mark>**이 논문에서는 “채널 간의 관계”에 집중**</mark>한다.
 
 예를 들어, 어떤 필터가 “색깔 정보”를 잡고, 어떤 필터가 “윤곽선”을 잡는다면, 그 둘 사이의 중요도, 상호의존성 같은 것을 더 명확하게 모델링하는 것이다.
 
@@ -27,20 +27,20 @@
 
 이 SE 블록은 간단히 말해서 다음을 의미한다.
 
-1. <span style='background-color: #fff5b1'>**Squeeze 단계: 채널마다 전역적인(전체 공간을 다본) 정보를 하나로 압축해서, 그 채널이 전체 그림에서 얼마나 중요한지 요약한다.**</span>
-2. <span style='background-color: #fff5b1'>**Excitation 단계: 요약한 정보를 사용해서 “이 채널은 더 강조하고, 저 채널은 덜 강조해라” 처럼 채널별 가중치를 학습한다.**</span>
+1. <mark>**Squeeze 단계: 채널마다 전역적인(전체 공간을 다본) 정보를 하나로 압축해서, 그 채널이 전체 그림에서 얼마나 중요한지 요약한다.**</mark>
+2. <mark>**Excitation 단계: 요약한 정보를 사용해서 “이 채널은 더 강조하고, 저 채널은 덜 강조해라” 처럼 채널별 가중치를 학습한다.**</mark>
 
-즉, 입력 이미지마다 <span style='background-color: #fff5b1'>**“현재 상황에 맞게 어떤 채널을 더 강조해야 하는가”를 SE블록이 판단해서 네트워크에 다시 흘려주는 구조**</span>이다.
+즉, 입력 이미지마다 <mark>**“현재 상황에 맞게 어떤 채널을 더 강조해야 하는가”를 SE블록이 판단해서 네트워크에 다시 흘려주는 구조**</mark>이다.
 
-그래서 SE는 <span style='background-color: #fff5b1'>**각 채널의 중요도를 동적으로 조정하는 일종의 채널 어텐션 역활**</span>을 한다.
+그래서 SE는 <mark>**각 채널의 중요도를 동적으로 조정하는 일종의 채널 어텐션 역활**</mark>을 한다.
 
 <br>
 
-그리고 <span style='background-color: #fff5b1'>**이 작은 블록을 기존 CNN 사이에 쌓아 넣으면 “SENet”이라는 아키텍처**</span>가 된다.
+그리고 <mark>**이 작은 블록을 기존 CNN 사이에 쌓아 넣으면 “SENet”이라는 아키텍처**</mark>가 된다.
 
 이 논문에서 실제로 실험 해보았더니 이 SENet은 여러 데이터셋에서 일반화도 잘되고, 기존 모델보다 성능이 확실히 좋아졌고한다.
 
-<span style='background-color: #fff5b1'>**심지어 계산량이 거의 증가하지 않는데도 성능 향상이 꽤 크다는 점이다.**</span>
+<mark>**심지어 계산량이 거의 증가하지 않는데도 성능 향상이 꽤 크다는 점이다.**</mark>
 
 <br>
 
@@ -58,39 +58,39 @@ CNN의 필터는 채널안의 한 지점만 보는게 아니라 그 주변 픽�
 
 <br>
 
-<span style='background-color: #fff5b1'>**컴퓨터 비전 연구의 큰 목표는 결국 더 뛰어난 표현(representation)을 만드는 것**</span>이다.
+<mark>**컴퓨터 비전 연구의 큰 목표는 결국 더 뛰어난 표현(representation)을 만드는 것**</mark>이다.
 
-<span style='background-color: #fff5b1'>**이미지에서 정말 중요한 부분만 뽑으며, 불필요한 정보는 버릴수 있다는 뜻이다.**</span>
+<mark>**이미지에서 정말 중요한 부분만 뽑으며, 불필요한 정보는 버릴수 있다는 뜻이다.**</mark>
 
 이것이 잘되면 같은 이미지라도 더 쉽게 분류하거나 분석하여 성능이 향상된다.
 
 <br>
 
-최근 CNN의 표현을 더 강하게 만들기 위해서 단순히 주변 패턴을 보는것에서 끝나지 않고, “<span style='background-color: #fff5b1'>**이 특징이 저 특징과 공간적으로 어떤 관계를 맺고 있는가?**</span>”를 네트워크가 더 잘 이해하도록 학습 메커니즘을 연구했다.
+최근 CNN의 표현을 더 강하게 만들기 위해서 단순히 주변 패턴을 보는것에서 끝나지 않고, “<mark>**이 특징이 저 특징과 공간적으로 어떤 관계를 맺고 있는가?**</mark>”를 네트워크가 더 잘 이해하도록 학습 메커니즘을 연구했다.
 
 <br>
 
-그 중에서도 <span style='background-color: #fff5b1'>**Inception 아키텍처 계열이 가장 유명**</span>했다.
+그 중에서도 <mark>**Inception 아키텍처 계열이 가장 유명**</mark>했다.
 
-inception의 핵심 아이디어는 <span style='background-color: #fff5b1'>**여러 크기의 필터를 동시에 적용해 다양한 스케일 정보를 한번에 보는것**</span>이다.
+inception의 핵심 아이디어는 <mark>**여러 크기의 필터를 동시에 적용해 다양한 스케일 정보를 한번에 보는것**</mark>이다.
 
-<span style='background-color: #fff5b1'>**작은 필터는 로컬 디테일을 보며, 큰 필터는 더 넓은 문맥을 담을 수 있다.**</span>
+<mark>**작은 필터는 로컬 디테일을 보며, 큰 필터는 더 넓은 문맥을 담을 수 있다.**</mark>
 
-이렇게 <span style='background-color: #fff5b1'>**multi-scale 정보를 한 블록에서 동시에 처리**</span>하면 성능이 좋아진다는것을 확인되었다.
-
-<br>
-
-추가적인 연구로 이미지 내의 <span style='background-color: #fff5b1'>**특정 영역에 주목하도록 만드는 공간적 어텐션(spatial attention)**</span>을 도입하는 방법도 있다.
-
-즉, <span style='background-color: #fff5b1'>**이미지 전체를 균일하게 보지 않고, 중요한 부분에 더 집중**</span>하는 것이다.
+이렇게 <mark>**multi-scale 정보를 한 블록에서 동시에 처리**</mark>하면 성능이 좋아진다는것을 확인되었다.
 
 <br>
 
-연구자들은 지금까지 CNN 구조를 개선할때 주로 <span style='background-color: #fff5b1'>**공간 정보(어디에 무엇이 있는가**</span>에 집중해왔다.
+추가적인 연구로 이미지 내의 <mark>**특정 영역에 주목하도록 만드는 공간적 어텐션(spatial attention)**</mark>을 도입하는 방법도 있다.
+
+즉, <mark>**이미지 전체를 균일하게 보지 않고, 중요한 부분에 더 집중**</mark>하는 것이다.
+
+<br>
+
+연구자들은 지금까지 CNN 구조를 개선할때 주로 <mark>**공간 정보(어디에 무엇이 있는가**</mark>에 집중해왔다.
 
 그런데 이 논문은 완전히 다른 방향을 본다.
 
-바로 <span style='background-color: #fff5b1'>**채널 간의 관계에 집중**</span>한다.
+바로 <mark>**채널 간의 관계에 집중**</mark>한다.
 
 <br>
 
@@ -98,7 +98,7 @@ inception의 핵심 아이디어는 <span style='background-color: #fff5b1'>**�
 
 각 채널은 서로 다른 종류의 특징을 담고 있다.(색감, 경계선, 패턴 등)
 
-<span style='background-color: #fff5b1'>**그런데 어떤 채널이 지금 중요한지, 어떤 채널은 덜 중요한지 판단하는 메커니즘이 없었다.**</span>
+<mark>**그런데 어떤 채널이 지금 중요한지, 어떤 채널은 덜 중요한지 판단하는 메커니즘이 없었다.**</mark>
 
 <br>
 
@@ -110,9 +110,9 @@ SE 블록의 목표는 단 하나이다.
 
 이미지 마다 어떤 채널이 중요한지 자동으로 판단해서
 
-<span style='background-color: #fff5b1'>**중요한 채널은 더 강조하고, 덜 중요한 채널은 약하게 해준다.**</span>
+<mark>**중요한 채널은 더 강조하고, 덜 중요한 채널은 약하게 해준다.**</mark>
 
-이걸 논문에서는 <span style='background-color: #fff5b1'>**특징 재조정(feature recalibration)**</span>이라고 부른다.
+이걸 논문에서는 <mark>**특징 재조정(feature recalibration)**</mark>이라고 부른다.
 
 <br>
 
@@ -124,9 +124,9 @@ SE 블록은 두 단계로 이루어진다.
 
    <br>
 
-   <span style='background-color: #fff5b1'>**왜 평균을 낼까?**</span>
+   <mark>**왜 평균을 낼까?**</mark>
 
-   <span style='background-color: #fff5b1'>**그 채널이 전체 이미지에서 얼마나 활성화되는지 요약한 값만 보면 그 채널이 지금 중요한지 대략 감을 잡을 수 있기 떄문이다.**</span>
+   <mark>**그 채널이 전체 이미지에서 얼마나 활성화되는지 요약한 값만 보면 그 채널이 지금 중요한지 대략 감을 잡을 수 있기 떄문이다.**</mark>
 
    <br>
 
@@ -149,7 +149,7 @@ SE 블록은 두 단계로 이루어진다.
 
    이 숫자들 전체를 모아서 만든 길이가 C 짜리 벡터가 채널 디스크립터(channel descriptor)이다.
 
-   이 디스크립터는 <span style='background-color: #fff5b1'>**각 채널이 전체 이미지에서 얼마나 중요한가를 요약한 벡터**</span>이다.
+   이 디스크립터는 <mark>**각 채널이 전체 이미지에서 얼마나 중요한가를 요약한 벡터**</mark>이다.
 
    <br>
 
@@ -167,7 +167,7 @@ SE 블록은 두 단계로 이루어진다.
 
    <br>
 
-   입력된 s를 바탕으로 <span style='background-color: #fff5b1'>**각 채널을 얼마나 키울지 혹은 줄일지 결정하는 가중치 벡터를 만든다.**</span>
+   입력된 s를 바탕으로 <mark>**각 채널을 얼마나 키울지 혹은 줄일지 결정하는 가중치 벡터를 만든다.**</mark>
 
    가중치 벡터 w = [w1, w2, …, wC]
 
@@ -176,9 +176,9 @@ SE 블록은 두 단계로 이루어진다.
 
    <br>
 
-   <span style='background-color: #fff5b1'>**이 가중치를 원래 특징 맵 U에 곱하면,**</span>
+   <mark>**이 가중치를 원래 특징 맵 U에 곱하면,**</mark>
 
-   <span style='background-color: #fff5b1'>**각 채널이 상황에 맞게 강조, 억제된 새로운 특징이 만들어진다.**</span>
+   <mark>**각 채널이 상황에 맞게 강조, 억제된 새로운 특징이 만들어진다.**</mark>
 
    이게 SE 블록의 출력이며 다음 레이어로 전달된다.
 
@@ -192,7 +192,7 @@ SE 블록은 두 단계로 이루어진다.
 
 <br>
 
-<span style='background-color: #fff5b1'>**어떤식으로 CNN 블록에 SE 블록을 붙일까?**</span>
+<mark>**어떤식으로 CNN 블록에 SE 블록을 붙일까?**</mark>
 
 1. 기존 구조
 
@@ -216,23 +216,23 @@ SE 블록은 두 단계로 이루어진다.
 
 ### Deeper architectures - 깊은 아키텍처
 
-딥러닝 기반의 컴퓨터 비전연구는 오랫동안 <span style='background-color: #fff5b1'>**어떻게 하면 더 깊고 강력한 네트워크를 안정적으로 학습할수 있을까?**</span> 라는 문제를 중심으로 발전해왔다.
+딥러닝 기반의 컴퓨터 비전연구는 오랫동안 <mark>**어떻게 하면 더 깊고 강력한 네트워크를 안정적으로 학습할수 있을까?**</mark> 라는 문제를 중심으로 발전해왔다.
 
-이러한 배경에서 VGGNet과 Inception 모델에서 <span style='background-color: #fff5b1'>**네트워크의 깊이를 늘리는것(레이어를 추가함)만으로도 표현력이 크게 개선**</span>될 수 있음을 보여주었다.
+이러한 배경에서 VGGNet과 Inception 모델에서 <mark>**네트워크의 깊이를 늘리는것(레이어를 추가함)만으로도 표현력이 크게 개선**</mark>될 수 있음을 보여주었다.
 
-<span style='background-color: #fff5b1'>**Batch Normalization(BN)은 깊은 네트워크에서 학습이 불안정해지는 문제를 해결**</span>해주며 최적화 과정을 한층 더 매끄럽게 만들어주었다.
+<mark>**Batch Normalization(BN)은 깊은 네트워크에서 학습이 불안정해지는 문제를 해결**</mark>해주며 최적화 과정을 한층 더 매끄럽게 만들어주었다.
 
-<span style='background-color: #fff5b1'>**Hightwaynet work**</span>는 이러한 <span style='background-color: #fff5b1'>**스킵 경로에 게이트를 추가해서 정보가 지나가는 양을 조절**</span>하는 기능을 더했다.
+<mark>**Hightwaynet work**</mark>는 이러한 <mark>**스킵 경로에 게이트를 추가해서 정보가 지나가는 양을 조절**</mark>하는 기능을 더했다.
 
-이후에도 네트워크 레이어들을 연결하는 다양한 방법이 제시되면서 <span style='background-color: #fff5b1'>**딥러이 모델의 학습 안정성과 표현력은 꾸준히 강화**</span> 되어왔다.
+이후에도 네트워크 레이어들을 연결하는 다양한 방법이 제시되면서 <mark>**딥러이 모델의 학습 안정성과 표현력은 꾸준히 강화**</mark> 되어왔다.
 
 <br>
 
-이 과정에서 <span style='background-color: #fff5b1'>**채널간 상관관계를 다루는 기존방식은 대부분 채널을 단순히 조합하는 연산에 가까웠다.**</span>
+이 과정에서 <mark>**채널간 상관관계를 다루는 기존방식은 대부분 채널을 단순히 조합하는 연산에 가까웠다.**</mark>
 
 이런 기법들은 모델의 계산량을 줄이는데 초점을 맞추었다.
 
-<span style='background-color: #fff5b1'>**채널 관계는 로컬한 함수들의 조합으로 충분하다는 암묵적인 가정위에서 발전해왔었다.**</span>
+<mark>**채널 관계는 로컬한 함수들의 조합으로 충분하다는 암묵적인 가정위에서 발전해왔었다.**</mark>
 
 <br>
 
@@ -240,9 +240,9 @@ SE 블록은 두 단계로 이루어진다.
 
 채널 간 관계는 단순히 로컬 정보를 조합해 얻을 수 있는것이 아니라,
 
-<span style='background-color: #fff5b1'>**이미지 전체(global context)를 반영해야하며, 상황에 따라 동적으로 변화하는 비선형 관계라는 것이다.**</span>
+<mark>**이미지 전체(global context)를 반영해야하며, 상황에 따라 동적으로 변화하는 비선형 관계라는 것이다.**</mark>
 
-따라서 이러한 <span style='background-color: #fff5b1'>**채널 의존성을 직접 학습할 수 있도록 해주는 메커니즘**</span>을 네트워크 안에 넣는 것이 표현력 향상에 더 효과적이라고 주장한다.
+따라서 이러한 <mark>**채널 의존성을 직접 학습할 수 있도록 해주는 메커니즘**</mark>을 네트워크 안에 넣는 것이 표현력 향상에 더 효과적이라고 주장한다.
 
 바로 이점이 SE 블록의 핵심 아이디어이다.
 
@@ -254,11 +254,11 @@ SE 블록은 두 단계로 이루어진다.
 
 딥러닝 모델 구조를 설계하는 과정에서 원래 연구자가 직접 레이어수, 커널 크기 등을 하나하나 정해야하는 매우 복잡한 작업이였다.
 
-<span style='background-color: #fff5b1'>**모델 구조 자체를 알고리즘이 자동으로 찾아내는 아키텍처 탐색(NAS)을 찾았다.**</span>
+<mark>**모델 구조 자체를 알고리즘이 자동으로 찾아내는 아키텍처 탐색(NAS)을 찾았다.**</mark>
 
 NAS는 다양한 탐색 전략이 있는 거대한 연구분야로 성장했다.
 
-이러한 탐색 과정에서 <span style='background-color: #fff5b1'>**SE 블록이 매우 유용한 구성단위로 활용**</span>될 수 있다.
+이러한 탐색 과정에서 <mark>**SE 블록이 매우 유용한 구성단위로 활용**</mark>될 수 있다.
 
 SE 블록은 작고 가벼우며, 어떤 CNN 구조에도 쉽게 삽입할 수 있다.
 
@@ -278,7 +278,7 @@ SE 블록은 작고 가벼우며, 어떤 CNN 구조에도 쉽게 삽입할 수 �
 
 하지만 SE 블록은 훨씬 단순하고 가볍다.
 
-<span style='background-color: #fff5b1'>**SE 블록은 오직 채널 간 관계(channel-wise relationships)를 학습하는데 집중하는 매우 가벼운 게이팅(gating) 매커니즘이다.**</span>
+<mark>**SE 블록은 오직 채널 간 관계(channel-wise relationships)를 학습하는데 집중하는 매우 가벼운 게이팅(gating) 매커니즘이다.**</mark>
 
 <br>
 
@@ -286,7 +286,7 @@ SE 블록은 작고 가벼우며, 어떤 CNN 구조에도 쉽게 삽입할 수 �
 
 ![SE block](https://velog.velcdn.com/images/lexkim/post/45121d8f-2988-49b1-99d5-965dae40a05f/image.png)
 
-<span style='background-color: #fff5b1'>**convolution 연산 수식**</span>
+<mark>**convolution 연산 수식**</mark>
 
 $$
 u_c = v_c ∗ X = \sum_{s=1}^{C`} v^s_c ∗ x^s
@@ -300,9 +300,9 @@ $v_c$ = [v1, v2, …, vC] → C번째 출력 채널을 만드는 필터의 각 �
 
 출력 $u_c$의 각 픽셀은 모든 입력 채널과 해당 필터 채널을 convolution 한 후 합친 값이다.
 
-<span style='background-color: #fff5b1'>**즉, 출력 한 채널을 만들때, 입력 모든 채널을 섞어서 특징을 만든다는 뜻이다.**</span>
+<mark>**즉, 출력 한 채널을 만들때, 입력 모든 채널을 섞어서 특징을 만든다는 뜻이다.**</mark>
 
-<span style='background-color: #fff5b1'>**예시**</span>
+<mark>**예시**</mark>
 
 - 입력 X: 채널 2개, x1, x2
 - 필터 vc: 채널 2개, v1, v2
@@ -313,22 +313,22 @@ $v_c$ = [v1, v2, …, vC] → C번째 출력 채널을 만드는 필터의 각 �
 
 convolution은 각 출력 채널을 만들때 모든 입력 채널을 사용한다.
 
-<span style='background-color: #fff5b1'>**채널 간 관계가 일부 반영되지만, 이건 암묵적(local)적이다.**</span>
+<mark>**채널 간 관계가 일부 반영되지만, 이건 암묵적(local)적이다.**</mark>
 
-예를 들어, <span style='background-color: #fff5b1'>**어떤 채널이 중요한지 명시적으로 알려주지 않는다.**</span>
+예를 들어, <mark>**어떤 채널이 중요한지 명시적으로 알려주지 않는다.**</mark>
 
 대부분의 관계는 필터가 감지한 지역적 패턴에 의존한다.
 
 <br>
 
-<span style='background-color: #fff5b1'>**SE 블록은 채널 간 관계를 명시적으로 반영해준다.**</span>
+<mark>**SE 블록은 채널 간 관계를 명시적으로 반영해준다.**</mark>
 
-<span style='background-color: #fff5b1'>**이렇게 하면 네트워크가 중요한 feature를 더 잘 반영할 수 있다.**</span>
+<mark>**이렇게 하면 네트워크가 중요한 feature를 더 잘 반영할 수 있다.**</mark>
 
 어떤 채널은 강조하고, 덜 중요한 채널은 줄인다는 조정이 가능해진다.
 
-- <span style='background-color: #fff5b1'>**Squeeze**</span>: 각 채널의 정보를 평균이나 요약으로 뽑아 <span style='background-color: #fff5b1'>**전역 정보**</span>를 얻음
-- <span style='background-color: #fff5b1'>**Excitation**</span>: 그 전역 정보를 이용해 <span style='background-color: #fff5b1'>**각 채널의 중요도**</span>를 계산 → 가중치 생성
+- <mark>**Squeeze**</mark>: 각 채널의 정보를 평균이나 요약으로 뽑아 <mark>**전역 정보**</mark>를 얻음
+- <mark>**Excitation**</mark>: 그 전역 정보를 이용해 <mark>**각 채널의 중요도**</mark>를 계산 → 가중치 생성
 
 <br>
 
@@ -338,7 +338,7 @@ convlution 연산으로 나온 출력 U는 지역적인(local) 정보만을 사�
 
 각 필터는 작은 영역(receptive filed)만 보고 특징을 추출한다.
 
-<span style='background-color: #fff5b1'>**즉, 한 픽셀이나 작은 패치 주변 정보만 반영하고 전체 이미지 맥락(global context)는 반영하지 못한다.**</span>
+<mark>**즉, 한 픽셀이나 작은 패치 주변 정보만 반영하고 전체 이미지 맥락(global context)는 반영하지 못한다.**</mark>
 
 <br>
 
@@ -348,17 +348,17 @@ SE 블록에서는 채널 간 관계(chaneel dependency)를 활용하려고 한�
 
 <br>
 
-그래서 <span style='background-color: #fff5b1'>**전역 정보를 한 채널로 요약하**</span>는 작업을 한다.
+그래서 <mark>**전역 정보를 한 채널로 요약하**</mark>는 작업을 한다.
 
-이것을 위해서 <span style='background-color: #fff5b1'>**global average pooling(GAP)을 사용**</span>한다.
+이것을 위해서 <mark>**global average pooling(GAP)을 사용**</mark>한다.
 
-<span style='background-color: #fff5b1'>**각 채널의 H x W 크기 데이터를 하나의 값으로 평균한다.**</span>
+<mark>**각 채널의 H x W 크기 데이터를 하나의 값으로 평균한다.**</mark>
 
-이렇게 하면 각 채널이 전체 이미지에서 가진 <span style='background-color: #fff5b1'>**대표 값(channel descriptor) 하나로 압축**</span>된다.
+이렇게 하면 각 채널이 전체 이미지에서 가진 <mark>**대표 값(channel descriptor) 하나로 압축**</mark>된다.
 
 <br>
 
-<span style='background-color: #fff5b1'>**Squeeze 수식**</span>
+<mark>**Squeeze 수식**</mark>
 
 $$
 z_c = F_{sq}(u_c) = \frac{1}{(H × W)} \sum_{i=1}^{H} \sum_{j=1}^{W} u_c(i, j)
@@ -370,9 +370,9 @@ $$
 
 <br>
 
-<span style='background-color: #fff5b1'>**H x W 크기의 2D feature map을 1개의 대표 숫자로 만든다는 것이다.**</span>
+<mark>**H x W 크기의 2D feature map을 1개의 대표 숫자로 만든다는 것이다.**</mark>
 
-<span style='background-color: #fff5b1'>**모든 채널에 대해 반복해서 채널의 개수 만큼의 크기 벡터가 생성된다.**</span>
+<mark>**모든 채널에 대해 반복해서 채널의 개수 만큼의 크기 벡터가 생성된다.**</mark>
 
 <br>
 
@@ -396,9 +396,9 @@ uc = [[1,2,3,4],
 
 U 는 작은 영역 정보로 이루어진 feature map들의 모임이다.
 
-<span style='background-color: #fff5b1'>**각 채널의 평균을 뽑으면 채널이 전체이미지에서 어떤 정보를 담고 있는지 대표값이 된다.**</span>
+<mark>**각 채널의 평균을 뽑으면 채널이 전체이미지에서 어떤 정보를 담고 있는지 대표값이 된다.**</mark>
 
-<span style='background-color: #fff5b1'>**이 값들을 SE 블록의 Excitation 단계에서 활용해서 채널 중요도를 계산한다.**</span>
+<mark>**이 값들을 SE 블록의 Excitation 단계에서 활용해서 채널 중요도를 계산한다.**</mark>
 
 <br>
 
@@ -408,11 +408,11 @@ U 는 작은 영역 정보로 이루어진 feature map들의 모임이다.
 
 Squeeze 단계에서 각 채널의 전역 정보를 요약한 z 벡터를 얻었다.
 
-이제 이 정보를 바탕으로 <span style='background-color: #fff5b1'>**각 채널의 중요도(channel weight)를 계산하는 단계가 바로 Excitation 이다.**</span>
+이제 이 정보를 바탕으로 <mark>**각 채널의 중요도(channel weight)를 계산하는 단계가 바로 Excitation 이다.**</mark>
 
 <br>
 
-<span style='background-color: #fff5b1'>**즉, Squeeze는 정보를 모으는 단계, Excitation은 그 정보를 이용해 채널별 가중치를 만드는 단계라고 생각하면 된다.**</span>
+<mark>**즉, Squeeze는 정보를 모으는 단계, Excitation은 그 정보를 이용해 채널별 가중치를 만드는 단계라고 생각하면 된다.**</mark>
 
 <br>
 
@@ -427,7 +427,7 @@ Excitation는 두가지 조건을 만족해야한다.
 
 <br>
 
-<span style='background-color: #fff5b1'>**Excitation 수식**</span>
+<mark>**Excitation 수식**</mark>
 
 $$
 s = F_{ex}(z, W) = σ(g(z,W)) = σ(W_2 δ(W_1 z))
@@ -447,7 +447,7 @@ z → FC layer($W_1$) → ReLU → FC layer($W_2$) → sigmoid
 
 <br>
 
-<span style='background-color: #fff5b1'>**왜 이런 수식을 사용했는지?**</span>
+<mark>**왜 이런 수식을 사용했는지?**</mark>
 
 1. 두 개의 FC 레이어 = W1, W2
 
@@ -455,11 +455,11 @@ z → FC layer($W_1$) → ReLU → FC layer($W_2$) → sigmoid
 
    z 벡터는 각 채널이 전체 이미지에서 어느정도 중요한지 나타내지만,
 
-   <span style='background-color: #fff5b1'>**채널끼리 서로 영향을 줄 수 있는 관계를 반영하기 위해 FC layer → ReLU → FC layer 구조를 사용했다.**</span>
+   <mark>**채널끼리 서로 영향을 줄 수 있는 관계를 반영하기 위해 FC layer → ReLU → FC layer 구조를 사용했다.**</mark>
 
    <br>
 
-   첫번째 FC(W1)는 <span style='background-color: #fff5b1'>**차원 축소 목적**</span>이다.
+   첫번째 FC(W1)는 <mark>**차원 축소 목적**</mark>이다.
 
    Bottlenect 구조
 
@@ -470,13 +470,13 @@ z → FC layer($W_1$) → ReLU → FC layer($W_2$) → sigmoid
 
    두번째 FC(W2)는 원래 차원으로 복원해준다.
 
-   - <span style='background-color: #fff5b1'>**각 채널별 가중치를 다시 원래 크기로 맞춘다.**</span>
+   - <mark>**각 채널별 가중치를 다시 원래 크기로 맞춘다.**</mark>
 
    <br>
 
 2. ReLU 할성화 함수
 
-   <span style='background-color: #fff5b1'>**비선형성을 추가해서 채널 간 복잡한 상호작용을 학습할 수 있게해준다.**</span>
+   <mark>**비선형성을 추가해서 채널 간 복잡한 상호작용을 학습할 수 있게해준다.**</mark>
 
    ReLU를 사용해서 음수 정보는 제거하고 양수 신호만을 강조한다.
 
@@ -488,17 +488,17 @@ z → FC layer($W_1$) → ReLU → FC layer($W_2$) → sigmoid
 
    Sigmoid는 0~1 사이의 값으로 제한해서 얼마나 강조하고 억제할지 정규화한다.
 
-   <span style='background-color: #fff5b1'>**한 채널만 강조하고 다른 채널을 억제하는 것이 아니라, 여러 채널이 동시에 강조하고 억제할 수 있게한다.**</span>
+   <mark>**한 채널만 강조하고 다른 채널을 억제하는 것이 아니라, 여러 채널이 동시에 강조하고 억제할 수 있게한다.**</mark>
 
    <br>
 
-<span style='background-color: #fff5b1'>**Bottlenect 구조**</span>
+<mark>**Bottlenect 구조**</mark>
 
-<span style='background-color: #fff5b1'>**모델 복잡도를 줄이고 일반화**</span>를 돕기 위해 두 개의 fully-connected layer 사이에 차원 축소(reduction)와 복원 구조를 사용한다.
+<mark>**모델 복잡도를 줄이고 일반화**</mark>를 돕기 위해 두 개의 fully-connected layer 사이에 차원 축소(reduction)와 복원 구조를 사용한다.
 
 <br>
 
-<span style='background-color: #fff5b1'>**최종 출력 계산(Recalibaration)**</span>
+<mark>**최종 출력 계산(Recalibaration)**</mark>
 
 각 채널의 feature map $u_c$에 SE 블록을 거친 $s_c$를 곱한다.
 
@@ -519,12 +519,12 @@ $$
 
 정리하자면,
 
-<span style='background-color: #fff5b1'>**Excitation 단계는 입력에 따라 동적으로(channel-wise self-attention) feature map을 조정하는 단계이다.**</span>
+<mark>**Excitation 단계는 입력에 따라 동적으로(channel-wise self-attention) feature map을 조정하는 단계이다.**</mark>
 
 <br>
 ### Instantiations
 
-<span style='background-color: #fff5b1'>**SE 블록은 유연하게 기존 네트워크에 넣을 수 있다.**</span>
+<mark>**SE 블록은 유연하게 기존 네트워크에 넣을 수 있다.**</mark>
 
 지금까지의 설명에서는 convolution 블록 이후, SE Block을 넣었다.
 
@@ -532,7 +532,7 @@ $$
 
 <br>
 
-<span style='background-color: #fff5b1'>**SE 블록은 convolution 외에 다른 변환에도 적용이 가능하다는 점이다.**</span>
+<mark>**SE 블록은 convolution 외에 다른 변환에도 적용이 가능하다는 점이다.**</mark>
 
 Inception 모듈 후에 SE Block을 넣으면 SE-Inception 네트워크가 된다.
 
@@ -540,7 +540,7 @@ Residual 모듈에서도 identity branch와 합치기 전에 SE Block을 적용�
 
 <br>
 
-<span style='background-color: #fff5b1'>**SE Block은 최근에 나온 다양한 아키텍처에도 적용이 가능하다.**</span>
+<mark>**SE Block은 최근에 나온 다양한 아키텍처에도 적용이 가능하다.**</mark>
 
 - ResNeXt, Inception-ResNet, MobileNet, ShuffleNet 등
 
@@ -548,7 +548,7 @@ Residual 모듈에서도 identity branch와 합치기 전에 SE Block을 적용�
 
 SE Block 삽입하는 방식은 여러가지가 가능하다.
 
-<span style='background-color: #fff5b1'>**따라서 네트워크 성능이 어디에 SE를 넣느냐에 따라 달라질수있다.**</span>
+<mark>**따라서 네트워크 성능이 어디에 SE를 넣느냐에 따라 달라질수있다.**</mark>
 
 이것을 확인하려면 성능 비교 실험(ablation study)를 수행해야한다.
 
@@ -572,7 +572,7 @@ SE 블록은 기존 CNN이 잘 처리하지 못하던 채널 간 의존성을 �
 
 CNN은 공간적 특징을 추출하는 데는 강하지만, 각 채널이 서로 어떤 의미적 관계를 가지는지 반영하는 데는 한계가 있었다.
 
-<span style='background-color: #fff5b1'>**SE 블록은 이 문제를 해결하기 위해 채널별 정보를 먼저 전역적으로 압축하고(squeeze), 그 정보를 바탕으로 각 채널의 중요도를 다시 계산(excitation)하여 특징 맵에 곱해 준다.**</span>
+<mark>**SE 블록은 이 문제를 해결하기 위해 채널별 정보를 먼저 전역적으로 압축하고(squeeze), 그 정보를 바탕으로 각 채널의 중요도를 다시 계산(excitation)하여 특징 맵에 곱해 준다.**</mark>
 
 이렇게 하면 모델이 중요한 채널은 더 강조하고 덜 중요한 채널은 약하게 사용하게 되어, 표현력이 향상된다.
 
