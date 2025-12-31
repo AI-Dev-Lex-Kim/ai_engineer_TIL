@@ -16,9 +16,9 @@
 ## 1. 논문 리뷰
 
 - [[NLP 논문 리뷰] Attention is all you need(Transformer)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0/%5BNLP%20%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0%5D%20Attention%20is%20all%20you%20need(Transformer).md>)
-- [CV 논문 리뷰]What is YOLOv8: An In-Depth Exploration of the Internal Features of the Next-Generation Object Detector(https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0/%5BCV%20%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0%5DWhat%20is%20YOLOv8%3A%20An%20In-Depth%20Exploration%20of%20the%20Internal%20Features%20of%20the%20Next-Generation%20Object%20Detector.md)
-- [CV 논문 리뷰]You Only Look Once: Unified, Real-Time Object Detection(https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0/%5BCV%20%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0%5DYou%20Only%20Look%20Once%3A%20Unified%2C%20Real-Time%20Object%20Detection.md)
-- [CV 논문 리뷰]Squeeze-and-Excitation Networks(https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0/%5BCV%20%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0%5DSqueeze-and-Excitation%20Networks.md)
+- [[CV 논문 리뷰]What is YOLOv8: An In-Depth Exploration of the Internal Features of the Next-Generation Object Detector](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0/%5BCV%20%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0%5DWhat%20is%20YOLOv8%3A%20An%20In-Depth%20Exploration%20of%20the%20Internal%20Features%20of%20the%20Next-Generation%20Object%20Detector.md)
+- [[CV 논문 리뷰]You Only Look Once: Unified, Real-Time Object Detection](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0/%5BCV%20%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0%5DYou%20Only%20Look%20Once%3A%20Unified%2C%20Real-Time%20Object%20Detection.md)
+- [[CV 논문 리뷰]Squeeze-and-Excitation Networks](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0/%5BCV%20%EB%85%BC%EB%AC%B8%20%EB%A6%AC%EB%B7%B0%5DSqueeze-and-Excitation%20Networks.md)
 
 <br>
 
