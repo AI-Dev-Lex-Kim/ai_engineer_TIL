@@ -30,6 +30,7 @@
 - [LangChain(2) - SystemMessage, HumanMessage, AIMessage](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangaChain(2)%20-%20SystemMessage%2C%20HumanMessage%2C%20AIMessage.md>)
 - [LangChain(3) - PromptTemplate, ChatPromptTemplate, MessagesPromptTemplate](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(3)%20-%20PromptTemplate%2C%20ChatPromptTemplate%2C%20MessagesPromptTemplate.md>)
 - [LangChain(4) - PDF Document Loaders(PyPDF, Lazy Load, OCR)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(4)%20-%20PDF%20Document%20Loaders(PyPDF%2C%20Lazy%20Load%2C%20OCR).md>)
+- [LangChain(5) - Text Splitters(Chunking)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(5)%20-%20Text%20Splitters(Chunking).md>)
 - [LangChain RAG(수정하기)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/RAG(Retrieval-Agumented%20Generation)%20Deep%20Dive%20with%20code.md>)
 
 <br>
