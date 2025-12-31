@@ -92,7 +92,7 @@ pip install -U langchain-anthropic
 
 ## 워크플로우
 
-![image.png](attachment:a33d0870-b774-4e94-afff-346cf6a5ef67:image.png)
+![image.png](<../images//LangChain(1)/1.png>)
 
 <br>
 

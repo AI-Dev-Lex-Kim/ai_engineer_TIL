@@ -26,6 +26,7 @@
 
 ### 2.1 LangChain
 
+- [LangChain(1) - 사용하는 이유, 설치, 그림으로 설명하는 RAG 워크플로우](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(1)%20-%20%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0%2C%20%EC%84%A4%EC%B9%98%2C%20%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C%20%EC%84%A4%EB%AA%85%ED%95%98%EB%8A%94%20RAG%20%EC%9B%8C%ED%81%AC%ED%94%8C%EB%A1%9C%EC%9A%B0.md>)
 - [LangChain RAG(수정하기)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/RAG(Retrieval-Agumented%20Generation)%20Deep%20Dive%20with%20code.md>)
 
 <br>
