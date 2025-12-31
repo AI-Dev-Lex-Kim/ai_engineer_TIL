@@ -1,120 +1,357 @@
 # [NLP 논문 리뷰] Attention is all you need(Transformer)
 
-- [\[NLP 논문 리뷰\] Attention is all you need(Transformer)](#nlp-논문-리뷰-attention-is-all-you-needtransformer)
-  - [Abstract](#abstract)
-  - [1. Introduction](#1-introduction)
-  - [2 Background](#2-background)
-  - [3. Model Architecture](#3-model-architecture)
-    - [3.1 Encoder and Decoder Stacks](#31-encoder-and-decoder-stacks)
-    - [3.2 Attention](#32-attention)
-    - [3.2.1 Scaled Dot-Product Attention](#321-scaled-dot-product-attention)
-    - [3.2.2 Multi-Head Attention](#322-multi-head-attention)
-    - [3.2.3 Applications of Attention in our Model](#323-applications-of-attention-in-our-model)
-    - [3.3 Position-wise Feed-Forward Networks](#33-position-wise-feed-forward-networks)
-    - [3.4 Embeddings and Softmax](#34-embeddings-and-softmax)
-    - [3.5 Positional Encoding](#35-positional-encoding)
-  - [4 Why Self-Attention](#4-why-self-attention)
-  - [Conclusion](#conclusion)
-
----
-
-논문 링크: https://arxiv.org/pdf/1706.03762
-
-<br>
+> 유명하고 자주 사용하는 개념이다 보니 이전 부터 이 논문을 굉장히 읽고 싶었었다.
+> 논문을 읽을때, 아키텍처 부분이 어려운 내용이 많아서, 깊게 이해하는데 시간이 꽤 걸리고 정리하는데도 최대한 자세히 적었다.
+> 역시 복잡하고 깊게 이해하는 만큼 성취감과 즐거움이 매우 커서 즐겁게 논문을 읽었다.
 
 ## Abstract
 
-기존의 인코더와 디코더를 포함한 모델들은 순환 신경망(RNN)이나 합셩곱 신경망(CNN)에 기반해 있었다.
-
-이 논문에서 <mark>**Tansformer라는 모델은 순환과 합성곱을 완전히 제거하고, 오직 어텐션 메커니즘에만 기반해 새롭고 간단한 네트워크 구조를 제안**</mark>한다.
-
-Transformer 모델은 <mark>**품질면에서도 우수**</mark>하고 병렬화가 훨씬 용이해서 <mark>**학습 시간이 굉장히 짧다**</mark>고 한다.
+기존의 시퀀스 모델(인코더와 디코더)들은 순환 신경망(RNN)이나 합성곱 신경망(CNN)에 기반이었다.
 
 <br>
 
-## 1. Introduction
+이 논문에서 <span style='background-color: #fff5b1'>**Transformer라는 모델은**</span>
 
-순환 신경망(RNN)과 장단기 메모리(LSTM) 그리고 게이티드 순환 신경망(GRU)는 언어 모델링과 기계 번역과 같은 시퀀스 모델링 및 변환 문제에서 SOTA를 기록해왔다.
+- <span style='background-color: #fff5b1'>**RNN과 CNN을 전혀 쓰지않고**</span>
+- <span style='background-color: #fff5b1'>**오직 Attention 메커니즘에만 사용하는 새로운 구조다.**</span>
 
-이러한 모델들은 시퀀스 위치를 계산 시간 단계에 맞추어 정렬하고, 이전 은닉 상태(ht-1)과 현재 위치(t)의 입력을 은닉 상태(ht) 시퀀스를 생성한다.
+<br>
 
-이러한 <mark>**필연적인 순차적인 특성은 학습시 병렬화를 불가능**</mark>하게 하며 <mark>**시퀀스 길이가 길어 질수록 이 문제가 심각**</mark>해 진다. 메모리 제약으로 인해서 여러 <mark>**example간의 배치 처리가 제한**</mark>되기 때문이다.
+Transformer 모델은
 
-Attention 메커니즘은 <mark>**이전에도 다양한 작업**</mark>에서 시퀀스 모델링 및 변환 모델의 핵심적인 구성요소로 사용했었다.
+- <span style='background-color: #fff5b1'>**성능(번역 품질)도 기존모델 보다 좋고**</span>
+- 병렬화가 훨씬 쉬워서 <span style='background-color: #fff5b1'>**학습 시간이 굉장히 짧다.**</span>
 
-<mark>**입력 또는 출력 시퀀스 내에서의 거리와 관계없이 의존 관계를 모델링**</mark> 할수있었기 때문이다.
+<br>
 
-하지만 이러한 어텐션 메커니즘은 <mark>**대부분 순환신경망(RNN)과 함께 사용**</mark>되었다.
+## <span style='background-color: #fff5b1'>**1. Introduction**</span>
 
-이 논문에서는 Transformer를 제안하며, <mark>**순환 구조를 완전히 배제하고 입력과 출력 사이의 global 적인 의존 관계를 학습하기 위해서 오직 어텐션 메커니즘에만 의존하는 모델구조를 설계**</mark>했다.
+RNN, LSTM, GRU는 그동안 언어 모델링, 기계 번역 같은 시퀀스 문제에서 SOTA를 달성해왔다.
 
-Transformer는 <mark>**훨씬 더 높은 수준의 병렬화를 가능**</mark>하게 해주며, 이 논문의 실험에서 단 8개의 P100 GPU에서 12시간 정도만 학습해도 번역 품질에서 SOTA에 도달 할 수 있었다고 한다.
+<br>
+
+이런 기존의 모델들은 다음과 같은 특징들이 있다.
+
+- 시퀀스의 순서를 시간(t)에 맞게 차례대로 정렬하고
+- <span style='background-color: #fff5b1'>**이전 은닉 상태 $h_{t-1}$**</span>와 <span style='background-color: #fff5b1'>**현재 위치(t)의 입력을 사용**</span>해서 <span style='background-color: #fff5b1'>**은닉상태 $h_t$ 를 계산하는 구조**</span>이다.
+- 결국, <span style='background-color: #fff5b1'>**계산이**</span> 시퀀스 순서에 맞춰서 <span style='background-color: #fff5b1'>**순차적으로 진행**</span>된다
+
+<br>
+
+이런 순차적인 특성 때문에
+
+- 학습시 <span style='background-color: #fff5b1'>**병렬화가 불가능**</span>하고
+- 시퀀스 <span style='background-color: #fff5b1'>**길이가 길어질수록 문제**</span>가 더 심해지며
+- <span style='background-color: #fff5b1'>**메모리 한계**</span> 때문에 큰 배치로 학습하기도 어렵다.
+
+<br>
+
+사실 <span style='background-color: #fff5b1'>**Attention 메커니즘은 기존모델에도 다양한 작업에서 사용**</span>되어 왔다.
+
+- 입,출력 시퀀스에서 거리에 상관없이 모델링 할 수 있었기 때문이다.
+- 하지만, <span style='background-color: #fff5b1'>**대부분 RNN과 Attention이 같이 사용**</span>되었었다.
+
+<br>
+
+이 논문에서의 Transformer는
+
+- <span style='background-color: #fff5b1'>**RNN 같은 순환 구조를 아예 제거**</span>하고
+- 입력과 출력 사이의 global한 의존관계를
+  <span style='background-color: #fff5b1'>**오직 Attention 만으로 학습하는 구조를 제안**</span>한다.
+
+<br>
+
+그 결과
+
+<span style='background-color: #fff5b1'>**훨씬 높은 수준의 병렬화가 가능**</span>하고
+
+8개의 P100 GPU로 12시간만 학습해도 번역 품질에서 SOTA를 달성했다.
 
 <br>
 
 ## 2 Background
 
-시퀀스 모델링에서 순차적 계산을 줄이려는 목표로 Extended Neural GPU, ByteNet, ConvS2S 모델링이 제안되어왔다.
+> 결국 <span style='background-color: #fff5b1'>**기존의 시퀀스 모델들은 순차적으로 계산되는 시도를 줄이기**</span> 위한 여러 방법을 찾아왔고 비슷한 방식으로 처리했다.<br>
+> 하지만 <span style='background-color: #fff5b1'>**여전한 한계가 존재했다.**</span>
 
-이 모델들은 <mark>**합성곱 신경망(CNN)을 기본 구성 요소로 사용해, 모든 입력 및 출력 위치에 대해 은닉 표현을 병렬로 계산하여 해결**</mark>했다.
+<br>
 
-하지만, 두 임의의 입출력 위치간의 신호를 연결하는데 필요한 연산 수는 <mark>**위치 간의 거리와 함께 증가해 먼 위치간의 의존 관계를 학습하는 것이 어려웠다.**</mark>
+이 모델들은
 
-Transformer는 이러한 <mark>**위치간의 연산 수가 일정한(constant) 수준으로 줄어든다.**</mark>
+- CNN을 기본 블록으로 사용하고
+- 모든 입력/출력 위치의 은닉 표현을 병렬로 계산함으로써
+  순차 계산 문제를 어느 정도 해결했다.
+  <br>
+
+하지만 CNN 기반 구조에서는
+
+- 임의의 두 위치 사이의 정보가 전달되기까지 필요한 <span style='background-color: #fff5b1'>**연산 수가**</span>
+  <span style='background-color: #fff5b1'>**위치 간 거리와 함께 증가**</span>한다.
+- 그래서 <span style='background-color: #fff5b1'>**멀리 떨어진 위치들 간의 의존 관계를 학습하는 것이 어렵다.**</span>
+
+<br>
+
+Transformer는
+
+- 이러한 위치 간 <span style='background-color: #fff5b1'>**연산 수를 거리에 상관없이 거의 일정한 수준**</span>으로 줄인다
+  (즉, 멀리 떨어진 토큰 간 의존 관계도 효율적으로 학습 가능하게 만든다).
 
 <br>
 
 ## 3. Model Architecture
 
-![논문리뷰1](../images/논문리뷰/Attention%20is%20all%20you%20need/1.png)
+![](https://velog.velcdn.com/images/lexkim/post/1a7d8666-99d5-4e6f-9919-96e8dbdae05f/image.png)
+<span style='background-color: #fff5b1'>**인코더-디코더 전체구조**</span>
 
-Transformer는 인코더와 디코더 구조를 가지고 있다.
+Transformer도 <span style='background-color: #fff5b1'>**기존의 seq2seq 모델들 처럼 인코더-디코더 구조**</span>를 가진다.
 
-<mark>**인코더**</mark>는 <mark>**입력 시퀀스 토큰(논문에서는 symbol이란 표현을 사용한다.)들인 x1, …, xn 들이 각 토큰들의 은닉상태 값을 가지고 있는 (z = z1, …, zn)으로 출력**</mark>되어진다.
+인코더
 
-<mark>**디코더**</mark>는 인코더가 생성한 은닉상태 값들인 z가 주어지면, <mark>**다음 예측할 토큰을 한번에 하나의 토큰씩 생성한다.**</mark>(y1, …, ym)
+- 입력 시퀀스 토큰들: $x_1$, …, $x_n$
+- <span style='background-color: #fff5b1'>**각 토큰들을 은닉 상태 벡터로 변환**</span>해, 은닉 상태 토큰 벡터들의 집합인 시퀀스 $z = z_1, …, z_n$ 을 출력한다.
 
-이러한 인코더와 디코더의 과정전체를 한번의 스텝으로 치자면, <mark>**각각의 스텝별로 auto-regressive(자기 회귀) 방식으로 동작**</mark>한다.
+<br>
 
-<mark>**auto-regressive 방식이란 모델이 다음 출력을 생성할때, “이전 시점에 생성한 출력”을 입력으로 사용하는 방식을 의미**</mark>한다.
+디코더
 
-다음 출력을 생성할때, 이전에 생성된 토큰들을 추가 입력으로 사용한다.
+- <span style='background-color: #fff5b1'>**인코더가 만든 은닉상태 $z$를 입력**</span>으로 받아
+- 출력 시퀀스 토큰들을 $y_1, …, y_m$ 형태로, <span style='background-color: #fff5b1'>**디코더 한번의 과정당 하나씩 생성**</span>한다.
 
-Transformer는 이러한 메커니즘으로 구성되어 있으며, <mark>**인코더와 디코더 모두에 층층이 쌓인 Self-Attention과 Point-wise fully connected layer을 사용한다.**</mark>
+<br>
 
-여기서 <mark>**Point-wise fully connected layer란 각 토큰(위치)마다 독립적으로 fully connected layer가 적용**</mark>되다는 의미이다.
+<span style='background-color: #fff5b1'>**Auto-regressive 방식**</span>
 
-예를 들어 시퀀스 길이가 n일때, FFN(feed-forward network)층을 <mark>**각 토큰 벡터에 독립적으로 적용해 시퀀스 길이 n에는 영향을 주지 않고 토큰별로 동일한 FFN를 적용하는 구조**</mark>이다.
+인코더-디코더 전체 과정을 보면, 디코더가 <span style='background-color: #fff5b1'>**출력 토큰을 생성하는 시점이 하나의 스텝**</span>이라고 부른다.
 
-Fully connected layer = MLP (Multi-Layer Perceptron) = 선형 변환 + 비선형(ReLU)
+Transformer 디코더는 <span style='background-color: #fff5b1'>**각 스텝에서 auto-regressive 방식**</span>으로 동작한다.
+
+<br>
+
+auto-regressive 방식이란
+
+- <span style='background-color: #fff5b1'>**다음 출력을 생성**</span>할때,
+- 이전 시점들에서 <span style='background-color: #fff5b1'>**이미 생성된 출력(토큰)들을 추가 입력**</span>으로 사용하는 방식이다.
+- 즉, $y_k$를 만들때, 이전에 생성한 토큰들인 $y_1, …, y_{k-1}$을 사용한다.
+
+<br>
+
+<span style='background-color: #fff5b1'>**인코더-디코더 블록의 공통 구조**</span>
+
+Transformer의 인코더와 디코더는 모두
+
+- Self-Attention 층
+- Point-wise Fully Connected Layer(FFN)
+  를 층층이 쌓은 형태로 구성된다.
+
+<br>
+
+<span style='background-color: #fff5b1'>**Self-Attention Layer**</span>
+
+시퀀스 내의 <span style='background-color: #fff5b1'>**모든 토큰들이 서로의 정보를 참조**</span>하며 자신의 토큰 벡터에 반영하게 하는 층이다.
+
+<br>
+
+<span style='background-color: #fff5b1'>**Point-wise Fully Connected Layer(FFN)**</span>
+
+point-wise란
+
+- <span style='background-color: #fff5b1'>**~wise: ~별로 따로따로 나눠서 수행한다.**</span>
+- <span style='background-color: #fff5b1'>**point: 지점**</span>
+
+즉, 각 토큰 별로 따로따로 나눠 수행한다는 뜻이다.
+
+<br>
+
+그래서 <span style='background-color: #fff5b1'>**모든 각각의 토큰**</span>마다,
+
+<span style='background-color: #fff5b1'>**Fully Connected Network를 독립적으로 적용**</span>한다는 뜻이다.
+
+<br>
+
+시퀀스 길이가 n일때
+
+- 각 토큰 벡터에 대해 같은 FFN을 수행하지만
+- 토큰들 사이를 섞지는 않는다
+
+즉, 길이 n은 그대로 유지되고, 각 위치의 벡터만 변환된다.
+
+<br>
+
+여기서 Fully Connected Layer = MLP = (선형 변환 → 비선형 활성함수(ReLU 등)) 구조를 의미한다.
 
 <br>
 
 ### 3.1 Encoder and Decoder Stacks
 
-> 인코더(Encoder)는 <mark>**N=6개의 동일한 층들로 구성된 스택(stack)이다.**</mark> 각 층은 <mark>**두 개의 서브 레이어**</mark>(sub-layer)으로 이루어져 있다. <mark>**첫 번째는 다중 헤드 셀프 어텐션(multi-head self-attention) 메커니즘**</mark>이고, 두 번째는 간단한 <mark>**위치별 완전연결 피드포워드(position-wise fully connected feed-forward) 네트워크**</mark>이다.
->
-> <mark>**각 두 개의 서브 레이어 주변에는 잔차 연결(residual connection) 을 적용**</mark>하며, <mark>**그 뒤에 층 정규화(layer normalization) [1]를 수행**</mark>한다. 즉, <mark>**각 서브 레이어의 출력은 LayerNorm(x + Sublayer(x)) 형태**</mark>이며, 여기서 <mark>**Sublayer(x)는 해당 서브 레이어이 수행**</mark>하는 함수이다.
->
-> 이러한 <mark>**잔차 연결을 용이하게 하기 위해, 모델의 모든 서브 레이어들과 임베딩 층(embedding layer)은 출력 차원 d_model = 512를 갖는다.**</mark>
+<span style='background-color: #fff5b1'>**인코더 구조**</span>
+
+Transformer의 <span style='background-color: #fff5b1'>**인코더는 6개의 동일한 레이어(layer)들이 쌓인 구조**</span>이다.
+
+- Encoder Layer 1
+- Encoder Layer 2
+- …
+- Encoder Layer 6
+
+이런 식으로 같은 형태의 블록을 6번 반복.
 
 <br>
 
-> 디코더(Decoder) 또한 **N=6개의 동일한 층들로 구성**되어 있다. <mark>**각 인코더 층의 두 개의 서브 레이어에 더해, 디코더는 세 번째 서브 레이어을 추가**</mark>하는데, 이는 <mark>**인코더 스택의 출력을 대상으로 다중 헤드 어텐션(multi-head attention)을 수행**</mark>한다.
->
-> 인코더와 마찬가지로, <mark>**각 서브 레이어 주위에 잔차 연결을 적용하고 그 후에 층 정규화를 수행**</mark>한다.
->
-> 또한 디코더 스택내에 <mark>**마스크드 멀티 헤드 셀프 어텐션(Masked Mult-Head Self-attention)가 있다. 현재 위치가 이후 위치를 참조(attend)하지 못하도록 한다.**</mark>
->
-> <mark>**마스킹을 해서 현재 시점보다 이전에 예측했던 토큰들만 의존하도록 보장**</mark>해준다. 즉, 이미 예측한 토큰들만 의존하고 이후 토큰들은 의존하지 못하게 마스킹한다.
+<span style='background-color: #fff5b1'>**인코더 서브레이어**</span>
+
+이제 하나의 Encode Layer가 어떻게 구성되어있는지 알아보자.
+
+각 인코더 레이어는 <span style='background-color: #fff5b1'>**두 개의 서브 레이어로 구성**</span>된다.
+
+1. <span style='background-color: #fff5b1'>**멀티 헤드 셀프 어텐션(Multi-Head Self-Attention)**</span>
+
+   - <span style='background-color: #fff5b1'>**토큰들끼리 서로의 정보를 보면서(Attention) 섞는 부분**</span>이다.
+   - Multi-Header 이라서 <span style='background-color: #fff5b1'>**여러개의 다른 관점(헤드)으로 Attention을 동시에 수행한뒤 합친다.**</span>
+
+   <br>
+
+2. <span style='background-color: #fff5b1'>**포지션-와이즈 피드포워드 네트워크(Position-wise Fully Connected Feed-Forward Network)**</span>
+   - <span style='background-color: #fff5b1'>**각 토큰에 대해 동일한 MLP(fully connected network)를 독립적으로 적용**</span>한다.
+   - 시퀀스 길이는 바꾸지 않고, 각 토큰의 표현만 <span style='background-color: #fff5b1'>**비선형 변환으로 변환**</span>시킨다.
+   - Fully Connected Layer = MLP = (선형 변환 → 비선형 활성함수(ReLU 등))
 
 <br>
 
-더 자세히 설명하자면 아래와 같다.
+이렇게 Encode Layer는 각 두 개의 서브레이어로 이루어져있다.
+
+서브 레이어가 출력한 x는 다음 서브 레이어에 전달된다.
+
+이때 출력 x가 다음 서브 레이어에 x의 정보가 보다 자연스럽게 전달되게 추가적인 레이어를 거친다.
 
 <br>
 
-트랜스포머는 <mark>**auto-regressive 구조 방식으로 동작**</mark>한다고 했다.
+<span style='background-color: #fff5b1'>**Residual Connection + Layer Normalization**</span>
+
+두 개의 서브레이어 주변에 잔차 연결과 정규화를 두어 수행한다.
+
+<br>
+
+<span style='background-color: #fff5b1'>**Residual Connection(잔차 연결)이란?**</span>
+
+- 레이어에 입력된 x를,
+- 레이어를 거쳐 출력된 값과 더해주는것이다.
+
+<br>
+
+조금더 풀어서 쓰면 더 이해하기 쉽다.
+
+일반 레이어 → `y = Sublayer(x)`
+
+잔차 연결 레이어 → `y = x + Sublayer(x)`
+
+<br>
+
+잔차 연결을 쓰는 이유는
+
+- 깊은 네트워크 학습이 더 안정적이고,
+- 기울기 소실 문제를 줄여준다.
+
+<br>
+
+<span style='background-color: #fff5b1'>**Layer Normalization**</span>
+
+서브 레이어의 출력 결과를 정규화 해주는것이다.
+
+각 토큰 별로 정해진 차원으로 <span style='background-color: #fff5b1'>**정규화해주어서 학습을 더 안정화**</span> 시켜준다.
+
+<br>
+
+결국 Residual Connection + Layer Normalization는 다음과 같다.
+
+- <span style='background-color: #fff5b1'>**출력 = LayerNorm(x + Sublayer(x))**</span>
+
+<br>
+
+<span style='background-color: #fff5b1'>**모든 레이어의 차원은 d_model=512 차원**</span>이다.
+
+이렇게 맞춰야, x와 Sublayer(x)의 차원이 같아서
+
+x + Sublayer(x) 형태의 <span style='background-color: #fff5b1'>**잔차 연결을 자연스럽게 적용**</span>할 수 있다.
+
+<br>
+
+<span style='background-color: #fff5b1'>**한줄 정리**</span>
+
+인코더: 6개, [Self-Attention → Residual + LayerNorm → FFN → Residual + LayerNorm]
+
+<br>
+
+<span style='background-color: #fff5b1'>**디코더 구조**</span>
+
+Transformer의 디코더는 <span style='background-color: #fff5b1'>**6개의 동일한 레이어(layer)들이 쌓인 구조**</span>이다.
+
+- Decoder Layer 1
+- Decoder Layer 2
+- …
+- Decoder Layer 6
+
+이런 식으로 같은 형태의 블록을 6번 반복.
+
+<br>
+
+<span style='background-color: #fff5b1'>**디코더의 서브레이어**</span>
+
+인코더는 서브 레이어가 2개였지만, <span style='background-color: #fff5b1'>**디코더는 서브 레이어가 3개이다.**</span>
+
+1. <span style='background-color: #fff5b1'>**마스크드 멀티 헤드 셀프 어텐션(Masked Multi-Head Self-Attention)**</span>
+
+   디코더가 지금까지 예측한 토큰들에 대해 self-attention을 수행한다.
+
+   여기서 중요한 포인트는 <span style='background-color: #fff5b1'>**마스킹(masking**</span>)을 한다는 점이다.
+
+   - <span style='background-color: #fff5b1'>**현재 위치가 미래 위치(아직 생성되지 않은 토큰들)를 참조하지 못하게 막는다.**</span>
+   - 현재 토큰 위치 t가 t 이후의 토큰들(t+1, t+2, …)을 보지 못하게 마스킹한다.
+   - 결과적으로 모델이 훈련시에도 추론 할때와 동일하게 미래를 모르는 상태로 학습하게 된다.
+
+   <br>
+
+   이 덕분에 디코더는 <span style='background-color: #fff5b1'>**auto-regressive 특성을 가지게된다.**</span>
+
+   - $y_t$를 만들때 $y_1,\ …,\ y_{t-1}$ 이전 정보만 사용할 수 있다.
+
+   <br>
+
+2. <span style='background-color: #fff5b1'>**인코더-디코더 어텐션 (Encoder-Decoder Multi-Head Attention)**</span>
+
+   - <span style='background-color: #fff5b1'>**디코더가 현재까지 예측한 토큰들과**</span>
+   - <span style='background-color: #fff5b1'>**인코더의 출력**</span>
+     <span style='background-color: #fff5b1'>**을 입력으로 받아**</span>
+     <span style='background-color: #fff5b1'>**입력 시퀀스의 어떤 위치에 주목 해야할지 학습하게 된다.**</span>
+
+   <br>
+
+   디코더가 현재까지 예측한 토큰들은 Q(query)로 들어가고
+
+   인코더의 출력은 K, V(key, value)로 들어가서 attention을 수행한다.
+
+   <br>
+
+3. 위치별 피드포워드 네트워크 (Position-wise Feed-Forward Network)
+
+   인코더와 동일하게, 각 토큰 벡터에 독립적으로 적용되는 MLP.
+
+<br>
+
+<span style='background-color: #fff5b1'>**Residual Connection + Layer Normalization**</span>
+
+- 디코더 역시 인코더와 마찬가지로 각 서브 레이어 마다
+  잔차 연결 + 정규화를 수행한다.
+
+<br>
+
+디코더: 6개, [Masked Self-Attention → Residual Connection + Layer Normalization → Encoder-Decoder Attention → Residual Connection + Layer Normalization→ FFN]
+
+<br>
+
+<span style='background-color: #fff5b1'>**이번 섹션에서 내가 인코더-디코더를 딥하게 이해한 것을 아래와 같이 정리해봤다.**</span>
+
+<br>
+
+트랜스포머는 <span style='background-color: #fff5b1'>**auto-regressive 구조 방식으로 동작**</span>한다고 했다.
 
 y1 → y2 → y3 → … 순서대로 하나씩 생성하며, y_t를 예측할 때는 t 이전의 출력들만 참조해야한다.
 
@@ -124,13 +361,13 @@ y1 → y2 → y3 → … 순서대로 하나씩 생성하며, y_t를 예측할 �
 
 훈련할때는 y1=i, y2=like, y3=apples 모두 가지고 있다.
 
-그런데 디코더에 [i, like, apples]를 <mark>**한꺼번에 넣어버리면, 디코더의 self-attention은 기본적으로 모든 토큰끼리 attention을 계산**</mark>하려고한다.
+그런데 디코더에 [i, like, apples]를 <span style='background-color: #fff5b1'>**한꺼번에 넣어버리면, 디코더의 self-attention은 기본적으로 모든 토큰끼리 attention을 계산**</span>하려고한다.
 
 <br>
 
 즉 y1 → y3 정보를 볼수있고 y2 → y3, y3 → y1 등 미래 참조가 자유로워진다.
 
-<mark>**그래버리면 auto-regressive 구조 방식이 이뤄지지 않는다.**</mark>
+<span style='background-color: #fff5b1'>**그래버리면 auto-regressive 구조 방식이 이뤄지지 않는다.**</span>
 
 <br>
 
@@ -204,7 +441,7 @@ s12 = 위치 1의 토큰이 위치 2 토큰을 얼마나 참고하는지 나타�
 
 이때 self-attention은 모든 위치를 다 보게 된다.
 
-<mark>**디코더는 auto-regressive 이끼 때문에 미래 토큰을 보면 안된다.**</mark>
+<span style='background-color: #fff5b1'>**디코더는 auto-regressive 이끼 때문에 미래 토큰을 보면 안된다.**</span>
 
 <br>
 
@@ -222,10 +459,10 @@ mask =
 
 여기서
 
-- <mark>**0은 “참조 가능”**</mark>
-- <mark>**-inf는 “softmax에서 0으로 만들기 위해 완전히 막는 값”이다.**</mark>
+- <span style='background-color: #fff5b1'>**0은 “참조 가능”**</span>
+- <span style='background-color: #fff5b1'>**-inf는 “softmax에서 0으로 만들기 위해 완전히 막는 값”이다.**</span>
 
-<mark>**QK^T 행렬과 mask 행렬을 더한다.**</mark>
+<span style='background-color: #fff5b1'>**QK^T 행렬과 mask 행렬을 더한다.**</span>
 
 <br>
 
@@ -266,13 +503,13 @@ S_masked =
 
 이제 softmax를 하게 되면 -inf는 0이 된다.
 
-<mark>**마스킹된 미래 위치는 음의 무한대 -inf을 더해서 0이 되게 만든다.**</mark>
+<span style='background-color: #fff5b1'>**마스킹된 미래 위치는 음의 무한대 -inf을 더해서 0이 되게 만든다.**</span>
 
 <br>
 
 결과적으로:
 
-<mark>**i 번째 위치는 절대로 i + 1 이상의 토큰을 참조할 수 없다.**</mark>
+<span style='background-color: #fff5b1'>**i 번째 위치는 절대로 i + 1 이상의 토큰을 참조할 수 없다.**</span>
 
 <br>
 
@@ -284,29 +521,29 @@ S_masked =
 
 <br>
 
-<mark>**정리**</mark>
+<span style='background-color: #fff5b1'>**정리**</span>
 
-1. <mark>**인코더**</mark>
+1. <span style='background-color: #fff5b1'>**인코더**</span>
    - 입력 시퀀스의 모든 토큰이 임베딩 + 위치 임베딩을 거친다.
-   - Self-Attention을 통해 <mark>**자신을 포함한 시퀀스 전체 토큰과의 관계**</mark>를 반영한 은닉벡터를 계산한다.
+   - Self-Attention을 통해 <span style='background-color: #fff5b1'>**자신을 포함한 시퀀스 전체 토큰과의 관계**</span>를 반영한 은닉벡터를 계산한다.
    - 각 토큰별로 Feed-Forward를 거쳐 최종 은닉상태(z₁, z₂, …, zₙ)를 갖게 된다.
-   - 결과적으로 인코더 출력은 <mark>**토큰별 context-aware 은닉벡터 시퀀스**</mark>다.
-2. <mark>**디코더**</mark>
-   - 생성 시작 시점에는 `<SOS>` 토큰을 입력으로 사용하며, 이후에는 <mark>**이전 시점에 예측한 토큰**</mark>이 입력으로 들어간다.
+   - 결과적으로 인코더 출력은 <span style='background-color: #fff5b1'>**토큰별 context-aware 은닉벡터 시퀀스**</span>다.
+2. <span style='background-color: #fff5b1'>**디코더**</span>
+   - 생성 시작 시점에는 `<SOS>` 토큰을 입력으로 사용하며, 이후에는 <span style='background-color: #fff5b1'>**이전 시점에 예측한 토큰**</span>이 입력으로 들어간다.
    - 입력 토큰은 임베딩 + 위치 임베딩을 거쳐 디코더 입력 벡터가 된다.
-   - <mark>**Masked Self-Attention**</mark>으로 지금까지 생성된 모든 이전 토큰 벡터를 참고한다.
-   - <mark>**Encoder-Decoder Attention**</mark>으로 인코더의 모든 토큰 은닉상태(z₁,…,zₙ)를 참조하여 시퀀스 전체 맥락을 반영한다.
+   - <span style='background-color: #fff5b1'>**Masked Self-Attention**</span>으로 지금까지 생성된 모든 이전 토큰 벡터를 참고한다.
+   - <span style='background-color: #fff5b1'>**Encoder-Decoder Attention**</span>으로 인코더의 모든 토큰 은닉상태(z₁,…,zₙ)를 참조하여 시퀀스 전체 맥락을 반영한다.
    - 디코더 마지막 은닉벡터는 선형변환 + 소프트맥스를 거쳐 다음 토큰 확률을 계산하고, 확률이 가장 높은 토큰을 최종 예측으로 생성한다.
 
 <br>
 
 ### 3.2 Attention
 
-![image.png](../images/논문리뷰/Attention%20is%20all%20you%20need/2.png)
+![](https://velog.velcdn.com/images/lexkim/post/164801ac-3803-4716-bdf0-44f9806224bd/image.png)
 
-> 어텐션(attention) 함수는 <mark>**쿼리(query, Q)와 키-값(key-value, K, V) 쌍들의 집합을 출력으로 매핑하는 함수**</mark>로 설명될 수 있다. 여기서 <mark>**쿼리, 키, 값, 출력은 모두 벡터(vector)**</mark>이다.
+> 어텐션(attention) 함수는 <span style='background-color: #fff5b1'>**쿼리(query, Q)와 키-값(key-value, K, V) 쌍들의 집합을 출력으로 매핑하는 함수**</span>로 설명될 수 있다. 여기서 <span style='background-color: #fff5b1'>**쿼리, 키, 값, 출력은 모두 벡터(vector)**</span>이다.
 >
-> 출력은 값(value)들의 <mark>**가중합(weighted sum)으로 계산**</mark>되며, 각 값에 할당되는 가중치는 <mark>**쿼리와 해당 키 간의 호환성 함수(compatibility function)에 의해 계산**</mark>된다.
+> 출력은 값(value)들의 <span style='background-color: #fff5b1'>**가중합(weighted sum)으로 계산**</span>되며, 각 값에 할당되는 가중치는 <span style='background-color: #fff5b1'>**쿼리와 해당 키 간의 호환성 함수(compatibility function)에 의해 계산**</span>된다.
 
 논문에서는 위와같이 설명하고 있다.
 
@@ -316,7 +553,7 @@ S_masked =
 
 ### 3.2.1 Scaled Dot-Product Attention
 
-<mark>**스케일드 닷 프로덕트 어텐션은 다음 과 같은 구조 방식으로 계산된다.**</mark>
+<span style='background-color: #fff5b1'>**스케일드 닷 프로덕트 어텐션은 다음 과 같은 구조 방식으로 계산된다.**</span>
 
 1. Q 와 K를 곱한다.(MatMul, Matrix Multiplication)
 2. 곱한 결과값이 너무 커지지 않게 각 값 ÷ $\sqrt{차원 수}$ 을 해준다(Scale)
@@ -327,18 +564,18 @@ S_masked =
 
 <br>
 
-<mark>**Q(쿼리) = 무엇을 찾고 싶은지**</mark>
+<span style='background-color: #fff5b1'>**Q(쿼리) = 무엇을 찾고 싶은지**</span>
 
-<mark>**K(키) = 어떤 정보를 가진 토큰 인지**</mark>
+<span style='background-color: #fff5b1'>**K(키) = 어떤 정보를 가진 토큰 인지**</span>
 
-<mark>**V(값) = 실제 정보**</mark>
+<span style='background-color: #fff5b1'>**V(값) = 실제 정보**</span>
 
 <br>
 
 모든 토큰들은 각각의 Q, K, V가 벡터형태로 존재한다.
 
-1. Q는 자기에게 중요한 값을 얻기 위해 <mark>**키 벡터들과 비교하여 중요도를 계산한다.**</mark>
-2. 그 결과 Q와K를 통해 생성된 <mark>**중요도 값과 V를 합하여 하나의 출력 벡터를 만든다.**</mark>
+1. Q는 자기에게 중요한 값을 얻기 위해 <span style='background-color: #fff5b1'>**키 벡터들과 비교하여 중요도를 계산한다.**</span>
+2. 그 결과 Q와K를 통해 생성된 <span style='background-color: #fff5b1'>**중요도 값과 V를 합하여 하나의 출력 벡터를 만든다.**</span>
 
 <br>
 
@@ -350,7 +587,7 @@ The cat eat fish
 
 지금 보고 있는 토큰이 cat이라고 하자.
 
-다른 단어들 중에서 <mark>**“어떤 토큰이 cat이라는 토큰을 설명하는데 얼마나 중요한지”**</mark>
+다른 단어들 중에서 <span style='background-color: #fff5b1'>**“어떤 토큰이 cat이라는 토큰을 설명하는데 얼마나 중요한지”**</span>
 
 그 중요도를 계산하는데 쓰이는 Q이다.
 
@@ -366,11 +603,11 @@ K는 “내가 어떤 정보인지 이름”을 나타내고
 
 V는 “내가 가지고 있는 정보에 대한 실제 내용”을 의미한다.
 
-![image.png](../images/논문리뷰/Attention%20is%20all%20you%20need/3.png)
+![](https://velog.velcdn.com/images/lexkim/post/c85285e3-0fb5-4d51-b5ad-ade9f12815db/image.png)
 
 <br>
 
-<mark>**첫번째. Q 와 K를 곱한다.(MatMul)**</mark>
+<span style='background-color: #fff5b1'>**첫번째. Q 와 K를 곱한다.(MatMul)**</span>
 
 이제 cat의 Q를 다른 모든 키들과 비교해서 각 단어를 얼마나 중요한지 중요도 점수를 만든다.
 
@@ -386,7 +623,7 @@ QK = [qk_The, qk_cat, qk_eat, qk_fish]
 
 <br>
 
-<mark>**두번째. 곱한 결과값이 너무 커지지 않게 각 값 ÷ $\sqrt{차원 수}$ 을 해준다(Scale)**</mark>
+<span style='background-color: #fff5b1'>**두번째. 곱한 결과값이 너무 커지지 않게 각 값 ÷ $\sqrt{차원 수}$ 을 해준다(Scale)**</span>
 
 Q 와 K를 곱하여 Softmax에 넣으면, 점수가 너무 커져서 softmax가 치우치게 된다.
 
@@ -403,7 +640,7 @@ Q 와 K를 곱하여 Softmax에 넣으면, 점수가 너무 커져서 softmax가
 
 <br>
 
-<mark>**세번째. 미래 토큰 위치의 값을 -inf로 바꾼다.(Mask)**</mark>
+<span style='background-color: #fff5b1'>**세번째. 미래 토큰 위치의 값을 -inf로 바꾼다.(Mask)**</span>
 
 디코더에서는 아직 예측하지 않은 미래 단어를 참조하지 못하게 특정 점수를 -inf로 바꾼다.
 
@@ -423,7 +660,7 @@ softmax를 적용시 -inf는 0으로 수렴해 미래 단어는 가중치에 영
 
 <br>
 
-<mark>**네번째. 곱한 결과를 softmax 해주어 가중치를 만든다.(Softmax)**</mark>
+<span style='background-color: #fff5b1'>**네번째. 곱한 결과를 softmax 해주어 가중치를 만든다.(Softmax)**</span>
 
 이 점수들을 softmax해서 가중치로 만든다.
 
@@ -437,7 +674,7 @@ softmax(qk_fish) = w_fish = 0
 
 <br>
 
-<mark>**다섯번째. 가중치를 V와 곱한다.(MatMul)**</mark>
+<span style='background-color: #fff5b1'>**다섯번째. 가중치를 V와 곱한다.(MatMul)**</span>
 
 그다음 각 토큰의 V(값) 벡터에 방금 계산한 가중치를 곱한다.
 
@@ -468,7 +705,7 @@ output_cat =
 
 <br>
 
-<mark>**여섯번째. 곱해서 나온 벡터들끼리 더해서 하나의 벡터를 만든다.(Concat)**</mark>
+<span style='background-color: #fff5b1'>**여섯번째. 곱해서 나온 벡터들끼리 더해서 하나의 벡터를 만든다.(Concat)**</span>
 
 output_cat =[
 
@@ -486,7 +723,7 @@ output_cat = [1.495,1.77,2.045,2.32]
 
 <br>
 
-<mark>**이렇게 만들어진 벡터가 Decoder의 이후 단계를 거쳐 다음 단어인 fish를 예측하게 된다.**</mark>
+<span style='background-color: #fff5b1'>**이렇게 만들어진 벡터가 Decoder의 이후 단계를 거쳐 다음 단어인 fish를 예측하게 된다.**</span>
 
 1. Attention → 컨텍스트 벡터(`output_cat`) 생성
 2. Feed-Forward → 비선형 변환
@@ -498,17 +735,17 @@ output_cat = [1.495,1.77,2.045,2.32]
 
 ### 3.2.2 Multi-Head Attention
 
-Q, K, V로 하나의 어텐션으로만 연산을 수행하는 대신에, 여러 개의 학습된 선형 변환(linear)을 적용한뒤, <mark>**여러개의 어텐션으로 병렬적으로 연산하는것이 성능이 더 좋다는 것을 발견**</mark>했다.
+Q, K, V로 하나의 어텐션으로만 연산을 수행하는 대신에, 여러 개의 학습된 선형 변환(linear)을 적용한뒤, <span style='background-color: #fff5b1'>**여러개의 어텐션으로 병렬적으로 연산하는것이 성능이 더 좋다는 것을 발견**</span>했다.
 
-그렇게 병렬적으로 <mark>**생성된 여러개의 결과들을 모두 연결(concat, 합치는것이 아니라 연결임)한뒤, 다시 선형변환(linear) 하여 최종 출력**</mark>을 생성한다.
+그렇게 병렬적으로 <span style='background-color: #fff5b1'>**생성된 여러개의 결과들을 모두 연결(concat, 합치는것이 아니라 연결임)한뒤, 다시 선형변환(linear) 하여 최종 출력**</span>을 생성한다.
 
 <br>
 
-<mark>**왜 여러 개의 attention이 성능이 좋았을까?**</mark>
+<span style='background-color: #fff5b1'>**왜 여러 개의 attention이 성능이 좋았을까?**</span>
 
 단일 어텐션은 하나의 관점으로만 토큰을 해석한뒤, 결과를 만들게된다.
 
-<mark>**즉, 한 가지 필터만 가지고 모든 관계를 판단해야한다.**</mark>
+<span style='background-color: #fff5b1'>**즉, 한 가지 필터만 가지고 모든 관계를 판단해야한다.**</span>
 
 하나의 head로 문장을 보면, 한번의 attention은 해석할 수 있는 정보의 다양성이 떨어진다.
 
@@ -516,7 +753,7 @@ Q, K, V로 하나의 어텐션으로만 연산을 수행하는 대신에, 여러
 - 의미적 연결만을 볼 수도 있고
 - 문장 구조적 패턴만 볼 수도 있다.
 
-이것들을 <mark>**모두 하나의 attention으로만 처리하려고하면 여러 관점을 보지 못하고 한 가지 관점**</mark>으로 보게 된다.
+이것들을 <span style='background-color: #fff5b1'>**모두 하나의 attention으로만 처리하려고하면 여러 관점을 보지 못하고 한 가지 관점**</span>으로 보게 된다.
 
 이것이 “다양성이 제한된다” 라는 표현이다.
 
@@ -524,7 +761,7 @@ Q, K, V로 하나의 어텐션으로만 연산을 수행하는 대신에, 여러
 
 멀티 헤드 어텐션은 여러개의 attention을 만든다.
 
-<mark>**각 head는 서로 다른 방식으로 Q, K, V를 바라보게 된다.**</mark>
+<span style='background-color: #fff5b1'>**각 head는 서로 다른 방식으로 Q, K, V를 바라보게 된다.**</span>
 
 <br>
 
@@ -544,23 +781,23 @@ head3는 동사-목적어 관계에 집중
 
 (concat은 섞는 것이 아니라 연결하는 것이다.)
 
-<mark>**즉, 멀티헤드는 여러 관점에서 본 결과를 이어붙여, 최종적으로 훨씬 풍부한 벡터를 만들어 낸다.**</mark>
+<span style='background-color: #fff5b1'>**즉, 멀티헤드는 여러 관점에서 본 결과를 이어붙여, 최종적으로 훨씬 풍부한 벡터를 만들어 낸다.**</span>
 
 <br>
 
 ### 3.2.3 Applications of Attention in our Model
 
-![image.png](../images/논문리뷰/Attention%20is%20all%20you%20need/4.png)
+![](https://velog.velcdn.com/images/lexkim/post/c2b6e78f-457a-4ae0-a8ea-08e8ebc6c26f/image.png)
 
 <br>
 
-<mark>**트랜스포머는 멀티헤드 어텐션(Multi-Head Attention)을 세 가지 방식으로 사용한다.**</mark>
+<span style='background-color: #fff5b1'>**트랜스포머는 멀티헤드 어텐션(Multi-Head Attention)을 세 가지 방식으로 사용한다.**</span>
 
 1. 디코더에서 “인코더-디코더 어텐션” 층에서는 Q가 이전 디코더 층에서 값이 오며, K와V는 인코더에서 생성된 출력에서 오게된다.
 
    <br>
 
-   <mark>**왜 Q는 이전 디코더 층에서 값이 오며, K와 V는 인코더에서 출력된 값이 오게 되는걸까?**</mark>
+   <span style='background-color: #fff5b1'>**왜 Q는 이전 디코더 층에서 값이 오며, K와 V는 인코더에서 출력된 값이 오게 되는걸까?**</span>
 
    먼저 어텐션에서 Q, K, V의 개념부터 다시 정리해보자.
 
@@ -593,28 +830,28 @@ head3는 동사-목적어 관계에 집중
 
    <br>
 
-   즉, 디코더는 항상 <mark>**“내가 지금까지 만든 출력 문맥(한국어)”과 “인코더가 제공한 입력 문장(영어)의 의미 정보” 이 두가지를 결합해서 다음 단어를 만든다.**</mark>
+   즉, 디코더는 항상 <span style='background-color: #fff5b1'>**“내가 지금까지 만든 출력 문맥(한국어)”과 “인코더가 제공한 입력 문장(영어)의 의미 정보” 이 두가지를 결합해서 다음 단어를 만든다.**</span>
 
    <br>
 
-   <mark>**그래서 디코더는 위에서 설명한 두 가지 정보를 취합하기 위한 어텐션이 필요하다.**</mark>
+   <span style='background-color: #fff5b1'>**그래서 디코더는 위에서 설명한 두 가지 정보를 취합하기 위한 어텐션이 필요하다.**</span>
 
-   1. 현재까지 예측한 <mark>**한국어 문장 정보**</mark>의 토큰이 서로 다른 토큰들을 참조하게 하는 Self-attention
-   2. 한국어 번역을 위해 <mark>**영어 문장 정보**</mark>를 가진 벡터를 생성한 Self-attention
+   1. 현재까지 예측한 <span style='background-color: #fff5b1'>**한국어 문장 정보**</span>의 토큰이 서로 다른 토큰들을 참조하게 하는 Self-attention
+   2. 한국어 번역을 위해 <span style='background-color: #fff5b1'>**영어 문장 정보**</span>를 가진 벡터를 생성한 Self-attention
 
-   <mark>**Q는 위에서 설명한 1번 Self-attention인 디코더에**</mark>서 오고
+   <span style='background-color: #fff5b1'>**Q는 위에서 설명한 1번 Self-attention인 디코더에**</span>서 오고
 
-   <mark>**K, V는 위에서 설명한 2번 Self-attention인 인코더에서 온다**</mark>는 것이다.
+   <span style='background-color: #fff5b1'>**K, V는 위에서 설명한 2번 Self-attention인 인코더에서 온다**</span>는 것이다.
 
    <br>
 
    이 두 개의 Self-attention이 생성한 정보 벡터를 합쳐야한다.
 
-   이 <mark>**두 개 벡터를 Self-attention으로 합치며, 각각 인코더와 디코더 Self-attention에서 왔으므로 인코더-디코더 어텐션이라고 부른다.**</mark>
+   이 <span style='background-color: #fff5b1'>**두 개 벡터를 Self-attention으로 합치며, 각각 인코더와 디코더 Self-attention에서 왔으므로 인코더-디코더 어텐션이라고 부른다.**</span>
 
    <br>
 
-   <mark>**왜 한국어 Self-attention이 Q에 올까?**</mark>
+   <span style='background-color: #fff5b1'>**왜 한국어 Self-attention이 Q에 올까?**</span>
 
    번역예시를 계속 보자.
 
@@ -630,9 +867,9 @@ head3는 동사-목적어 관계에 집중
 
    <br>
 
-   <mark>**즉, 질문(Query)는 현재 한국어 단어를 만들고 있는 디코더 이다.**</mark>
+   <span style='background-color: #fff5b1'>**즉, 질문(Query)는 현재 한국어 단어를 만들고 있는 디코더 이다.**</span>
 
-   <mark>**그래서 디코더는 “내가 지금 까지 예측해서 만든 어떠한 한국어 토큰 정보를 참고해야하나?” 라는 질문을 던지는 것이다.**</mark>
+   <span style='background-color: #fff5b1'>**그래서 디코더는 “내가 지금 까지 예측해서 만든 어떠한 한국어 토큰 정보를 참고해야하나?” 라는 질문을 던지는 것이다.**</span>
 
    만약 이전까지 생성한 한국어 문장을 참조하지 않는다면, 다음 단어는 이전까지 생성한 한국어 문장과 상관없이 원문인 영어 문장만을 보고 다음 토큰을 예측해야하는 것이다.
 
@@ -642,7 +879,7 @@ head3는 동사-목적어 관계에 집중
 
    <br>
 
-   <mark>**그럼 K와 V는 왜 인코더에서 오는것일까?**</mark>
+   <span style='background-color: #fff5b1'>**그럼 K와 V는 왜 인코더에서 오는것일까?**</span>
 
    Masked Multi Self-attention 서브 레이어층에서 지금까지 예측한 한국어 문장의 토큰들을 모두 참조했다.
 
@@ -650,7 +887,7 @@ head3는 동사-목적어 관계에 집중
 
    이제는 영어 문장 정보를 얻어서 다음 토큰을 예측해야한다.
 
-   <mark>**만약, 원문인 영어 문장을 참조하지 않는다면, 이전까지 생성한 한국어 문장만을 보고 다음 단어를 생성해야한다. 그렇다면 영어 문장 번역이란 태스크가 아니게 된다.**</mark>
+   <span style='background-color: #fff5b1'>**만약, 원문인 영어 문장을 참조하지 않는다면, 이전까지 생성한 한국어 문장만을 보고 다음 단어를 생성해야한다. 그렇다면 영어 문장 번역이란 태스크가 아니게 된다.**</span>
 
    <br>
 
@@ -666,8 +903,8 @@ head3는 동사-목적어 관계에 집중
 
    최종적으로
 
-   - <mark>**Q는 Masked Multi Self-attention로 생성한 이전까지 예측한 한국어 문장 정보 벡터로 설정**</mark>
-   - <mark>**K와V는 인코더의 Multi Self-attention로 생성한 영어 문장 정보 벡터로 설정**</mark>
+   - <span style='background-color: #fff5b1'>**Q는 Masked Multi Self-attention로 생성한 이전까지 예측한 한국어 문장 정보 벡터로 설정**</span>
+   - <span style='background-color: #fff5b1'>**K와V는 인코더의 Multi Self-attention로 생성한 영어 문장 정보 벡터로 설정**</span>
 
    인코더-디코더 어텐션을 통해 2가지 정보를 반영한 벡터를 생성하는것이다.
 
@@ -679,21 +916,21 @@ head3는 동사-목적어 관계에 집중
 
    논문에서는 위와 같은 문장이 있다.
 
-   인코더는 여러 층(layer)로 쌓여 있는데, 예를들어 <mark>**인코더 2층에서 셀프 어텐션을 계산한다면, 셀프 어텐션으로 들어오는 입력 값은 인코더 1층에서 출력되어 생성된 값이다.**</mark>
+   인코더는 여러 층(layer)로 쌓여 있는데, 예를들어 <span style='background-color: #fff5b1'>**인코더 2층에서 셀프 어텐션을 계산한다면, 셀프 어텐션으로 들어오는 입력 값은 인코더 1층에서 출력되어 생성된 값이다.**</span>
 
    <br>
 
    즉, 인코더 2층의 각 토큰은 인코더의 1층의 모든 토큰들을 참고할 수 있다는 뜻이다.
 
-   이 구조를 쓰게 되면, 2층의 입력으로 들어온 1층의 출력값 안에는, 문장 내에서 <mark>**멀리 떨어진 단어도 벡터형태로 존재하기 때문에 참조하여 정보를 반영**</mark>할 수 있다.
+   이 구조를 쓰게 되면, 2층의 입력으로 들어온 1층의 출력값 안에는, 문장 내에서 <span style='background-color: #fff5b1'>**멀리 떨어진 단어도 벡터형태로 존재하기 때문에 참조하여 정보를 반영**</span>할 수 있다.
 
    <br>
 
-3. 마찬가지로, <mark>**디코더의 셀프 어텐션 층**</mark>들은 디코더 내에서 현재 위치의 토큰을 포함하여 <mark>**그 이전의 모든 위치의 토큰들을 참조**</mark>할 수 있도록 한다.
+3. 마찬가지로, <span style='background-color: #fff5b1'>**디코더의 셀프 어텐션 층**</span>들은 디코더 내에서 현재 위치의 토큰을 포함하여 <span style='background-color: #fff5b1'>**그 이전의 모든 위치의 토큰들을 참조**</span>할 수 있도록 한다.
 
-   그러나 <mark>**셀프회귀(auto-regressive) 특성을 유지하기 위해 디코더 내에서의 미래 방향 정보 흐름을 차단**</mark>해야 한다.
+   그러나 <span style='background-color: #fff5b1'>**셀프회귀(auto-regressive) 특성을 유지하기 위해 디코더 내에서의 미래 방향 정보 흐름을 차단**</span>해야 한다.
 
-   이를 위해 스케일드 닷-프로덕트 어텐션(scaled dot-product attention) 내부에서 <mark>**미래 토큰 위치의 모든 값을 마스킹(masking)하여 −∞로 설정**</mark>한다.
+   이를 위해 스케일드 닷-프로덕트 어텐션(scaled dot-product attention) 내부에서 <span style='background-color: #fff5b1'>**미래 토큰 위치의 모든 값을 마스킹(masking)하여 −∞로 설정**</span>한다.
 
    이렇게 되면 Softmax에서 -inf는 0값으로 바뀌게되어 어떠한 영향도 주지 않는다.
 
@@ -710,9 +947,9 @@ Self-attention은은 각 토큰이 문장의 모든 토큰 사이의 관계를 �
 
 그런데 그 뒤에는 하나하나 각 토큰별로 변환하는 FFN이 붙는다.
 
-<mark>**이 FFN은 토큰 간의 관계를 보지 않는다.**</mark>
+<span style='background-color: #fff5b1'>**이 FFN은 토큰 간의 관계를 보지 않는다.**</span>
 
-<mark>**오직 각 토큰 하나만 입력으로 받아, 그 토큰의 벡터를 더 풍부한 형태로 가공하는 역활을한다.**</mark>
+<span style='background-color: #fff5b1'>**오직 각 토큰 하나만 입력으로 받아, 그 토큰의 벡터를 더 풍부한 형태로 가공하는 역활을한다.**</span>
 
 <br>
 
@@ -767,27 +1004,27 @@ W2는 2048차원 → 512차원으로 다시 줄여주는 가중치이다.
 
 <br>
 
-<mark>**왜 2048차원으로 확장하고 다시 512차원으로 줄일까?**</mark>
+<span style='background-color: #fff5b1'>**왜 2048차원으로 확장하고 다시 512차원으로 줄일까?**</span>
 
 512 → 2048 → 512
 
-<mark>**이렇게 확장하면, 비선형 변환인 ReLU을 통해 더 복잡한 패턴을 모델링 할 수 있다.**</mark>
+<span style='background-color: #fff5b1'>**이렇게 확장하면, 비선형 변환인 ReLU을 통해 더 복잡한 패턴을 모델링 할 수 있다.**</span>
 
 <br>
 
-<mark>**어텐션만 사용**</mark>하면, 토큰 간 관계는 잘 파악할 수 있지만
+<span style='background-color: #fff5b1'>**어텐션만 사용**</span>하면, 토큰 간 관계는 잘 파악할 수 있지만
 
-<mark>**각 토큰 내부의 표현을 더욱 복잡하게 비틀거나 확장하는 능력이 부족하다.**</mark>
+<span style='background-color: #fff5b1'>**각 토큰 내부의 표현을 더욱 복잡하게 비틀거나 확장하는 능력이 부족하다.**</span>
 
 <br>
 
-<mark>**FFN은 각 토큰의 벡터 내부에서 비선형 조합을 만들어 더 강력한 표현을 구성한다.**</mark>
+<span style='background-color: #fff5b1'>**FFN은 각 토큰의 벡터 내부에서 비선형 조합을 만들어 더 강력한 표현을 구성한다.**</span>
 
 “attention의 토큰간 관계”와 “FFN의 토큰 내부 표현 강화” 이 둘을 합쳐 강력한 표현 학습이 가능해진다.
 
 <br>
 
-<mark>**왜 FFN은 각 토큰별로 적용하는 것일까?**</mark>
+<span style='background-color: #fff5b1'>**왜 FFN은 각 토큰별로 적용하는 것일까?**</span>
 
 문장이 길든 짧든 FFN은 모든 토큰을 동시에 처리할 수 있어 매우 빠르다.
 
@@ -818,19 +1055,19 @@ W2는 2048차원 → 512차원으로 다시 줄여주는 가중치이다.
 
 ### 3.4 Embeddings and Softmax
 
-1. <mark>**학습된 두 임베딩**</mark>
+1. <span style='background-color: #fff5b1'>**학습된 두 임베딩**</span>
 
 인코더와 디코더로 들어가기 전에 임베딩 레이어로 입력 토큰과 출력 토큰(디코더 입력)이 벡터로 변환한다.
 
 <br>
 
-<mark>**하나는 인코더 입력을 위한 학습된 임베딩**</mark>
+<span style='background-color: #fff5b1'>**하나는 인코더 입력을 위한 학습된 임베딩**</span>
 
-<mark>**하나는 디코더 입력을 위한 학습된 임베딩이다.**</mark>
+<span style='background-color: #fff5b1'>**하나는 디코더 입력을 위한 학습된 임베딩이다.**</span>
 
 <br>
 
-1. <mark>**디코더 출력 벡터 → 다음 토큰 확률로 변환하는 과정(선형 변환 & softmax)**</mark>
+1. <span style='background-color: #fff5b1'>**디코더 출력 벡터 → 다음 토큰 확률로 변환하는 과정(선형 변환 & softmax)**</span>
 
 디코더는 문장을 생성할 때, 다음 토큰을 위한 출력 벡터를 만들어낸다.
 
@@ -864,7 +1101,7 @@ prob = softmax(logit)
 
 <br>
 
-1. <mark>**임베딩 레이어 가중치와 softmax 직전 선형 변환 레이어 가중치는 서로 동일한 가중치이다.**</mark>
+1. <span style='background-color: #fff5b1'>**임베딩 레이어 가중치와 softmax 직전 선형 변환 레이어 가중치는 서로 동일한 가중치이다.**</span>
 
 입력 임베딩을 만들때 쓰는 가중치 W_embed
 
@@ -874,7 +1111,7 @@ prob = softmax(logit)
 
 <br>
 
-<mark>**이것을 weight tying(가중치 공유)라는 용어로 부른다.**</mark>
+<span style='background-color: #fff5b1'>**이것을 weight tying(가중치 공유)라는 용어로 부른다.**</span>
 
 두 가중치 행렬을 사용하는 대신 하나의 가중치 행렬만 사용하는 방법이다.
 
@@ -882,9 +1119,9 @@ prob = softmax(logit)
 
 왜 가중치를 공유할까?
 
-1. <mark>**단어 임베딩을 할때의 의미 공간과 단어를 뽑아낼때의 의미 공간을 같은 맥락으로 유지해서 성능이 향상된다.**</mark>
-2. <mark>**파라미터 수가 감소하게 되서 overtfitting에 빠질 위험이 감소한다.**</mark>
-3. <mark>**학습해야할 가중치가 감소해서 학습 속도가 개선된다.**</mark>
+1. <span style='background-color: #fff5b1'>**단어 임베딩을 할때의 의미 공간과 단어를 뽑아낼때의 의미 공간을 같은 맥락으로 유지해서 성능이 향상된다.**</span>
+2. <span style='background-color: #fff5b1'>**파라미터 수가 감소하게 되서 overtfitting에 빠질 위험이 감소한다.**</span>
+3. <span style='background-color: #fff5b1'>**학습해야할 가중치가 감소해서 학습 속도가 개선된다.**</span>
 
 <br>
 
@@ -892,7 +1129,7 @@ prob = softmax(logit)
 
 <br>
 
-1. <mark>**임베딩에서는 해당 가중치에 sqrt(d_model)을 곱한다.**</mark>
+1. <span style='background-color: #fff5b1'>**임베딩에서는 해당 가중치에 sqrt(d_model)을 곱한다.**</span>
 
 임베딩에서 가중치를 sqrt(512)로 스케일링 하는 이유는
 
@@ -900,11 +1137,11 @@ prob = softmax(logit)
 
 <br>
 
-<mark>**임베딩 테이블의 초기값은 일반적으로 작은 값으로 초기화된다.**</mark>
+<span style='background-color: #fff5b1'>**임베딩 테이블의 초기값은 일반적으로 작은 값으로 초기화된다.**</span>
 
 그런데 위치 인코딩(position encoding)도 함께 더해지기 때문에
 
-<mark>**입력 임베딩이 너무 작으면, position encoding에도 영향을 과도하게 주게된다.**</mark>
+<span style='background-color: #fff5b1'>**입력 임베딩이 너무 작으면, position encoding에도 영향을 과도하게 주게된다.**</span>
 
 <br>
 
@@ -912,11 +1149,11 @@ prob = softmax(logit)
 
 sqrt(d_model) = sqrt(512) = 약 22.6
 
-<mark>**으로 스케일업해서 임베딩이 갖는 절대 크기를 어느정도 균형있게 맞춘다.**</mark>
+<span style='background-color: #fff5b1'>**으로 스케일업해서 임베딩이 갖는 절대 크기를 어느정도 균형있게 맞춘다.**</span>
 
 <br>
 
-<mark>**정리**</mark>
+<span style='background-color: #fff5b1'>**정리**</span>
 
 1. 임베딩은 토큰을 512차원 벡터로 변환하는 테이블 같은 역할이다.
 2. 디코더 출력은 (512 → 단어 수) 선형 변환 후 softmax로 다음 단어 확률이 된다.
@@ -927,17 +1164,17 @@ sqrt(d_model) = sqrt(512) = 약 22.6
 
 ### 3.5 Positional Encoding
 
-![image.png](../images/논문리뷰/Attention%20is%20all%20you%20need/5.png)
+![](https://velog.velcdn.com/images/lexkim/post/37498cac-c317-44bc-8db8-0bd35c3bf092/image.png)
 
-Transformer 모델은 순환 구조(Recurrent)나 합성곱(convolution)을 포함하지 않기 때문에, <mark>**시퀀스의 순서 정보를 알기 위해 각 토큰의 상대적 또는 절대적 위치에 대한 정보를 주입**</mark>해야 한다.
+Transformer 모델은 순환 구조(Recurrent)나 합성곱(convolution)을 포함하지 않기 때문에, <span style='background-color: #fff5b1'>**시퀀스의 순서 정보를 알기 위해 각 토큰의 상대적 또는 절대적 위치에 대한 정보를 주입**</span>해야 한다.
 
-<mark>**이것을 위해서 인코딩과 디코딩 스택 맨아래층에 위치 인코딩(positionnal encoding)을 입력 임베딩에 추가한다.**</mark>
+<span style='background-color: #fff5b1'>**이것을 위해서 인코딩과 디코딩 스택 맨아래층에 위치 인코딩(positionnal encoding)을 입력 임베딩에 추가한다.**</span>
 
 <br>
 
-<mark>**위치 인코딩의 차원은 임베딩과 동일하게 d_model이며, 이를 통해 두 값을 더할 수 있다.**</mark>
+<span style='background-color: #fff5b1'>**위치 인코딩의 차원은 임베딩과 동일하게 d_model이며, 이를 통해 두 값을 더할 수 있다.**</span>
 
-<mark>**위치 인코딩에는 학습 가능한 것과 고정된(fixed) 것 등 다양한 선택이 있다.**</mark>
+<span style='background-color: #fff5b1'>**위치 인코딩에는 학습 가능한 것과 고정된(fixed) 것 등 다양한 선택이 있다.**</span>
 
 <br>
 
@@ -945,17 +1182,17 @@ Transformer 모델은 순환 구조(Recurrent)나 합성곱(convolution)을 포�
 
 <br>
 
-<mark>**왜 사인과 코사인 함수를 사용했을까?**</mark>
+<span style='background-color: #fff5b1'>**왜 사인과 코사인 함수를 사용했을까?**</span>
 
 위치 정보(pos)를 일종의 규칙있는 숫자 패턴으로 바꿔서 임베딩에 더해준다.
 
 <br>
 
-<mark>**이때 단순히 위치를 1,2,3,4로 주는게 아니라 다양한 주파수의 사인파, 코사인파를 이용해 더 풍부한 패턴을 만든다.**</mark>
+<span style='background-color: #fff5b1'>**이때 단순히 위치를 1,2,3,4로 주는게 아니라 다양한 주파수의 사인파, 코사인파를 이용해 더 풍부한 패턴을 만든다.**</span>
 
 <br>
 
-<mark>**사인파를 토큰의 어떤 값에 적용할까?**</mark>
+<span style='background-color: #fff5b1'>**사인파를 토큰의 어떤 값에 적용할까?**</span>
 
 위치 인코딩(positional encoding)의 각 차원은 하나의 사인파(sinusoid)에 대응된다.
 
@@ -973,7 +1210,7 @@ Transformer 모델은 순환 구조(Recurrent)나 합성곱(convolution)을 포�
 
 <br>
 
-<mark>**이 512개의 차원 하나하나 마다, 서로 다른 파장, 서로 다른 주파수를 가진 사인파 또는 코사인파를 계산해 적용한다는 뜻이다.**</mark>
+<span style='background-color: #fff5b1'>**이 512개의 차원 하나하나 마다, 서로 다른 파장, 서로 다른 주파수를 가진 사인파 또는 코사인파를 계산해 적용한다는 뜻이다.**</span>
 
 <br>
 
@@ -989,7 +1226,7 @@ i = 511 → 마지막 sin 계산
 
 <br>
 
-<mark>**어떤 수식으로 위치 인코딩을 할까?**</mark>
+<span style='background-color: #fff5b1'>**어떤 수식으로 위치 인코딩을 할까?**</span>
 
 $$
 PE(pos, 2i) = sin(pos / 10000^{2i / d_{model}})
@@ -1041,11 +1278,11 @@ sin(pos / 10000^(거의 1))
 
 <br>
 
-<mark>**왜 다양한 파장이 필요할까?**</mark>
+<span style='background-color: #fff5b1'>**왜 다양한 파장이 필요할까?**</span>
 
 문장에서는 단어 간의 관계가 근거리일수도 장거리일수도 있다.
 
-<mark>**그래서 위치 인코딩은 다양한 거리에 대해 감도있게 반응하도록 짧은 파장부터 긴 파장까지 다 넣는것이다.**</mark>
+<span style='background-color: #fff5b1'>**그래서 위치 인코딩은 다양한 거리에 대해 감도있게 반응하도록 짧은 파장부터 긴 파장까지 다 넣는것이다.**</span>
 
 <br>
 
@@ -1079,7 +1316,7 @@ sin(pos / 10000^(거의 1))
 
 <br>
 
-<mark>**왜 짧은 파장이 근거리 관계에 유리할까?**</mark>
+<span style='background-color: #fff5b1'>**왜 짧은 파장이 근거리 관계에 유리할까?**</span>
 
 근접 단어 관계는 보통 단어 간 거리가 1~3 정도 수준에서 많이 나타난다.
 
@@ -1091,7 +1328,7 @@ pos=10과 pos=12 → pos 차이 2
 
 pos=10과 pos=13 → pos 차이 3
 
-<mark>**이런 작은 거리 차이를 Transformer가 서로 다른 관계로 명확히 인식해야한다.**</mark>
+<span style='background-color: #fff5b1'>**이런 작은 거리 차이를 Transformer가 서로 다른 관계로 명확히 인식해야한다.**</span>
 
 <br>
 
@@ -1103,9 +1340,9 @@ pos=10과 pos=13 → pos 차이 3
 
 <br>
 
-<mark>**이런 관계를 구분하기 위해서는**</mark>
+<span style='background-color: #fff5b1'>**이런 관계를 구분하기 위해서는**</span>
 
-<mark>**각 위치 pos가 1 또는 2만 달라져도 명확히 다른 패턴을 가져야한다.**</mark>
+<span style='background-color: #fff5b1'>**각 위치 pos가 1 또는 2만 달라져도 명확히 다른 패턴을 가져야한다.**</span>
 
 <br>
 
@@ -1123,13 +1360,13 @@ pos=10과 pos=12의 차이(거리2)
 
 <br>
 
-<mark>**그래서 512개의 파장들중에서 짧은 파장들 중에서 짧은 파장은 가까운 위치 차이에 민감하다.**</mark>
+<span style='background-color: #fff5b1'>**그래서 512개의 파장들중에서 짧은 파장들 중에서 짧은 파장은 가까운 위치 차이에 민감하다.**</span>
 
 <br>
 
-<mark>**만약 파장이 매우 길기만 하다면?**</mark>
+<span style='background-color: #fff5b1'>**만약 파장이 매우 길기만 하다면?**</span>
 
-반대로 512개의 파장들이 짧은 파장이 없고 <mark>**긴 파장들만 있다고 해보자.**</mark>
+반대로 512개의 파장들이 짧은 파장이 없고 <span style='background-color: #fff5b1'>**긴 파장들만 있다고 해보자.**</span>
 
 pos가 1~5정도 변해도 값이 거의 안바뀌게 된다.
 
@@ -1148,13 +1385,13 @@ sin(11/10000) ≈ sin(0.0011)
 
 두 값은 거의 차이가 없다.
 
-<mark>**pos가 1, 2만 바뀌어도 거의 동일하게 보인다.**</mark>
+<span style='background-color: #fff5b1'>**pos가 1, 2만 바뀌어도 거의 동일하게 보인다.**</span>
 
 그럼 모델은 pos=10과 pos=11이 얼마나 가까운 위치인지 구분하기가 매우 어렵다.
 
 <br>
 
-<mark>**그래서 Transformer는 두 가지 파장을 모두 쓴다.**</mark>
+<span style='background-color: #fff5b1'>**그래서 Transformer는 두 가지 파장을 모두 쓴다.**</span>
 
 짧은 파장
 
@@ -1172,13 +1409,13 @@ pos가 크게 변해야 값이 달라짐
 
 <br>
 
-<mark>**Transformer는 문장의 짧은 거리, 긴거리 모두 다룰 수 있어야 하므로**</mark>
+<span style='background-color: #fff5b1'>**Transformer는 문장의 짧은 거리, 긴거리 모두 다룰 수 있어야 하므로**</span>
 
-<mark>**512차원 전체를 다양한 파장인 짧은 파장~긴 파장 으로 채워 넣는다.**</mark>
+<span style='background-color: #fff5b1'>**512차원 전체를 다양한 파장인 짧은 파장~긴 파장 으로 채워 넣는다.**</span>
 
 <br>
 
-<mark>**정리**</mark>
+<span style='background-color: #fff5b1'>**정리**</span>
 
 512개의 서로 다른 파장을
 “512개의 감각 센서”라고 생각해보자.
@@ -1191,19 +1428,19 @@ pos가 크게 변해야 값이 달라짐
 
 센서들이 내는 신호가 벡터 전체에 녹아있고
 
-<mark>**그 벡터끼리 내적을 수행하면서 모든 센서의 신호가 결합된 결과를 얻는것이다.**</mark>
+<span style='background-color: #fff5b1'>**그 벡터끼리 내적을 수행하면서 모든 센서의 신호가 결합된 결과를 얻는것이다.**</span>
 
 <br>
 
 ## 4 Why Self-Attention
 
-![image.png](../images/논문리뷰/Attention%20is%20all%20you%20need/6.png)
+![](https://velog.velcdn.com/images/lexkim/post/44f47a52-488d-4790-a20d-afac96d60ac7/image.png)
 
 Table 1: 다양한 레이어 유형에 대해, 최대 경로 길이(maximum path lengths), 레이어당 복잡도(per-layer complexity), 그리고 최소 순차 연산 개수(minimum number of sequential operations)를 나타낸다. 여기서 n은 시퀀스 길이(sequence length), d는 표현 차원(representation dimension), k는 합성곱(convolution)의 커널 크기(kernel size), r은 제한적 셀프 어텐션(restricted self-attention)에서의 이웃(neighborhood)의 크기를 의미한다.
 
 <br>
 
-<mark>**이 챕터에서는 시퀀스 변환(sequence transduction) 모델에서 흔히 쓰이는 세가지 층을 비교한다.**</mark>
+<span style='background-color: #fff5b1'>**이 챕터에서는 시퀀스 변환(sequence transduction) 모델에서 흔히 쓰이는 세가지 층을 비교한다.**</span>
 
 ---
 
@@ -1213,48 +1450,48 @@ Table 1: 다양한 레이어 유형에 대해, 최대 경로 길이(maximum path
 
 <br>
 
-<mark>**셀프 어텐션을 사용하는 동기를 설명하기 위해 3가지 고려사항이 있다.**</mark>
+<span style='background-color: #fff5b1'>**셀프 어텐션을 사용하는 동기를 설명하기 위해 3가지 고려사항이 있다.**</span>
 
 ---
 
 1. 계산 복잡도(computational complexity)
 
-   <mark>**층 하나를 실행하는데 필요한 총 연산량이다.**</mark>
+   <span style='background-color: #fff5b1'>**층 하나를 실행하는데 필요한 총 연산량이다.**</span>
 
 2. 최소 순차 연산량(sequential operations)
 
    병렬 처리가 얼마나 가능한지 보여준다.
 
-   <mark>**순차적으로 실행해야 할 연산이 적을수록 병렬화가 잘되고 빠른 모델이다.**</mark>
+   <span style='background-color: #fff5b1'>**순차적으로 실행해야 할 연산이 적을수록 병렬화가 잘되고 빠른 모델이다.**</span>
 
 3. 장거리 의존 관계의 경로 길이(maximum path length)
 
    멀리 떨어진 단어가 서로 영향을 주기 위해
 
-   <mark>**네트워크 내부에서 정보가 몇 개 층을 통과해야 하는지를 의미한다.**</mark>
+   <span style='background-color: #fff5b1'>**네트워크 내부에서 정보가 몇 개 층을 통과해야 하는지를 의미한다.**</span>
 
    경로가 짧을수록 장거리 의존 관계를 더 학습하기 쉽다.
 
 <br>
 
-<mark>**표1: Self-Attention vs RNN**</mark>
+<span style='background-color: #fff5b1'>**표1: Self-Attention vs RNN**</span>
 
 ---
 
 1.  Self-Attention은 모든 위치를 연결하는데 상수 개(constant number)의 연산만 필요하다.
-    <mark>**즉, 한번의 어텐션 계산으로 모든 토큰이 서로를 직접 바라볼수있다.**</mark>
+    <span style='background-color: #fff5b1'>**즉, 한번의 어텐션 계산으로 모든 토큰이 서로를 직접 바라볼수있다.**</span>
     그래서 경로 길이는 1이다. $O(1)$
-2.  RNN은 <mark>**토큰을 순서대로 하나씩 처리해야 해서 O(n)의 순차 연산이 필요**</mark>하다.
+2.  RNN은 <span style='background-color: #fff5b1'>**토큰을 순서대로 하나씩 처리해야 해서 O(n)의 순차 연산이 필요**</span>하다.
 
     경로 길이 = n
 
-3.  <mark>**그래서 RNN은 병렬화가 어렵고, 장거리 관계를 잘 못잡는다.**</mark>
+3.  <span style='background-color: #fff5b1'>**그래서 RNN은 병렬화가 어렵고, 장거리 관계를 잘 못잡는다.**</span>
 
-    반면, <mark>**Self-Attention은 병렬화가 매우 잘되고, 장거리 의존 관계를 훨씬 쉽게 학습**</mark>할 수 있다.
+    반면, <span style='background-color: #fff5b1'>**Self-Attention은 병렬화가 매우 잘되고, 장거리 의존 관계를 훨씬 쉽게 학습**</span>할 수 있다.
 
 <br>
 
-<mark>**계산 복잡도 비교: n이 작을 때 Self-Attention이 더 빠르다.**</mark>
+<span style='background-color: #fff5b1'>**계산 복잡도 비교: n이 작을 때 Self-Attention이 더 빠르다.**</span>
 
 ---
 
@@ -1264,9 +1501,9 @@ RNN의 계산량은 $O(n*d^2)$
 
 <br>
 
-따라서 <mark>**문장 길이 n < 표현 차원 d**</mark>
+따라서 <span style='background-color: #fff5b1'>**문장 길이 n < 표현 차원 d**</span>
 
-<mark>**인 상황에서 Self-Attention이 더 빠르다.**</mark>
+<span style='background-color: #fff5b1'>**인 상황에서 Self-Attention이 더 빠르다.**</span>
 
 <br>
 
@@ -1275,11 +1512,11 @@ RNN의 계산량은 $O(n*d^2)$
 - 워드피스(word-piece)
 - BPE(Byte-Pair Encoding)
 
-<mark>**을 사용하면, 토큰 수(n)가 상대적으로 작기 때문에, 대부분 Self-Attention이 RNN 계산량 보다 유리하다.**</mark>
+<span style='background-color: #fff5b1'>**을 사용하면, 토큰 수(n)가 상대적으로 작기 때문에, 대부분 Self-Attention이 RNN 계산량 보다 유리하다.**</span>
 
 <br>
 
-<mark>**긴 시퀀스를 다룰때: 제한된 셀프 어텐션(restriceted Self-Attention)**</mark>
+<span style='background-color: #fff5b1'>**긴 시퀀스를 다룰때: 제한된 셀프 어텐션(restriceted Self-Attention)**</span>
 
 만약 시퀀스가 아주 길면 Self-Attention의 계산 복잡도 $O(n^2)$의 계산량이 부담이 된다.
 
@@ -1295,7 +1532,7 @@ Transformer 논문에서도 향후 이 방법을 더 연구할 것이라고 언�
 
 <br>
 
-<mark>**CNN과의 비교**</mark>
+<span style='background-color: #fff5b1'>**CNN과의 비교**</span>
 
 CNN층은 kerner size = k일때, 한번에 k 범위의 토큰만 연결할 수 있다.
 
@@ -1311,7 +1548,7 @@ CNN층은 kerner size = k일때, 한번에 k 범위의 토큰만 연결할 수 �
 
 <br>
 
-<mark>**추가적 장점으로 해석 가능한 모델이라는 점도 있다.**</mark>
+<span style='background-color: #fff5b1'>**추가적 장점으로 해석 가능한 모델이라는 점도 있다.**</span>
 
 Self-Attention은 각 토믄이 어떤 토큰을 바라보는지 어텐션 분포를 시각화 할 수 있어서 모델 내부 동작을 해석 가능하게 만든다.
 
@@ -1326,24 +1563,24 @@ Transformer 논문에서는 부록에서 예시를 보여주면서 설명한다.
 
 이것은 RNN이나 CNN에서는 가능하지 않은 장점이다.
 
-![image.png](../images/논문리뷰/Attention%20is%20all%20you%20need/7.png)
+![](https://velog.velcdn.com/images/lexkim/post/419a1017-1326-48b3-8444-20b1cd628c8c/image.png)
 
 위의 두 그림은 각각 헤드 1개씩을 의미한다. 2개의 헤드가 서로 다른 task를 담당하는것을 시각적으로 보여준다.
 
 ## Conclusion
 
-이 논문에서는 Transformer를 제안했다. <mark>**순전히 어텐션에 기반한 최초의 시퀀스 변환(sequence transduction) 모델**</mark>이다.
+이 논문에서는 Transformer를 제안했다. <span style='background-color: #fff5b1'>**순전히 어텐션에 기반한 최초의 시퀀스 변환(sequence transduction) 모델**</span>이다.
 
-인코더-디코더 구조에서 가장 일반적으로 사용되는 <mark>**순환층을 다중 헤드 셀프 어텐션으로 대체**</mark>한 모델이다.
+인코더-디코더 구조에서 가장 일반적으로 사용되는 <span style='background-color: #fff5b1'>**순환층을 다중 헤드 셀프 어텐션으로 대체**</span>한 모델이다.
 
-번역 작업에서는 트랜스포머가 RNN이나 CNN 층에 기반한 아키텍처보다 <mark>**훨씬 빠르게 학습**</mark>할 수 있었다.
+번역 작업에서는 트랜스포머가 RNN이나 CNN 층에 기반한 아키텍처보다 <span style='background-color: #fff5b1'>**훨씬 빠르게 학습**</span>할 수 있었다.
 
-영어-독일어와 영어-프랑스어 번역과제에서도 <mark>**state-of-the-art을 달성**</mark>했다.
+영어-독일어와 영어-프랑스어 번역과제에서도 <span style='background-color: #fff5b1'>**state-of-the-art을 달성**</span>했다.
 
-기존에 보고된 <mark>**모든 앙상블 모델보다도 우수한 성능**</mark>을 보여줬다.
+기존에 보고된 <span style='background-color: #fff5b1'>**모든 앙상블 모델보다도 우수한 성능**</span>을 보여줬다.
 
-이 논문에서는 어텐션 기반 모델을 텍스트 외의 입력 및 출력 모달리티를 포함하는 문제로 확장하고, <mark>**이미지, 오디오, 비디오 같은 대규모 입력과 출력을 효율적으로 처리**</mark>할 수 있도록 <mark>**국소적 제한(local restricted) 어텐션 메커니즘을 연구**</mark>할 것이라고 했다.
+이 논문에서는 어텐션 기반 모델을 텍스트 외의 입력 및 출력 모달리티를 포함하는 문제로 확장하고, <span style='background-color: #fff5b1'>**이미지, 오디오, 비디오 같은 대규모 입력과 출력을 효율적으로 처리**</span>할 수 있도록 <span style='background-color: #fff5b1'>**국소적 제한(local restricted) 어텐션 메커니즘을 연구**</span>할 것이라고 했다.
 
-<mark>**생성 과정에서 덜 순차적(sequential)으로 만드는것도 또 다른 연구**</mark>의 목표라고 했다.
+<span style='background-color: #fff5b1'>**생성 과정에서 덜 순차적(sequential)으로 만드는것도 또 다른 연구**</span>의 목표라고 했다.
 
 <br>
