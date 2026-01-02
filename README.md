@@ -27,10 +27,11 @@
 ### 2.1 LangChain
 
 - [LangChain(1) - 사용하는 이유, RAG 워크플로우](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(1)%20-%20%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0%2C%20%EC%84%A4%EC%B9%98%2C%20%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C%20%EC%84%A4%EB%AA%85%ED%95%98%EB%8A%94%20RAG%20%EC%9B%8C%ED%81%AC%ED%94%8C%EB%A1%9C%EC%9A%B0.md>)
-- [LangChain(2) - SystemMessage, HumanMessage, AIMessage](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangaChain(2)%20-%20SystemMessage%2C%20HumanMessage%2C%20AIMessage.md>)
-- [LangChain(3) - PromptTemplate, ChatPromptTemplate, MessagesPromptTemplate](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(3)%20-%20PromptTemplate%2C%20ChatPromptTemplate%2C%20MessagesPromptTemplate.md>)
-- [LangChain(4) - PDF Document Loaders(PyPDF, Lazy Load, OCR)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(4)%20-%20PDF%20Document%20Loaders(PyPDF%2C%20Lazy%20Load%2C%20OCR).md>)
+- [LangaChain(2) - Message (SystemMessage, HumanMessage, AIMessage)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangaChain(2)%20-%20SystemMessage%2C%20HumanMessage%2C%20AIMessage.md>)
+- [LangChain(3) - Prompt Template (PromptTemplate, ChatPromptTemplate, MessagesPromptTemplate)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(3)%20-%20PromptTemplate%2C%20ChatPromptTemplate%2C%20MessagesPromptTemplate.md>)
+- [LangChain(4) - Document Loaders (PyPDF, Lazy Load, OCR)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(4)%20-%20PDF%20Document%20Loaders(PyPDF%2C%20Lazy%20Load%2C%20OCR).md>)
 - [LangChain(5) - Text Splitters(Chunking)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(5)%20-%20Text%20Splitters(Chunking).md>)
+- [LangChain(6) - Embedding (OpenAIEmbeddings, OllamaEmbeddings, BGE on Hugging Face, CacheBackedEmbeddings)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(6)%20-%20Embedding%20(OpenAIEmbeddings%2C%20OllamaEmbeddings%2C%20BGE%20on%20Hugging%20Face%2C%20CacheBackedEmbeddings).md>)
 - [LangChain RAG(수정하기)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/RAG(Retrieval-Agumented%20Generation)%20Deep%20Dive%20with%20code.md>)
 
 <br>
