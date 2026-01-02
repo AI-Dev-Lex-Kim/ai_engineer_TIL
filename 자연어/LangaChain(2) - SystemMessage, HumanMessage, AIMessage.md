@@ -1,9 +1,9 @@
-- [LangaChain(2) - SystemMessage, HumanMessage, AIMessage](#langachain2---systemmessage-humanmessage-aimessage)
+- [LangaChain(2) - Message (SystemMessage, HumanMessage, AIMessage)](#langachain2---message-systemmessage-humanmessage-aimessage)
   - [SystemMessage](#systemmessage)
   - [HumanMessage](#humanmessage)
   - [AIMessage](#aimessage)
 
-# LangaChain(2) - SystemMessage, HumanMessage, AIMessage
+# LangaChain(2) - Message (SystemMessage, HumanMessage, AIMessage)
 
 GPT-4, Claude 같은 <mark>**채팅 기반 모델**</mark>들은 단순 문자열이 아니라, <mark>**역할(role)과 content(내용), Metadata(메타데이터)를 가진 메시지들을 입력**</mark>으로 받는다.
 

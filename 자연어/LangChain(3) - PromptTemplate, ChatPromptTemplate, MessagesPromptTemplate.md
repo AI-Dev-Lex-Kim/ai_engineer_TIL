@@ -1,10 +1,10 @@
-- [LangChain(3) - PromptTemplate, ChatPromptTemplate, MessagesPromptTemplate](#langchain3---prompttemplate-chatprompttemplate-messagesprompttemplate)
+- [LangChain(3) - Prompt Template (PromptTemplate, ChatPromptTemplate, MessagesPromptTemplate)](#langchain3---prompt-template-prompttemplate-chatprompttemplate-messagesprompttemplate)
   - [PromptTemplate 이란?](#prompttemplate-이란)
   - [PromptTemplate](#prompttemplate)
   - [ChatPromptTemplate](#chatprompttemplate)
   - [MessagesPromptTemplate](#messagesprompttemplate)
 
-# LangChain(3) - PromptTemplate, ChatPromptTemplate, MessagesPromptTemplate
+# LangChain(3) - Prompt Template (PromptTemplate, ChatPromptTemplate, MessagesPromptTemplate)
 
 ## PromptTemplate 이란?
 

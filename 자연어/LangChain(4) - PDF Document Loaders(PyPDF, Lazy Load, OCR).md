@@ -1,4 +1,4 @@
-- [LangChain(4) - PDF Document Loaders(PyPDF, Lazy Load, OCR)](#langchain4---pdf-document-loaderspypdf-lazy-load-ocr)
+- [LangChain(4) - Document Loaders (PyPDF, Lazy Load, OCR)](#langchain4---document-loaders-pypdf-lazy-load-ocr)
   - [PDF](#pdf)
   - [PyPDFLoader](#pypdfloader)
     - [Lazy Load](#lazy-load)
@@ -7,7 +7,7 @@
     - [**tessearct**](#tessearct)
     - [**Multimodal model**](#multimodal-model)
 
-# LangChain(4) - PDF Document Loaders(PyPDF, Lazy Load, OCR)
+# LangChain(4) - Document Loaders (PyPDF, Lazy Load, OCR)
 
 Documetn loader는 다양한 데이터를 읽어와서 LangChain의 Document 형식으로 변환한다.
 
