@@ -1,4 +1,4 @@
-# LangChain(8) - Models (invoke, stream, batch, schema, reasoning, Ollama)
+# LangChain(9) - Models (invoke, stream, batch, schema, reasoning, Ollama)
 
 LLM은 텍스트를 해석하고 생성하는 AI 도구이다
 

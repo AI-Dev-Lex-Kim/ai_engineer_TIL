@@ -1,4 +1,4 @@
-# LangChain(9) - Reranker (BAAI/bge-reranker-v2-m3)
+# LangChain(10) - Reranker (BAAI/bge-reranker-v2-m3)
 
 ## Reranker란?
 
