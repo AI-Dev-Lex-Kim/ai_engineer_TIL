@@ -34,6 +34,7 @@
 - [LangChain(6) - Embedding (OpenAIEmbeddings, OllamaEmbeddings, BGE on Hugging Face)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(6)%20-%20Embedding%20(OpenAIEmbeddings%2C%20OllamaEmbeddings%2C%20BGE%20on%20Hugging%20Face%2C%20CacheBackedEmbeddings).md>)
 - [LangChain(7) - Vector Store(Chroma, FAISS)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(7)%20-%20Vector%20Store(Chroma%2C%20FAISS).md>)
 - [LangChain(8) - Models (invoke, stream, batch, schema, reasoning, Ollama)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(8)%20-%20Models%20(invoke%2C%20stream%2C%20batch%2C%20schema%2C%20reasoning%2C%20Ollama).md>)
+- [LangChain(9) - Reranker (BAAI/bge-reranker-v2-m3)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LangChain(9)%20-%20Reranker%20(bge-reranker-v2-m3).md>)
 - [LangChain RAG(수정하기)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/RAG(Retrieval-Agumented%20Generation)%20Deep%20Dive%20with%20code.md>)
 
 <br>
