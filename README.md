@@ -6,9 +6,10 @@
   - [1. 논문 리뷰](#1-논문-리뷰)
   - [2. NLP(Natural Language Processing)](#2-nlpnatural-language-processing)
     - [2.1 LangChain](#21-langchain)
-    - [2.2 OpenAI](#22-openai)
-    - [2.3 HuggingFace](#23-huggingface)
-    - [2.4 이론공부](#24-이론공부)
+    - [2.2 Agent(LangChain)](#22-agentlangchain)
+    - [2.3 OpenAI](#23-openai)
+    - [2.4 HuggingFace](#24-huggingface)
+    - [2.5 이론공부](#25-이론공부)
   - [3. AI Basic](#3-ai-basic)
 
 <br>
@@ -39,7 +40,13 @@
 
 <br>
 
-### 2.2 OpenAI
+### 2.2 Agent(LangChain)
+
+- [Agent(1) - Structured output (ProviderStrategy, ToolStrategy)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Agent(1)%20-%20Structured%20output.md>)
+
+<br>
+
+### 2.3 OpenAI
 
 - [OpenAI(1) - Responses vs Chat Completions](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20Responses%20vs%20Chat%20Completions.md)
 - [OpenAI(2) - Responses API](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/OpenAI%20Responses%20API.md)
@@ -55,7 +62,7 @@
 
 <br>
 
-### 2.3 HuggingFace
+### 2.4 HuggingFace
 
 - [Hugging Face(1) - T5 모델 구현](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/hugging%20face%20T5%20%EC%82%AC%EC%9A%A9%EB%B2%95.md)
 - [Hugging Face(2) - load_dataset](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/dataset%20load_dataset().md>)
@@ -65,10 +72,10 @@
 
 <br>
 
-### 2.4 이론공부
+### 2.5 이론공부
 
 - [CLM(Causal Language Modeling)이란? (인과적 언어 모델링): 데이터셋/학습/추론](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Causal%20language%20modeling%EC%9D%B4%EB%9E%80%3F%20(%EC%9D%B8%EA%B3%BC%EC%A0%81%20%EC%96%B8%EC%96%B4%20%EB%AA%A8%EB%8D%B8%EB%A7%81)%3A%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B_%ED%95%99%EC%8A%B5_%EC%B6%94%EB%A1%A0.md>)
-- [MLM(Masked Language Modeling)이란? (마스크 언어 모델링): 데이터셋/학습/추론](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Masked%20Language%20Modeling%EC%9D%B4%EB%9E%80%3F%20(%EB%A7%88%EC%8A%A4%ED%81%AC%20%EC%96%B8%EC%96%B4%20%EB%AA%A8%EB%8D%B8%EB%A7%81)%3A%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B_%ED%95%99%EC%8A%B5_%EC%B6%94%EB%A1%A0.md>)
+- [MLM(Masked Language Modeling)이란? (마스크 언어 모델링): 데이터셋/학습/추론](<https://github.com/AI-Dev-LILex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Masked%20Language%20Modeling%EC%9D%B4%EB%9E%80%3F%20(%EB%A7%88%EC%8A%A4%ED%81%AC%20%EC%96%B8%EC%96%B4%20%EB%AA%A8%EB%8D%B8%EB%A7%81)%3A%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B_%ED%95%99%EC%8A%B5_%EC%B6%94%EB%A1%A0.md>)
 - [LoRA(Low Rank Adaptation of LLM)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/LoRA(Low%20Rank%20Adaptation%20of%20LLM).md>)
 - [MCP(Model Context Protocol)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/MCP(Model%20Context%20Protocol).md>)
 - [Self-Attention 구현 코드 분석](https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Self-Attention%2C%20Mult-Head-Attention.md)
