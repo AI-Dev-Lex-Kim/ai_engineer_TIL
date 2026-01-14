@@ -44,7 +44,8 @@
 
 - [Agent(1) - Structured output (ProviderStrategy, ToolStrategy)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Agent(1)%20-%20Structured%20output.md>)
 - [Agent(2) - Tools (ToolRuntime)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Agent(2)%20-%20Tools%20(ToolRuntime).md>)
-  <br>
+
+<br>
 
 ### 2.3 OpenAI
 
