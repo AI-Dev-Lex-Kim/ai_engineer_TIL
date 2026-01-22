@@ -4,6 +4,7 @@
   - [MCP 서버 생성](#mcp-서버-생성)
   - [MCP 서버 사용](#mcp-서버-사용)
   - [Session](#session)
+  - [주의해야할점](#주의해야할점)
 
 # Agent(4) - MCP (MultiServerMCPClient, FastMCP)
 
@@ -505,6 +506,54 @@ print(res3["messages"][-1].content)
 ```
 
 같은 세션에서 도구를 불러와 데이터를 가져와 사용가능하다.
+
+## 주의해야할점
+
+MCP 서버 transport가 http 인 경우, 비동기적으로 도구와 에이전트를 호출해야한다.
+
+<br>
+
+비동기적으로 호출하기 위해서 async, await를 잊지말고 잘 적용해야한다.
+
+```python
+client = MultiServerMCPClient(
+    {
+        "kiwi-com-flight-search": {
+            "transport": "streamable_http",
+            "url": "https://mcp.kiwi.com",
+        }
+    }
+)
+
+flight_tool = await client.get_tools
+
+flight_agent = create_agent(
+    model = flight_agent_param['model'],
+    system_prompt= flight_agent_param['system_prompt'],
+    tools = flight_agent_param['tools']
+)
+
+@tool
+async def search_flights(runtime: ToolRuntime) -> str:
+    """flight agent는 장소에 알맞은 결혼 항공편을 검색한다."""
+    origin = runtime.state.get('origin', '김포')
+    destination = runtime.state.get('destination', '제주도')
+    query = f'{origin}에서 {destination}으로 향하는 항공편을 찾아야한다.'
+
+    response = await flight_agent.ainvoke(
+            {'messages' : [HumanMessage(content=query)]}
+        )
+    return response['messages'][-1].content
+
+response = await main_agent.ainvoke(
+    input = messages,
+    config = config
+)
+```
+
+- `clinet.get_tools` 을 호출할때 `awiat`을 사용했다.
+- 멀티 에이전트를 만들때, 서브 에이전트를 tool에 넣을때도 `async`를 사용해야한다.
+- 상위 에이전트(감독) 또한 실행할때 `invoke`가 아닌 `ainvoke`를 사용해야한다.
 
 참고
 
