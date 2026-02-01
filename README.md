@@ -48,6 +48,7 @@
 - [Anent(4) - Long Conversation 최적화](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Agent(4)%20-%20Long%20Conversation%20%EC%B5%9C%EC%A0%81%ED%99%94.md>)
 - [Agent(5) - MCP (MultiServerMCPClient, FastMCP)](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Agent(5)%20-%20MCP%20(MultiServerMCPClient%2C%20FastMCP).md>)
 - [Agent(6) - Multi-Agent Systems](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Agent(6)%20-%20Multi-Agent%20Systems.md>)
+- [Agent(7) - Human in the loop](<https://github.com/AI-Dev-Lex-Kim/ai_engineer_TIL/blob/main/%EC%9E%90%EC%97%B0%EC%96%B4/Agent(7)%20-%20Human%20in%20the%20loop.md>)
 
 <br>
 
