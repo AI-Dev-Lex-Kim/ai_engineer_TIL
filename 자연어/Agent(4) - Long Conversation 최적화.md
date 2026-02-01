@@ -1,5 +1,4 @@
-
-## Long Context 최적화
+## Anent(4) - Long Conversation 최적화
 
 에이전트가 단기 메모리를 사용하면, 이전 대화들을 불러와 <mark>**컨텍스트 윈도우를 초과**</mark>하게 된다.
 
@@ -448,14 +447,12 @@ Summarize 전략 단점
    <br>
 
    `Command(update=...)`
-
    - <mark>**Command**</mark>를 사용해서 state을 업데이트한다.
    - 그래서 “툴 실행 → 결과 state 저장 → 툴이 그 state를 읽음” 흐름이 가능하다.
 
    <br>
 
    `CustomeContext`, `CustomState` 분리
-
    - `runtime.context`
      <mark>**불변하는 외부 정보**</mark>들이다.
      ex) user_id, auth 정보
@@ -486,7 +483,6 @@ Summarize 전략 단점
    <br>
 
    <mark>**중간결과 state를 저장하는 이유**</mark>
-
    1. 한번 조회한 값을 <mark>**반복하지 않게**</mark>
    2. <mark>**후속 툴과 프롬프트**</mark>에서 접근할수있게
 
