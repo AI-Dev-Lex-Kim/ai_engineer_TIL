@@ -1,4 +1,4 @@
-- [Agent(4) - MCP (MultiServerMCPClient, FastMCP)](#agent4---mcp-multiservermcpclient-fastmcp)
+- [Agent(5) - MCP (MultiServerMCPClient, FastMCP)](#agent5---mcp-multiservermcpclient-fastmcp)
   - [MCP 중요한 개념 3가지](#mcp-중요한-개념-3가지)
   - [헷갈렸던점](#헷갈렸던점)
   - [MCP 서버 생성](#mcp-서버-생성)
@@ -6,7 +6,7 @@
   - [Session](#session)
   - [주의해야할점](#주의해야할점)
 
-# Agent(4) - MCP (MultiServerMCPClient, FastMCP)
+# Agent(5) - MCP (MultiServerMCPClient, FastMCP)
 
 Model Context Protocol(MCP)는 애플리케이션이 LLM에게 도구(tools)와 컨텍스트를 제공하는 방식을 <mark>**표준화한 오픈 프로토콜**</mark>이다.
 

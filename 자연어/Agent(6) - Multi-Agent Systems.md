@@ -1,4 +1,4 @@
-- [Agent(5) - Multi-Agent Systems](#agent5---multi-agent-systems)
+- [Agent(6) - Multi-Agent Systems](#agent6---multi-agent-systems)
   - [Agent State](#agent-state)
   - [Sub Agent tool](#sub-agent-tool)
   - [Prompt](#prompt)
@@ -6,7 +6,7 @@
     - [Sub Agent](#sub-agent)
     - [Sub Agent Tool](#sub-agent-tool-1)
 
-# Agent(5) - Multi-Agent Systems
+# Agent(6) - Multi-Agent Systems
 
 에이전트의 태스크가 복잡해질수록, 에이전트의 성능은 점점 나빠진다.
 
